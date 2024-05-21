@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import '../../core/presentation/common/common_button.dart';
+import '../../core/presentation/custom/custom_back_button.dart';
+import '../../core/presentation/custom/custom_expandable_.pageview.dart';
+import '../../core/resources/custom_colors.dart';
+import '../../core/resources/dimensions.dart';
+import '../../core/resources/strings.dart';
+import '../../core/utils/print_utils.dart';
+import '_components/information_setup.dart';
 import 'register_controller.dart';
 
 class RegisterPage extends GetView<RegisterController> {
@@ -8,19 +17,87 @@ class RegisterPage extends GetView<RegisterController> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Column(
-        children: [
-          Center(
-            child: Text(
-              "Register Page",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 25
-              ),
-            ),
-          )
-        ],
+    
+    var registerLength = <Widget> [
+      GetBuilder<RegisterController>(
+        builder: (controller) {
+          return InformationSetup(
+            uniqueCodeController: controller.uniqueCodeController, 
+            firstNameController: controller.firstNameController, 
+            lastNameController: controller.lastNameController, 
+            addressController: controller.addressController, 
+            phoneNumberController: controller.phoneNumberController, 
+            birthday: controller.birthday.value, 
+            emailController: controller.emailController, 
+            passwordController: controller.passwordController, 
+            confirmPasswordController: controller.confirmPasswordController
+          );
+        },
+      )
+    ];
+
+    return GestureDetector(
+      onTap: () => controller.dismissKeyboard(),
+      child: Scaffold(
+        backgroundColor: CustomColors.white,
+        appBar: AppBar(
+          backgroundColor: CustomColors.white,
+          elevation: 0,
+          leading: const CustomBackButton(),
+          systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarColor: CustomColors.white,
+            statusBarBrightness: Brightness.dark,
+            statusBarIconBrightness: Brightness.dark
+          ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: CustomScrollView(
+            slivers: [ 
+              SliverFillRemaining(
+                hasScrollBody: false,
+                fillOverscroll: false,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Center(
+                      child: Text(
+                        Strings.createAccount,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600
+                        ),
+                      ),
+                    ),
+                    ExpandablePageView.builder(
+                      controller: controller.pageController,
+                      physics: const NeverScrollableScrollPhysics(),
+                      onPageChanged: (index) =>controller.registerPageChanged(index),
+                      itemCount: registerLength.length,
+                      itemBuilder: (p0, index) {
+                        return registerLength[index];
+                      },
+                    ),
+                    const SizedBox(height: Dimensions.textFieldHeight),
+                    CommonButton(
+                      onPressed: () => printUtil("Hello"),
+                      width: Get.width,
+                      height: Dimensions.buttonHeight,
+                      text: Strings.next,
+                      textStyle: const TextStyle(
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white
+                      ),
+                    ),
+                    const SizedBox(height: Dimensions.largeSpacing),
+                  ],
+                ),
+              )
+            ]
+          ),
+        ),
       ),
     );
   }
