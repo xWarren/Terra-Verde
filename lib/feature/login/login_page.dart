@@ -148,7 +148,7 @@ class LoginPage extends GetView<LoginController> {
                         ),
                         const SizedBox(width: Dimensions.smallSpacing),
                         GestureDetector(
-                          onTap: () => printUtil("Sign Up"),
+                          onTap: () => controller.goToRegister(),
                           child: const Text(
                             Strings.signUp,
                             style: TextStyle(

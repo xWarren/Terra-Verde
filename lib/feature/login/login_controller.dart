@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../core/domain/services/storage_service.dart';
+import '../../core/routes/routes.dart';
 
 class LoginController extends GetxController {
   
@@ -18,5 +19,9 @@ class LoginController extends GetxController {
 
   void setIsRememberMe(bool isChecked) {
     storageService.setIsRemember(isChecked);
+  }
+
+  void goToRegister() {
+    Get.offAndToNamed(Routes.registerRoute);
   }
 }

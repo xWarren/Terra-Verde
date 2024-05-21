@@ -67,7 +67,6 @@ class _InformationSetupState extends State<InformationSetup> {
             left: Dimensions.largeSpacing,
             right: Dimensions.largeSpacing,
           ),
-          prefixIcon: Image.asset(Assets.icKey),
           hintText: Strings.uniqueCode,
           textStyle: const TextStyle(
             fontSize: 16.0,
@@ -98,7 +97,6 @@ class _InformationSetupState extends State<InformationSetup> {
                       left: Dimensions.largeSpacing,
                       right: Dimensions.largeSpacing,
                     ),
-                    prefixIcon: Image.asset(Assets.icUser),
                     hintText: Strings.firstName,
                     textStyle: const TextStyle(
                       fontSize: 16.0,
@@ -131,7 +129,6 @@ class _InformationSetupState extends State<InformationSetup> {
                       left: Dimensions.largeSpacing,
                       right: Dimensions.largeSpacing,
                     ),
-                    prefixIcon: Image.asset(Assets.icUser),
                     hintText: Strings.lastName,
                     textStyle: const TextStyle(
                       fontSize: 16.0,
@@ -161,7 +158,6 @@ class _InformationSetupState extends State<InformationSetup> {
             left: Dimensions.largeSpacing,
             right: Dimensions.largeSpacing,
           ),
-          prefixIcon: Image.asset(Assets.icMap),
           hintText: Strings.address,
           textStyle: const TextStyle(
             fontSize: 16.0,
@@ -214,8 +210,6 @@ class _InformationSetupState extends State<InformationSetup> {
               children: [
                 Row(
                   children: [
-                    Image.asset(Assets.icCalendar),
-                    const SizedBox(width: 15),
                     Text(
                       birthday.isEmpty 
                       ? "MM/DD/YYYY"    
@@ -259,7 +253,6 @@ class _InformationSetupState extends State<InformationSetup> {
             left: Dimensions.largeSpacing,
             right: Dimensions.largeSpacing,
           ),
-          prefixIcon: Image.asset(Assets.icEmail),
           hintText: Strings.email,
           textStyle: const TextStyle(
             fontSize: 16.0,
@@ -286,7 +279,6 @@ class _InformationSetupState extends State<InformationSetup> {
             left: Dimensions.largeSpacing,
             right: Dimensions.largeSpacing,
           ),
-          prefixIcon: Image.asset(Assets.icPassword),
           hintText: Strings.password,
           textStyle: const TextStyle(
             fontSize: 16.0,
@@ -313,7 +305,6 @@ class _InformationSetupState extends State<InformationSetup> {
             left: Dimensions.largeSpacing,
             right: Dimensions.largeSpacing,
           ),
-          prefixIcon: Image.asset(Assets.icPassword),
           hintText: Strings.confirmPassword,
           textStyle: const TextStyle(
             fontSize: 16.0,
