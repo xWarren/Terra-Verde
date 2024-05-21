@@ -15,7 +15,7 @@ import 'print_utils.dart';
 abstract class BaseGetConnect extends GetConnect {
   
   @override
-  String get baseUrl => APIEndpoint.login;
+  String get baseUrl => APIEndpoint.baseUrl;
 
   Future<Response<dynamic>> methodRequest(
     String url, {
@@ -100,14 +100,6 @@ abstract class BaseGetConnect extends GetConnect {
     if (error?.toLowerCase().contains('mobile number') == true) {
       return FetchDataException(error);  
     } else if (error?.toLowerCase().contains("password") == true) {
-      return FetchDataException(error);
-    } else if (error?.toLowerCase().contains( "Mobile number or password is incorrect".toLowerCase()) == true) {
-      return FetchDataException(error);
-    } else if (error?.toLowerCase().contains("You haven't clocked out from your previous shift yet".toLowerCase()) == true) {
-      return FetchDataException(error);
-    } else if (error?.toLowerCase().contains("Already clocked out the previous shift".toLowerCase()) == true) {
-      return FetchDataException(error);
-    } else if (error?.toLowerCase().contains("Please set up a bank account first".toLowerCase()) == true) {
       return FetchDataException(error);
     } else {
       return null;

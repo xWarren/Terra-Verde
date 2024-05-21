@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../../feature/login/login_binding.dart';
 import '../../feature/login/login_page.dart';
+import '../../feature/register/register_binding.dart';
+import '../../feature/register/register_page.dart';
 import '../../feature/welcome/welcome_binding.dart';
 import '../../feature/welcome/welcome_page.dart';
 import 'routes.dart';
@@ -18,6 +20,11 @@ class Pages {
       name: Routes.loginRoute,
       page: () => const LoginPage(),
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: Routes.registerRoute,
+      page: () => const RegisterPage(),
+      binding: RegisterBinding(),
     ),
   ];
 }

@@ -3,18 +3,21 @@ import 'package:get/get.dart';
 
 import 'core/routes/pages.dart';
 import 'core/routes/routes.dart';
+import 'di/modules.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  await initAppDependecies();
+  runApp(const TerraVerde());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class TerraVerde extends StatelessWidget {
+  const TerraVerde({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Terra Verde',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: "Poppins",
         useMaterial3: false,
