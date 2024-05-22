@@ -9,6 +9,7 @@ import '../../core/resources/custom_colors.dart';
 import '../../core/resources/dimensions.dart';
 import '../../core/presentation/custom/custom_back_button.dart';
 import '../../core/resources/strings.dart';
+import '../../core/routes/routes.dart';
 import '../../core/utils/print_utils.dart';
 import '_components/remember_me.dart';
 import 'login_controller.dart';
@@ -124,7 +125,7 @@ class LoginPage extends GetView<LoginController> {
                     ),
                     const SizedBox(height: Dimensions.textFieldHeight),
                     CommonButton(
-                      onPressed: () => printUtil("Hello"),
+                      onPressed: () => Get.offAndToNamed(Routes.dashboardRoute),
                       width: Get.width,
                       height: Dimensions.buttonHeight,
                       text: Strings.login,
