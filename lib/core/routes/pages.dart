@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../../feature/dashboard/dashboard_binding.dart';
+import '../../feature/dashboard/dashboard_page.dart';
 import '../../feature/login/login_binding.dart';
 import '../../feature/login/login_page.dart';
 import '../../feature/register/register_binding.dart';
@@ -25,6 +27,11 @@ class Pages {
       name: Routes.registerRoute,
       page: () => const RegisterPage(),
       binding: RegisterBinding(),
+    ),
+    GetPage(
+      name: Routes.dashboardRoute,
+      page: () => const DashboardPage(),
+      binding: DashboardBinding(),
     ),
   ];
 }
