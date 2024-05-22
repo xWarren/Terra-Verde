@@ -45,6 +45,7 @@ class _InformationSetupState extends State<InformationSetup> {
     birthday = widget.birthday;
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -233,7 +234,7 @@ class _InformationSetupState extends State<InformationSetup> {
                   ),
                 )
               ],
-            )
+            ),
           ),
         ),
         const SizedBox(height: Dimensions.regularSpacing),
@@ -311,7 +312,7 @@ class _InformationSetupState extends State<InformationSetup> {
             color: Colors.black,
             fontWeight: FontWeight.w500
           ),
-        ),
+        )
       ],
     );
   }

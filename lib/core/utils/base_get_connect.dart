@@ -15,7 +15,7 @@ import 'print_utils.dart';
 abstract class BaseGetConnect extends GetConnect {
   
   @override
-  String get baseUrl => APIEndpoint.baseUrl;
+  String get baseUrl => APIEndpoint.getBaseUrl;
 
   Future<Response<dynamic>> methodRequest(
     String url, {
