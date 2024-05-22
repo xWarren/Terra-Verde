@@ -1,8 +1,0 @@
-{
-    "env": "dev",
-    "base_url_api": "",
-    "android_token": "",
-    "android_secret_key": "",
-    "ios_token": "",
-    "ios_secret_key": ""
-}
