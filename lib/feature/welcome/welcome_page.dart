@@ -37,21 +37,12 @@ class WelcomePage extends GetView<WelcomeController> {
                 ),
                 const SizedBox(height: Dimensions.extraLargeSpacing),
                 const Text(
-                  "Lorem ipsum",
-                  style: TextStyle(
-                    color: CustomColors.black,
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600
-                  ),
-                ),
-                const SizedBox(height: Dimensions.regularSpacing),
-                const Text(
-                  "Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum",
+                  "Welcome to TRIMS Neighbor",
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   style: TextStyle(
-                    color: CustomColors.grey400,
-                    fontSize: 15,
+                    color: CustomColors.black,
+                    fontSize: 24,
                     fontWeight: FontWeight.w600
                   ),
                 ),

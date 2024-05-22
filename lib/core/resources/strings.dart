@@ -24,4 +24,15 @@ abstract class Strings {
   static const String forgotPassword = "Forgot Password";
   static const String signUp = "Sign up";
   static const String dontHaveAnAccount = "Don’t have an account?";
+
+  //Register
+  static const String uniqueCode = "Unique Code";
+  static const String firstName = "First Name";
+  static const String lastName = "Last Name";
+  static const String address = "Address";
+  static const String mobileNumber = "Mobile Number";
+  static const String birthday = "Birthday";
+  static const String confirmPassword = "Confirm Password";
+  static const String next = "Next";
+  static const String verify = "Verify";
 }

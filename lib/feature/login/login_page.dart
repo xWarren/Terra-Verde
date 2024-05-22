@@ -62,6 +62,8 @@ class LoginPage extends GetView<LoginController> {
                     ),
                     CommonTextField(
                       controller: controller.emailController,
+                      maxLines: 1,
+                      textInputAction: TextInputAction.next,
                       contentPadding: const EdgeInsets.only(
                         left: Dimensions.largeSpacing,
                         right: Dimensions.largeSpacing,
@@ -73,8 +75,6 @@ class LoginPage extends GetView<LoginController> {
                         color: Colors.black,
                         fontWeight: FontWeight.w500
                       ),
-                      maxLines: 1,
-                      textInputAction: TextInputAction.next,
                     ),
                      const SizedBox(height: Dimensions.extraLargeSpacing),
                     const Text(
@@ -87,6 +87,10 @@ class LoginPage extends GetView<LoginController> {
                     ),
                     CommonTextField(
                       controller: controller.passwordController,
+                      maxLines: 1,
+                      isSecure: true,
+                      hasShowHideTextIcon: true,
+                      textInputAction: TextInputAction.done,
                       contentPadding: const EdgeInsets.only(
                         left: Dimensions.largeSpacing,
                         right: Dimensions.largeSpacing,
@@ -98,8 +102,6 @@ class LoginPage extends GetView<LoginController> {
                         color: Colors.black,
                         fontWeight: FontWeight.w500
                       ),
-                      maxLines: 1,
-                      textInputAction: TextInputAction.done,
                     ),
                     const SizedBox(height: Dimensions.regularSpacing),
                     Row(
@@ -146,7 +148,7 @@ class LoginPage extends GetView<LoginController> {
                         ),
                         const SizedBox(width: Dimensions.smallSpacing),
                         GestureDetector(
-                          onTap: () => printUtil("Sign Up"),
+                          onTap: () => controller.goToRegister(),
                           child: const Text(
                             Strings.signUp,
                             style: TextStyle(
