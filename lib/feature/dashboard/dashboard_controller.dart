@@ -4,10 +4,9 @@ import 'package:terra_verde/core/utils/extensions/int_extensions.dart';
 
 import '../../core/domain/services/storage_service.dart';
 import '../../core/utils/enums/tab_type.dart';
-import '../events/events_page.dart';
 import '../home/home_page.dart';
 import '../officials/officials_page.dart';
-import '../profile/profile_page.dart';
+import '../settings/settings_page.dart';
 import '_util/scroll_listener.dart';
 
 abstract class DashboardDelegate {
@@ -33,9 +32,8 @@ class DashboardController extends GetxController with GetTickerProviderStateMixi
 
   RxList<Widget> navigationItems = const [
     HomePage(),
-    EventsPage(),
     OfficialsPage(),
-    ProfilePage()
+    SettingsPage()
   ].obs;
 
   RxInt pageIndex = 0.obs;

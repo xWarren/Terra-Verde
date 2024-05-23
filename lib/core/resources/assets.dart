@@ -7,11 +7,11 @@ class Assets {
   static const icDown = "assets/images/ic_down.png";
   static const icHomeUnselected = "assets/images/home_unselected.png";
   static const icHomeSelected = "assets/images/home_selected.png";
-  static const icEventsUnselected = "assets/images/events_unselected.png";
-  static const icEventsSelected = "assets/images/events_selected.png";
   static const icOfficialsUnselected = "assets/images/officials_unselected.png";
   static const icOfficialsSelected = "assets/images/officials_selected.png";
-  static const icProfileUnselected = "assets/images/profile_unselected.png";
-  static const icProfileSelected = "assets/images/profile_selected.png";
-  
+  static const icSettingsUnselected = "assets/images/settings_unselected.png";
+  static const icSettingsSelected = "assets/images/settings_selected.png";
+  static const icRight = "assets/images/ic_right_green.png";
+  static const icRightLogout = "assets/images/ic_right_red.png";
+
 }

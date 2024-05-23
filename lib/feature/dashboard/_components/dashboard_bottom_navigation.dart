@@ -60,14 +60,6 @@ class DashBoardBottomNavigation extends StatelessWidget {
           ),
           Tab(
             icon: Image.asset(
-              index.toTabType() == TabType.events ? Assets.icEventsSelected : Assets.icEventsUnselected, 
-              width: 24, 
-              height: 24
-            ),
-            iconMargin: const EdgeInsets.symmetric(vertical: Dimensions.smallSpacing),
-          ),
-          Tab(
-            icon: Image.asset(
               index.toTabType() == TabType.officials ? Assets.icOfficialsSelected : Assets.icOfficialsUnselected, 
               width: 24, 
               height: 24
@@ -76,7 +68,7 @@ class DashBoardBottomNavigation extends StatelessWidget {
           ),
           Tab(
             icon: Image.asset(
-              index.toTabType() == TabType.profile ? Assets.icProfileSelected : Assets.icProfileUnselected, 
+              index.toTabType() == TabType.settings ? Assets.icSettingsSelected : Assets.icSettingsUnselected, 
               width: 24, 
               height: 24
             ),
