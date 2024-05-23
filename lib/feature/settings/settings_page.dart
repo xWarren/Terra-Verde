@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../core/resources/custom_colors.dart';
+import '_components/bookmarks_section.dart';
+import '_components/logout_section.dart';
+import '_components/privacy_policy_section.dart';
 import '_components/profile_section.dart';
 import 'settings_controller.dart';
 
@@ -83,7 +86,10 @@ class SettingsPage extends GetView<SettingsController> {
                     ),
                   ),
                 ),
-                ProfileSection()
+                ProfileSection(),
+                BookmarksSection(),
+                PrivacyPolicySection(),
+                LogoutSection()
               ],
             ),
           )
