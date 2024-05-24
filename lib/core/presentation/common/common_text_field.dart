@@ -174,16 +174,17 @@ class CommonTextFieldState extends State<CommonTextField> {
                 fontSize: 14.0,
                 fontWeight: FontWeight.w400,
               ) : null,
-              errorText: widget.errorText,
-              errorStyle: const TextStyle(fontSize: 12.0, color: CustomColors.red, fontWeight: FontWeight.w500,),
-              errorMaxLines: 5,
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(Dimensions.regularSpacing),
                 borderSide: const BorderSide(color: CustomColors.primaryColor)
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(Dimensions.regularSpacing),
-                borderSide: const BorderSide(color: CustomColors.grey100)
+                borderSide: BorderSide(
+                  color: widget.errorText.toString().isNotEmpty
+                  ? CustomColors.red
+                  : CustomColors.grey100
+                )
               ),
               prefixIconConstraints: widget.prefixIconConstraints,
               prefixIcon: widget.prefixIcon,

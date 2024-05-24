@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../core/resources/custom_colors.dart';
 import 'home_controller.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -9,20 +8,22 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return  Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Center(
-            child: Text(
-              "Home Page",
-              style: TextStyle(
-                color: CustomColors.black,
-                fontSize: 30,
-                fontWeight: FontWeight.w500
-              ),
-            ),
-          )
+         Expanded(
+          child: ListView.builder(
+            itemCount: 100,
+            itemBuilder: (context, index) {
+              return const Column(
+                children: [
+                  Text("Hello")
+                ],
+              );
+            },
+          ),
+         )
         ],
       ),
     );

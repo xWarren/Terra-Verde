@@ -28,11 +28,15 @@ abstract class Strings {
   //Register
   static const String uniqueCode = "Unique Code";
   static const String firstName = "First Name";
+  static const String middleName = "Middle Name";
   static const String lastName = "Last Name";
   static const String address = "Address";
+  static const String gender = "Gender";
   static const String mobileNumber = "Mobile Number";
   static const String birthday = "Birthday";
   static const String confirmPassword = "Confirm Password";
-  static const String next = "Next";
+  static const String register = "Register";
   static const String verify = "Verify";
+  static const String male = "Male";
+  static const String female = "Female";
 }

@@ -6,8 +6,13 @@ import '../../../core/resources/custom_colors.dart';
 class RememberMe extends StatefulWidget {
 
   final Function(bool value) isChecked;
+  final String title;
 
-  const RememberMe({super.key, required this.isChecked});
+  const RememberMe({
+    required this.isChecked,
+    required this.title,
+    super.key
+  });
 
   @override
   State<RememberMe> createState() => _RememberMeState();
@@ -55,9 +60,9 @@ class _RememberMeState extends State<RememberMe> {
               ),
             ),
             const SizedBox(width: Dimensions.smallSpacing),
-            const Text(
-              "Remember Me",
-              style: TextStyle(
+            Text(
+              widget.title,
+              style: const TextStyle(
                 fontSize: 14,
                 color: Colors.black87,
                 fontWeight: FontWeight.w400,
