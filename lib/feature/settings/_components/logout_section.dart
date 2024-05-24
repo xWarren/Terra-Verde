@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../core/resources/assets.dart';
 import '../../../core/resources/custom_colors.dart';
-import '../../../core/utils/print_utils.dart';
+import '../../../core/routes/routes.dart';
 
 class LogoutSection extends StatelessWidget {
   const LogoutSection({super.key});
@@ -11,7 +11,7 @@ class LogoutSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => printUtil("Logout Section"),
+      onTap: () => Get.offAndToNamed(Routes.welcomeRoute),
       child: Container(
         height: 50,
         width: Get.width,

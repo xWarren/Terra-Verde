@@ -108,7 +108,10 @@ class LoginPage extends GetView<LoginController> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        RememberMe(isChecked: controller.setIsRememberMe),
+                        RememberMe(
+                          isChecked: controller.setIsRememberMe,
+                          title: "Remember Me",
+                        ),
                         GestureDetector(
                           onTap: () => printUtil("Forgot Password"),
                           child: const Text(

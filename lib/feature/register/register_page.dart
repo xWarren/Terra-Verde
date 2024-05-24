@@ -8,7 +8,6 @@ import '../../core/presentation/custom/custom_expandable_.pageview.dart';
 import '../../core/resources/custom_colors.dart';
 import '../../core/resources/dimensions.dart';
 import '../../core/resources/strings.dart';
-import '../../core/utils/print_utils.dart';
 import '_components/information_setup.dart';
 import 'register_controller.dart';
 
@@ -22,8 +21,10 @@ class RegisterPage extends GetView<RegisterController> {
       GetBuilder<RegisterController>(
         builder: (controller) {
           return InformationSetup(
+            key: controller.informationSetupKey,
             uniqueCodeController: controller.uniqueCodeController, 
-            firstNameController: controller.firstNameController, 
+            firstNameController: controller.firstNameController,
+            middleNameController: controller.middleNameController,
             lastNameController: controller.lastNameController, 
             addressController: controller.addressController, 
             phoneNumberController: controller.phoneNumberController, 
@@ -81,10 +82,12 @@ class RegisterPage extends GetView<RegisterController> {
                     ),
                     const SizedBox(height: Dimensions.textFieldHeight),
                     CommonButton(
-                      onPressed: () => printUtil("Hello"),
+                      onPressed: () { 
+                        controller.register();
+                      },
                       width: Get.width,
                       height: Dimensions.buttonHeight,
-                      text: Strings.next,
+                      text: Strings.register,
                       textStyle: const TextStyle(
                         fontSize: 14.0,
                         fontWeight: FontWeight.w500,
