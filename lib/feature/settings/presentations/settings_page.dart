@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../core/resources/assets.dart';
 import '../../../core/resources/custom_colors.dart';
+import '../../../core/resources/strings.dart';
 import '_components/bookmarks_section.dart';
 import '_components/logout_section.dart';
 import '_components/privacy_policy_section.dart';
@@ -30,7 +32,7 @@ class SettingsPage extends GetView<SettingsController> {
               collapseMode: CollapseMode.pin,
               centerTitle: true,
               title: const Text(
-                "Gavino Caro",
+                "Gavino T. Caro",
                 style: TextStyle(
                   color: CustomColors.black,
                   fontSize: 20,
@@ -57,12 +59,17 @@ class SettingsPage extends GetView<SettingsController> {
                         color: Colors.white,
                         shape: CircleBorder(),
                       ),
-                      child: const CircleAvatar(
-                        backgroundImage:NetworkImage(
-                          'https://picsum.photos/256'
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(99),
+                        child: Hero(
+                          tag: Strings.image,
+                          child: Image.asset(
+                            Assets.image,
+                            height: 100,
+                            width: 100,
+                          ),
                         ),
-                        radius: 45,
-                      ),
+                      )
                     ),
                   ),
                 ],
