@@ -30,7 +30,14 @@ class LoginController extends GetxController {
   }
 
   void goToRegister() {
-    Get.offAndToNamed(Routes.registerRoute);
+    textRefresh();
+    clearErrors();
+    Get.toNamed(Routes.registerRoute);
+  }
+
+  void textRefresh() {
+    emailController.text = "";
+    passwordController.text = "";
   }
 
   void clearErrors() {
