@@ -3,11 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 
-import '../../../../core/presentation/common/common_button.dart';
-import '../../../../core/presentation/custom/custom_back_button.dart';
-import '../../../../core/resources/assets.dart';
-import '../../../../core/resources/custom_colors.dart';
-import '../../../../core/resources/dimensions.dart';
+import '../../../core/presentation/common/common_button.dart';
+import '../../../core/presentation/custom/custom_back_button.dart';
+import '../../../core/resources/assets.dart';
+import '../../../core/resources/custom_colors.dart';
+import '../../../core/resources/dimensions.dart';
+import '../../../core/resources/strings.dart';
+import '../../../core/routes/routes.dart';
 import 'profile_controller.dart';
 
 class ProfilePage extends GetView<ProfileController> {
@@ -61,7 +63,7 @@ class ProfilePage extends GetView<ProfileController> {
                       children: [
                         Expanded(
                           child: ListView.builder(
-                            itemCount: 10,
+                            itemCount: 1,
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
                               return Column(
@@ -83,10 +85,17 @@ class ProfilePage extends GetView<ProfileController> {
                                       children: [
                                         Row(
                                           children: [
-                                            Image.asset(
-                                              Assets.logo,
-                                              height: 68,
-                                              width: 74,
+                                            const SizedBox(width: Dimensions.regularSpacing),
+                                            ClipRRect(
+                                              borderRadius: BorderRadius.circular(99),
+                                              child: Hero(
+                                                tag: Strings.image,
+                                                child: Image.asset(
+                                                  Assets.image,
+                                                  height: 64,
+                                                  width: 64
+                                                ),
+                                              ),
                                             ),
                                             const SizedBox(width: Dimensions.extraLargeSpacing),
                                             const Column(
@@ -114,9 +123,12 @@ class ProfilePage extends GetView<ProfileController> {
                                             ),
                                           ],
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(right: 30),
-                                          child: Image.asset(Assets.icView),
+                                        GestureDetector(
+                                          onTap: () => Get.toNamed(Routes.profileInformationRoute),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(right: 30),
+                                            child: Image.asset(Assets.icView),
+                                          ),
                                         )
                                       ],
                                     ),
@@ -134,7 +146,7 @@ class ProfilePage extends GetView<ProfileController> {
                     right: 20,
                     bottom: 20,
                     child: CommonButton(
-                      onPressed: () {},
+                      onPressed: () => Get.toNamed(Routes.addFamilyMemberRoute),
                       width: Get.width,
                       height: Dimensions.buttonHeight,
                       text: "Add Family Member",

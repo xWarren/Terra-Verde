@@ -32,11 +32,12 @@ abstract class Strings {
   static const String lastName = "Last Name";
   static const String address = "Address";
   static const String gender = "Gender";
-  static const String mobileNumber = "Mobile Number";
+  static const String mobileNumber = "Contact Number";
   static const String birthday = "Birthday";
   static const String confirmPassword = "Confirm Password";
   static const String register = "Register";
   static const String verify = "Verify";
   static const String male = "Male";
   static const String female = "Female";
+  static const String image = "Image";
 }

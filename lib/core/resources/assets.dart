@@ -14,5 +14,6 @@ class Assets {
   static const icRight = "assets/images/ic_right_green.png";
   static const icRightLogout = "assets/images/ic_right_red.png";
   static const icView = "assets/images/ic_view.png";
+  static const image = "assets/images/image.png";
 
 }
