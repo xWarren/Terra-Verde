@@ -10,20 +10,23 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return  Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
         children: [
          Expanded(
           child: ListView.builder(
-            itemCount: 100,
+            itemCount: 50,
+            shrinkWrap: true,
             itemBuilder: (context, index) {
-              return const Column(
+              return Column(
                 children: [
-                  Text("Hello")
+                  Text("Hello $index")
                 ],
               );
             },
           ),
-         )
+         ),
+         const Text("Hello")
         ],
       ),
     );

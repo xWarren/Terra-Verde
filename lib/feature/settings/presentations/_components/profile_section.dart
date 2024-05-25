@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../core/resources/assets.dart';
-import '../../../core/resources/custom_colors.dart';
-import '../../../core/utils/print_utils.dart';
+import '../../../../core/resources/assets.dart';
+import '../../../../core/resources/custom_colors.dart';
+import '../../../../core/routes/routes.dart';
 
-class PrivacyPolicySection extends StatelessWidget {
-  const PrivacyPolicySection({super.key});
+class ProfileSection extends StatelessWidget {
+  const ProfileSection({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => printUtil("Privacy Policy Section"),
+      onTap: () => Get.toNamed(Routes.profileRoute),
       child: Container(
         height: 50,
         width: Get.width,
@@ -35,7 +35,7 @@ class PrivacyPolicySection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                "Privacy Policy",
+                "Profile",
                 style: TextStyle(
                   color: CustomColors.black,
                   fontSize: 13,

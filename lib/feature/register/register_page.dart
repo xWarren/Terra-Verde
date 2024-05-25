@@ -89,9 +89,9 @@ class RegisterPage extends GetView<RegisterController> {
                       height: Dimensions.buttonHeight,
                       text: Strings.register,
                       textStyle: const TextStyle(
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white
+                        color: CustomColors.white,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w700
                       ),
                     ),
                     const SizedBox(height: Dimensions.largeSpacing),

@@ -57,9 +57,9 @@ class WelcomePage extends GetView<WelcomeController> {
                     height: Dimensions.buttonHeight,
                     text: Strings.createAccount,
                     textStyle: const TextStyle(
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white
+                      color: CustomColors.white,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w700
                     ),
                   ),
                 ),

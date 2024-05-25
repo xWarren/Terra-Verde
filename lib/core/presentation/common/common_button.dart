@@ -55,7 +55,8 @@ class CommonButton extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(
+        Container(
+          color: Colors.transparent,
           height: height,
           width: width,
           child: ElevatedButton(
@@ -64,11 +65,11 @@ class CommonButton extends StatelessWidget {
               shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
                 RoundedRectangleBorder(
                   side: hasBorder
-                      ? BorderSide(
-                          color: borderColor ?? foregroundColor,
-                          width: borderWidth
-                        )
-                      : BorderSide.none,
+                  ? BorderSide(
+                      color: borderColor ?? foregroundColor,
+                      width: borderWidth
+                    )
+                  : BorderSide.none,
                   borderRadius: BorderRadius.circular(borderRadius),
                 ),
               ),
