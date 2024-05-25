@@ -10,6 +10,7 @@ class OfficialsPage extends GetView<OfficialsController> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+      backgroundColor: CustomColors.white,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

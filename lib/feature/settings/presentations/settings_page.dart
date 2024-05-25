@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../core/resources/custom_colors.dart';
+import '../../../core/resources/custom_colors.dart';
 import '_components/bookmarks_section.dart';
 import '_components/logout_section.dart';
 import '_components/privacy_policy_section.dart';
@@ -70,8 +70,7 @@ class SettingsPage extends GetView<SettingsController> {
             ),
           ),
           const SliverFillRemaining(
-            hasScrollBody: true,
-            fillOverscroll: true,
+            hasScrollBody: false,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -89,7 +88,7 @@ class SettingsPage extends GetView<SettingsController> {
                 ProfileSection(),
                 BookmarksSection(),
                 PrivacyPolicySection(),
-                LogoutSection()
+                LogoutSection(),
               ],
             ),
           )

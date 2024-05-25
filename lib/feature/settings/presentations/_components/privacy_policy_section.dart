@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../core/resources/assets.dart';
-import '../../../core/resources/custom_colors.dart';
-import '../../../core/utils/print_utils.dart';
+import '../../../../core/resources/assets.dart';
+import '../../../../core/resources/custom_colors.dart';
+import '../../../../core/utils/print_utils.dart';
 
-class BookmarksSection extends StatelessWidget {
-  const BookmarksSection({super.key});
+class PrivacyPolicySection extends StatelessWidget {
+  const PrivacyPolicySection({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => printUtil("Bookmarks Section"),
+      onTap: () => printUtil("Privacy Policy Section"),
       child: Container(
         height: 50,
         width: Get.width,
@@ -35,7 +35,7 @@ class BookmarksSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                "Bookmarks",
+                "Privacy Policy",
                 style: TextStyle(
                   color: CustomColors.black,
                   fontSize: 13,

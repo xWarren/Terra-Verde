@@ -4,4 +4,5 @@ class Routes {
   static const loginRoute = "/login_page";
   static const registerRoute = "/register_page";
   static const dashboardRoute = "/dashboard_page";
+  static const profileRoute = "/profile_page";
 }

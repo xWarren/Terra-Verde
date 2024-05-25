@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../core/resources/assets.dart';
-import '../../../core/resources/custom_colors.dart';
-import '../../../core/routes/routes.dart';
+import '../../../../core/resources/assets.dart';
+import '../../../../core/resources/custom_colors.dart';
+import '../../../../core/routes/routes.dart';
 
 class LogoutSection extends StatelessWidget {
   const LogoutSection({super.key});

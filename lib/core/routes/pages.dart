@@ -6,6 +6,8 @@ import '../../feature/login/login_binding.dart';
 import '../../feature/login/login_page.dart';
 import '../../feature/register/register_binding.dart';
 import '../../feature/register/register_page.dart';
+import '../../feature/settings/presentations/profile/profile_binding.dart';
+import '../../feature/settings/presentations/profile/profile_page.dart';
 import '../../feature/welcome/welcome_binding.dart';
 import '../../feature/welcome/welcome_page.dart';
 import 'routes.dart';
@@ -32,6 +34,11 @@ class Pages {
       name: Routes.dashboardRoute,
       page: () => const DashboardPage(),
       binding: DashboardBinding(),
+    ),
+    GetPage(
+      name: Routes.profileRoute,
+      page: () => const ProfilePage(),
+      binding: ProfileBinding(),
     ),
   ];
 }

@@ -6,7 +6,7 @@ import '../../core/domain/services/storage_service.dart';
 import '../../core/utils/enums/tab_type.dart';
 import '../home/home_page.dart';
 import '../officials/officials_page.dart';
-import '../settings/settings_page.dart';
+import '../settings/presentations/settings_page.dart';
 import '_util/scroll_listener.dart';
 
 abstract class DashboardDelegate {
