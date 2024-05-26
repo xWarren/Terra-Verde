@@ -2,6 +2,7 @@ abstract class Strings {
   
   //Exceptions
   static const String oops = "Oops!";
+  static const String unauthorized = "Unauthorized";
   static const String somethingWentWrong = "Something Went Wrong. Please try again";
   static const String noInternetConnection = "No Internet Connection Found \n Check your connection.";
   static const String timeoutException = "Request timeout. Please try again.";
