@@ -9,7 +9,7 @@ import '../../../core/resources/assets.dart';
 import '../../../core/resources/custom_colors.dart';
 import '../../../core/resources/dimensions.dart';
 import '../../../core/resources/strings.dart';
-import '../../login/_components/remember_me.dart';
+import '../../login/presentations/_components/remember_me.dart';
 
 class InformationSetup extends StatefulWidget {
 
@@ -157,7 +157,6 @@ class InformationSetupState extends State<InformationSetup> with AutomaticKeepAl
 
   @override
   Widget build(BuildContext context) {
-    printUtil("GENDER: $gender");
     super.build(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

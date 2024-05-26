@@ -46,7 +46,7 @@ abstract class BaseGetConnect extends GetConnect {
           throw exception;
         }
         return response;
-      } else if (response.statusCode == 404 || response.statusCode == 400) {
+      } else if (response.statusCode == 404 || response.statusCode == 401) {
         var exception = _getException(response.body);
         if(exception != null){
           throw exception;
@@ -72,21 +72,19 @@ abstract class BaseGetConnect extends GetConnect {
     String? error;
     try {
       if (response is Map<String, dynamic>) {
-        final hasError = response['status_message'] != null && response['status_message'] == "Error";
-        final condition = response['message'] != null && hasError;
+        final condition = response['Message'] != null;
 
         if (condition) {
-          error = response['message'].toString();
+          error = response['Message'].toString();
         }
       
       } else {
         
         final jsonResponse = jsonDecode(response);
-        final hasError = response['status_message'] != null && response['status_message'] == "Error";
-        final condition = jsonResponse['message'] != null && hasError;
+        final condition = jsonResponse['Message'] != null;
 
         if (condition) {
-          error = jsonResponse['message'].toString();
+          error = jsonResponse['Message'].toString();
         }
       }
     } catch (e) {      
@@ -97,7 +95,7 @@ abstract class BaseGetConnect extends GetConnect {
   }
 
   AppException? _getExceptionFromErrorResponse(String? error) {
-    if (error?.toLowerCase().contains('mobile number') == true) {
+    if (error?.toLowerCase().contains('userName') == true) {
       return FetchDataException(error);  
     } else if (error?.toLowerCase().contains("password") == true) {
       return FetchDataException(error);

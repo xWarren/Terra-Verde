@@ -5,10 +5,10 @@ import '../../core/routes/routes.dart';
 class WelcomeController extends GetxController {
 
   void goToRegister() {
-    Get.offAndToNamed(Routes.registerRoute);
+    Get.toNamed(Routes.registerRoute);
   }
 
   void goToLogin() {
-    Get.offAndToNamed(Routes.loginRoute);
+    Get.toNamed(Routes.loginRoute);
   }
 }

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 import '../home/home_controller.dart';
-import '../officials/officials_controller.dart';
+import '../officials/presentations/officials_controller.dart';
 import '../settings/presentations/settings_controller.dart';
 import 'dashboard_controller.dart';
 
@@ -16,7 +16,9 @@ class DashboardBinding extends Bindings {
     );
 
     Get.lazyPut<OfficialsController>(
-      () => OfficialsController(),
+      () => OfficialsController(
+        officialsUseCase: Get.find()
+      ),
       fenix: true
     );
 

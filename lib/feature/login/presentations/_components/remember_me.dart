@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/resources/dimensions.dart';
-import '../../../core/resources/custom_colors.dart';
+import '../../../../../core/resources/dimensions.dart';
+import '../../../../core/resources/custom_colors.dart';
 
 class RememberMe extends StatefulWidget {
 

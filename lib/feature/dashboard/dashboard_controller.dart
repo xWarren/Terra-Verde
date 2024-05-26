@@ -5,7 +5,7 @@ import 'package:terra_verde/core/utils/extensions/int_extensions.dart';
 import '../../core/domain/services/storage_service.dart';
 import '../../core/utils/enums/tab_type.dart';
 import '../home/home_page.dart';
-import '../officials/officials_page.dart';
+import '../officials/presentations/officials_page.dart';
 import '../settings/presentations/settings_page.dart';
 import '_util/scroll_listener.dart';
 
