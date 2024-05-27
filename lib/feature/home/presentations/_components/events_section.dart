@@ -7,13 +7,14 @@ import '../../../../core/presentation/common/common_button.dart';
 import '../../../../core/resources/assets.dart';
 import '../../../../core/resources/custom_colors.dart';
 import '../../../../core/resources/dimensions.dart';
-import '../../../../core/utils/print_utils.dart';
 
 class EventsSection extends StatefulWidget {
   final List<EventsDataEntity> eventsData;
+  final Function({required int id}) getIdFromEvents;
   const EventsSection({
     super.key,
-    required this.eventsData
+    required this.eventsData,
+    required this.getIdFromEvents
   });
 
   @override
@@ -31,9 +32,9 @@ class EventsSectionState extends State<EventsSection> with AutomaticKeepAliveCli
   }
   
 
-  void addEventsData(List<EventsDataEntity> eventsData) {
+  void addEventsData(List<EventsDataEntity> events) {
     setState(() {
-      eventsData.addAll(eventsData);
+      eventsData.addAll(events);
     });
   }
 
@@ -227,7 +228,7 @@ class EventsSectionState extends State<EventsSection> with AutomaticKeepAliveCli
                                         Row(
                                           children: [
                                             const Text(
-                                              "Event Starts:",
+                                              "Event Start:",
                                               style: TextStyle(
                                                 color: CustomColors.black,
                                                 fontSize: 11,
@@ -247,7 +248,7 @@ class EventsSectionState extends State<EventsSection> with AutomaticKeepAliveCli
                                         ),
                                         CommonButton(
                                           isLoading: false,
-                                          onPressed: () => printUtil("Hi"),
+                                          onPressed: () =>  widget.getIdFromEvents(id: data.id),
                                           width: 80,
                                           height: 27,
                                           text: "View",

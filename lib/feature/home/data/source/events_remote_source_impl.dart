@@ -27,4 +27,17 @@ class EventsRemoteSourceImpl extends BaseGetConnect implements EventsRemoteSourc
     var featureResponseModel = FeatureEventsResponseModel.fromJson(response.body);
     return EventsMapper.fromFeatureEventsResponseModel(featureResponseModel);
   }
+  
+  @override
+  Future<EventsResponseModel> getIdFromEvent({required int id}) async {
+    var response = await methodRequest(
+      "${APIEndpoint.events}/$id",
+      method: Method.get,
+      headers: {
+      "Authorization": "Bearer ${storageService.getAccessToken()}"
+      }
+    );
+    var featureResponseModel = FeatureEventsResponseModel.fromJson(response.body);
+    return EventsMapper.fromFeatureEventsResponseModel(featureResponseModel);
+  }
 }

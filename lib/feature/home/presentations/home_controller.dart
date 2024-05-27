@@ -21,7 +21,11 @@ class HomeController extends GetxController {
   final EventsUseCase eventsUseCase;
   StreamSubscription? eventsSubs;
 
+  StreamSubscription? idEventSubs;
+
   RxBool isLoading = false.obs;
+
+  RxInt id = 0.obs;
 
   RxList<EventsDataEntity> eventsData = <EventsDataEntity>[].obs;
 
@@ -32,8 +36,32 @@ class HomeController extends GetxController {
 
     eventsSubs?.cancel();
     eventsSubs = eventsUseCase.execute().asStream().listen((response) {
+
       eventsData.assignAll(response);
       eventSectionKey.currentState?.addEventsData(response);
+      isLoading(false);
+      update();
+    },
+    onError: (error) {
+      printUtil("getEventsErr: $error");
+      isLoading(false);
+      update();
+    });
+  }
+
+
+  void getIdFromEvents({required int id}) {
+    isLoading(true);
+
+    idEventSubs?.cancel();
+    idEventSubs = eventsUseCase.getIdFromEvent(id: id).asStream().listen((response) {
+      
+      for (var data in response) {
+        printUtil(data.eventDate);
+        update();
+      }
+      // eventsData.assignAll(response);
+      // eventSectionKey.currentState?.addEventsData(response);
       isLoading(false);
       update();
     },
@@ -54,6 +82,7 @@ class HomeController extends GetxController {
   @override
   void onClose() {
     eventsSubs?.cancel();
+    idEventSubs?.cancel();
     super.onClose();
   }
 }

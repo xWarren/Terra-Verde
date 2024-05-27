@@ -46,9 +46,10 @@ class HomePage extends GetView<HomeController> {
           const AnnouncementsSection(),
           const SizedBox(height: Dimensions.largeSpacing),
           EventsSection(
-            key: controller.eventSectionKey,
+            key: controller.eventSectionKey, 
             eventsData: controller.eventsData,
-          ),
+            getIdFromEvents: controller.getIdFromEvents,
+          )
         ],
       ),
     ),
