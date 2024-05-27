@@ -45,7 +45,7 @@ class DashBoardBottomNavigation extends StatelessWidget {
         controller: tabController,
         labelColor: CustomColors.primaryColor,
         unselectedLabelColor: Colors.grey,
-        overlayColor: MaterialStateProperty.all(Colors.transparent),
+        overlayColor: WidgetStateProperty.all(Colors.transparent),
         indicatorSize: TabBarIndicatorSize.label,
         indicator: CircleTabIndicator(color: CustomColors.primaryColor, radius: 3),
         labelStyle: const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500, fontSize: 12.0),

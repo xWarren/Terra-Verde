@@ -1,14 +1,10 @@
+import 'officials_response_data_model.dart';
+
 class OfficialsResponseModel {
 
-  const OfficialsResponseModel({
-    required this.id,
-    required this.name,
-    required this.position,
-    required this.contacts
+  OfficialsResponseModel({
+    required this.data
   });
 
-  final int id;
-  final String name;
-  final String position;
-  final int contacts;
+  List<OfficialsResponseDataModel> data;
 }

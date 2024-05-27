@@ -230,16 +230,21 @@ class ProfileInformationPage extends GetView<ProfileInformationController> {
                             ),
                           ),
                           const SizedBox(height: Dimensions.textFieldHeight),
-                          CommonButton(
-                            onPressed: () {},
-                            width: Get.width,
-                            height: Dimensions.buttonHeight,
-                            text: "Edit Profile",
-                            textStyle: const TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.white
-                            ),
+                          GetBuilder<ProfileInformationController>(
+                            builder: (context) {
+                              return CommonButton(
+                                isLoading: controller.isLoading.value,
+                                onPressed: () {},
+                                width: Get.width,
+                                height: Dimensions.buttonHeight,
+                                text: "Edit Profile",
+                                textStyle: const TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.white
+                                ),
+                              );
+                            }
                           ),
                         ],
                       ),

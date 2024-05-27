@@ -186,6 +186,7 @@ class LoginPage extends GetView<LoginController> {
                         ),
                         const SizedBox(height: Dimensions.textFieldHeight),
                         CommonButton(
+                          isLoading: controller.isLoading.value,
                           onPressed: () => controller.login(),
                           width: Get.width,
                           height: Dimensions.buttonHeight,

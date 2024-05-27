@@ -1,6 +1,6 @@
-import '../../domain/entities/officials_entity.dart';
+import '../../domain/entities/officials_data_entity.dart';
 
 abstract class OfficialsRepository {
 
-  Future<OfficialsEntity> officials(); 
+  Future<List<OfficialsDataEntity>> officials(); 
 }

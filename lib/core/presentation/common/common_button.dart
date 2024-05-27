@@ -3,10 +3,13 @@ import 'package:get/get.dart';
 
 import '../../resources/custom_colors.dart';
 import '../../resources/dimensions.dart';
+import 'common_loading.dart';
 
 class CommonButton extends StatelessWidget {
   const CommonButton({
     super.key,
+    required this.isLoading,
+    this.loadingIndicatorColor = Colors.white,
     this.text,
     this.textStyle,
     this.height,
@@ -25,10 +28,13 @@ class CommonButton extends StatelessWidget {
     this.onPressed,
     this.errorText,
     this.elevation,
-    this.borderWidth = 1.0
+    this.borderWidth = 1.0,
+    this.indicatorSize
   })  : assert(
             (text == null && child != null) || (child == null && text != null));
-
+  final bool isLoading;
+  final Color loadingIndicatorColor;
+  final double? indicatorSize;
   final String? text;
   final TextStyle? textStyle;
   final double? height;
@@ -73,20 +79,20 @@ class CommonButton extends StatelessWidget {
                   borderRadius: BorderRadius.circular(borderRadius),
                 ),
               ),
-              elevation: MaterialStateProperty.all(elevation),
+              elevation: WidgetStateProperty.all(elevation),
               padding: ButtonStyleButton.allOrNull<EdgeInsets>(padding),
-              foregroundColor: MaterialStateProperty.resolveWith(
+              foregroundColor: WidgetStateProperty.resolveWith(
                 (states) {
-                  if (states.contains(MaterialState.disabled)) {
+                  if (states.contains(WidgetState.disabled)) {
                     return disabledForegroundColor;
                   } else {
                     return foregroundColor;
                   }
                 },
               ),
-              backgroundColor: MaterialStateProperty.resolveWith(
+              backgroundColor: WidgetStateProperty.resolveWith(
                 (states) {
-                  if (states.contains(MaterialState.disabled)) {
+                  if (states.contains(WidgetState.disabled)) {
                     return backgroundColor;
                   } else {
                     return backgroundColor;
@@ -101,7 +107,7 @@ class CommonButton extends StatelessWidget {
               ),
             ),
             onPressed: onPressed,
-            child: child ??
+            child: isLoading ? CommonLoading(color: loadingIndicatorColor, size: indicatorSize) : child ??
                 Text(
                   text!,
                   textAlign: TextAlign.center,

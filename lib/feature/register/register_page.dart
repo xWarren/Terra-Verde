@@ -81,18 +81,23 @@ class RegisterPage extends GetView<RegisterController> {
                       },
                     ),
                     const SizedBox(height: Dimensions.textFieldHeight),
-                    CommonButton(
-                      onPressed: () { 
-                        controller.register();
-                      },
-                      width: Get.width,
-                      height: Dimensions.buttonHeight,
-                      text: Strings.register,
-                      textStyle: const TextStyle(
-                        color: CustomColors.white,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w700
-                      ),
+                    GetBuilder<RegisterController>(
+                      builder: (context) {
+                        return CommonButton(
+                          isLoading: !controller.isLoading.value,
+                          onPressed: () { 
+                            controller.register();
+                          },
+                          width: Get.width,
+                          height: Dimensions.buttonHeight,
+                          text: Strings.register,
+                          textStyle: const TextStyle(
+                            color: CustomColors.white,
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w700
+                          ),
+                        );
+                      }
                     ),
                     const SizedBox(height: Dimensions.largeSpacing),
                   ],

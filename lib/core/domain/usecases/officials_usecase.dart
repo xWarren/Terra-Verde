@@ -1,6 +1,6 @@
-import '../entities/officials_entity.dart';
+import '../entities/officials_data_entity.dart';
 
 abstract class OfficialsUseCase {
 
-  Future<OfficialsEntity> execute();
+  Future<List<OfficialsDataEntity>> execute();
 }

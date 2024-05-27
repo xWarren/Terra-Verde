@@ -1,16 +1,18 @@
 import 'package:get/get.dart';
 
+import '../core/data/repositories/events_repository.dart';
 import '../core/data/repositories/login_repository.dart';
 import '../core/data/repositories/officials_repository.dart';
+import '../core/data/source/events_remote_source.dart';
 import '../core/data/source/login_remote_source.dart';
 import '../core/data/source/officials_remote_source.dart';
 import '../core/domain/services/storage_service.dart';
-import '../core/domain/usecases/officials_usecase.dart';
+import '../feature/home/data/repositories/events_repositories_impl.dart';
+import '../feature/home/data/source/events_remote_source_impl.dart';
 import '../feature/login/data/repositories/login_repository_impl.dart';
 import '../feature/login/data/source/login_remote_source_impl.dart';
 import '../feature/officials/data/repositories/officials_repository_impl.dart';
 import '../feature/officials/data/source/officials_remote_source_impl.dart';
-import '../feature/officials/domain/usecases/officials_usecase_impl.dart';
 
 Future<void> initAppDependecies() async {
 
@@ -35,13 +37,6 @@ Future<void> initAppDependecies() async {
   );
 
   // Officials
-
-  Get.lazyPut<OfficialsUseCase>(
-    () => OfficialsUseCaseImpl(
-      officialsRepository: Get.find()
-    ),
-    fenix: true
-  );
   Get.put<OfficialsRemoteSource>(
     OfficialsRemoteSourceImpl(
       storageService: Get.find()
@@ -50,6 +45,20 @@ Future<void> initAppDependecies() async {
   );
   Get.put<OfficialsRepository>(
     OfficialsRepositoryImpl(
+      remoteSource: Get.find()
+    ),
+    permanent: true
+  );
+
+  // Events
+  Get.put<EventsRemoteSource>(
+    EventsRemoteSourceImpl(
+      storageService: Get.find()
+    ),
+    permanent: true
+  );
+  Get.put<EventsRepository>(
+    EventsRepositoryImpl(
       remoteSource: Get.find()
     ),
     permanent: true

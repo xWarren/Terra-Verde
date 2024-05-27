@@ -1,7 +1,8 @@
 import '../../../../core/data/repositories/officials_repository.dart';
 import '../../../../core/data/source/officials_remote_source.dart';
-import '../../../../core/domain/entities/officials_entity.dart';
-import '../../mapper/officials_mapper.dart';
+import '../../../../core/domain/entities/officials_data_entity.dart';
+import '../../domain/entities/feature_officials_data_entity.dart';
+import '../../mapper/officials_data_mapper.dart';
 
 
 class OfficialsRepositoryImpl implements OfficialsRepository {
@@ -13,10 +14,10 @@ class OfficialsRepositoryImpl implements OfficialsRepository {
   final OfficialsRemoteSource remoteSource;
 
   @override
-  Future<OfficialsEntity> officials() async {
+  Future<List<OfficialsDataEntity>> officials() async {
     var response = await remoteSource.officials();
-    var featureEntity = OfficialsMapper.fromOfficialsResponseModel(response);
-    var entity = OfficialsMapper.fromFeatureOfficialsEntity(featureEntity);
+    var featureEntity = response.data.map<FeatureOfficialsDataEntity>((e) => OfficialsDataMapper.fromOfficialsResponseDataModel(e)).toList();
+    var entity = featureEntity.map<OfficialsDataEntity>((e) => OfficialsDataMapper.fromFeatureOfficialsDataEntity(e)).toList();
     return entity;
   }
 }
