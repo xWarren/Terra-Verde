@@ -1,21 +1,14 @@
+import 'feature_officials_response_data_model.dart';
+
 class FeatureOfficialsResponseModel {
 
-  final int id;
-  final String name;
-  final String position;
-  final int contacts;
+  final List<FeatureOfficialsResponseDataModel> data;
 
   const FeatureOfficialsResponseModel({
-    required this.id,
-    required this.name,
-    required this.position,
-    required this.contacts
+    required this.data
   });
 
-  factory FeatureOfficialsResponseModel.fromJson(Map<String, dynamic>? json) => FeatureOfficialsResponseModel(
-    id: json?["id"] ?? 0,
-    name: json?["name"] ?? "",
-    position: json?["position"] ?? "",
-    contacts: json?["contacts"] ?? 0,
+  factory FeatureOfficialsResponseModel.fromJson(List<dynamic> json) => FeatureOfficialsResponseModel(
+    data: json.map((e) => FeatureOfficialsResponseDataModel.fromJson(e)).toList()
   );
 }

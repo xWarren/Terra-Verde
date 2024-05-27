@@ -1,14 +1,10 @@
+import 'feature_officials_data_entity.dart';
+
 class FeatureOfficialsEntity {
 
   FeatureOfficialsEntity({
-    required this.id,
-    required this.name,
-    required this.position,
-    required this.contacts
+    required this.data
   });
 
-  final int id;
-  final String name;
-  final String position;
-  final int contacts;
+  final List<FeatureOfficialsDataEntity> data;
 }

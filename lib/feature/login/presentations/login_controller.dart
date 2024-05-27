@@ -87,7 +87,6 @@ class LoginController extends GetxController {
         printUtil("loginErr: $error");
         errorMessage.value = error.toString();
         isLoading(false);
-                printUtil("asdasd: ${errorMessage.value}");
         update();
       });
     }

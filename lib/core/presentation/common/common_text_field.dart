@@ -24,6 +24,7 @@ class CommonTextField extends StatefulWidget {
     this.textInputAction = TextInputAction.next,
     this.onTap,
     this.keyboardType = TextInputType.text,
+    this.inputBorder,
     this.isEnabled = true,
     this.validator,
     this.onChanged,
@@ -62,6 +63,7 @@ class CommonTextField extends StatefulWidget {
   final VoidCallback? onTap;
   final TextInputAction textInputAction;
   final TextInputType keyboardType;
+  final InputBorder? inputBorder;
   final bool isEnabled;
   final String? errorText;
   final Function(String)? onChanged;
@@ -186,6 +188,7 @@ class CommonTextFieldState extends State<CommonTextField> {
                   : CustomColors.grey100
                 )
               ),
+              disabledBorder: widget.inputBorder,
               prefixIconConstraints: widget.prefixIconConstraints,
               prefixIcon: widget.prefixIcon,
               prefixText: widget.prefixText,

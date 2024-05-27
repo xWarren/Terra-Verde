@@ -79,7 +79,6 @@ abstract class BaseGetConnect extends GetConnect {
         }
       
       } else {
-        
         final jsonResponse = jsonDecode(response);
         final condition = jsonResponse['Message'] != null;
 

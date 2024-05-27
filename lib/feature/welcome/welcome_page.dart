@@ -51,16 +51,21 @@ class WelcomePage extends GetView<WelcomeController> {
                     top: Dimensions.buttonHeight,
                     bottom: Dimensions.largeSpacing
                   ),
-                  child: CommonButton(
-                    onPressed: () => controller.goToRegister(),
-                    width: Get.width,
-                    height: Dimensions.buttonHeight,
-                    text: Strings.createAccount,
-                    textStyle: const TextStyle(
-                      color: CustomColors.white,
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w700
-                    ),
+                  child: GetBuilder<WelcomeController>(
+                    builder: (context) {
+                      return CommonButton(
+                        isLoading: controller.isLoading.value,
+                        onPressed: () => controller.goToRegister(),
+                        width: Get.width,
+                        height: Dimensions.buttonHeight,
+                        text: Strings.createAccount,
+                        textStyle: const TextStyle(
+                          color: CustomColors.white,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w700
+                        ),
+                      );
+                    }
                   ),
                 ),
                 Row(

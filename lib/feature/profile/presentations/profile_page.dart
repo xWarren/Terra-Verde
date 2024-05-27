@@ -145,16 +145,21 @@ class ProfilePage extends GetView<ProfileController> {
                     left: 20,
                     right: 20,
                     bottom: 20,
-                    child: CommonButton(
-                      onPressed: () => Get.toNamed(Routes.addFamilyMemberRoute),
-                      width: Get.width,
-                      height: Dimensions.buttonHeight,
-                      text: "Add Family Member",
-                      textStyle: const TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white
-                      ),
+                    child: GetBuilder<ProfileController>(
+                      builder: (context) {
+                        return CommonButton(
+                          isLoading: controller.isLoading.value,
+                          onPressed: () => Get.toNamed(Routes.addFamilyMemberRoute),
+                          width: Get.width,
+                          height: Dimensions.buttonHeight,
+                          text: "Add Family Member",
+                          textStyle: const TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white
+                          ),
+                        );
+                      }
                     ),
                   )
                 ],

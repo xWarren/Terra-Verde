@@ -4,6 +4,7 @@ class CustomColors {
 
   static const Color primaryColor = Color(0xFF539C7C);
   static const Color black = Color(0xFF2D2D2D);
+  static const Color blackOpacity = Color.fromRGBO(45, 45, 45, 0.5);
   static const Color grey = Color(0xFFA19D9D);
   static const Color grey100 = Color(0xFFD9D9D9);
   static const Color grey200 = Color(0xFFF0F0F0);

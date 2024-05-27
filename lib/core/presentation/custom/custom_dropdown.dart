@@ -79,9 +79,9 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>>
         height: style.height,
         child: ElevatedButton(
           style: ButtonStyle(
-            elevation: const MaterialStatePropertyAll(0),
-            backgroundColor: const MaterialStatePropertyAll(Colors.white),
-            shape: MaterialStateProperty.all<OutlinedBorder>(
+            elevation: const WidgetStatePropertyAll(0),
+            backgroundColor: const WidgetStatePropertyAll(Colors.white),
+            shape: WidgetStateProperty.all<OutlinedBorder>(
               RoundedRectangleBorder(
                 side: BorderSide(
                   color: (
