@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
@@ -13,14 +14,33 @@ class OfficialsPage extends GetView<OfficialsController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: CustomColors.white,
+      appBar: AppBar(
+        backgroundColor: CustomColors.white,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: CustomColors.white,
+          statusBarBrightness: Brightness.dark,
+          statusBarIconBrightness: Brightness.dark
+        ),
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        title: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 5),
+          child: Text(
+            "Officials",
+            style: TextStyle(
+              color: CustomColors.black,
+              fontSize: 18,
+              fontWeight: FontWeight.w600
+            ),
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 30,
-          vertical: 50
+          vertical: 20
         ),
-        child: SafeArea(
-          child: _body(),
-        ),
+        child: _body(),
       ),
     );
   }
@@ -30,14 +50,6 @@ class OfficialsPage extends GetView<OfficialsController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        const Text(
-          "Officials",
-          style: TextStyle(
-            color: CustomColors.black,
-            fontSize: 18,
-            fontWeight: FontWeight.w600
-          ),
-        ),
         GetBuilder<OfficialsController>(
           builder: (context) {
             return Expanded(
