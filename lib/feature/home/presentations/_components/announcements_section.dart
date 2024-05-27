@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../../core/presentation/common/common_state.dart';
 import '../../../../core/resources/assets.dart';
 import '../../../../core/resources/custom_colors.dart';
-import '../../../../core/resources/dimensions.dart';
-import '../../../../core/utils/print_utils.dart';
 
 class AnnouncementsSection extends StatelessWidget {
   const AnnouncementsSection({super.key});
