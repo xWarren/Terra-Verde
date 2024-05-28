@@ -23,10 +23,10 @@ class EventsRepositoryImpl implements EventsRepository {
   }
 
   @override
-  Future<List<EventsDataEntity>> getIdFromEvent(EventsParam param) async {
+  Future<EventsDataEntity> getIdFromEvent(EventsParam param) async {
     var response = await remoteSource.getIdFromEvent(id: param.id);
-    var featureEntity = response.data.map<FeatureEventsDataEntity>((e) => EventsDataMapper.fromEventsResponseDataModel(e)).toList();
-    var entity = featureEntity.map<EventsDataEntity>((e) => EventsDataMapper.fromFeatureEventsDataEntity(e)).toList();
+    var featureEntity = EventsDataMapper.fromEventsResponseDataModel(response);
+    var entity = EventsDataMapper.fromFeatureEventsDataEntity(featureEntity);
     return entity;
   }
 }

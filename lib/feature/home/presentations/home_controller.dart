@@ -56,10 +56,7 @@ class HomeController extends GetxController {
     idEventSubs?.cancel();
     idEventSubs = eventsUseCase.getIdFromEvent(id: id).asStream().listen((response) {
       
-      for (var data in response) {
-        printUtil(data.eventDate);
-        update();
-      }
+      printUtil(response.eventDate);
       // eventsData.assignAll(response);
       // eventSectionKey.currentState?.addEventsData(response);
       isLoading(false);

@@ -1,7 +1,8 @@
+import '../model/events_response_data_model.dart';
 import '../model/events_response_model.dart';
 
 abstract class EventsRemoteSource {
 
   Future<EventsResponseModel> events();
-  Future<EventsResponseModel> getIdFromEvent({required int id});
+  Future<EventsResponseDataModel> getIdFromEvent({required int id});
 }

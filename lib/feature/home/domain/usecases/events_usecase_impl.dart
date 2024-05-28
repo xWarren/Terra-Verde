@@ -18,7 +18,7 @@ class EventsUseCaseImpl implements EventsUseCase {
   }
   
   @override
-  Future<List<EventsDataEntity>> getIdFromEvent({required int id}) {
+  Future<EventsDataEntity> getIdFromEvent({required int id}) {
 
     var param = EventsParam(
       id: id
