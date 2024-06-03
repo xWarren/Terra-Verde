@@ -18,5 +18,9 @@ class Assets {
   static const image = "assets/images/image.png";
   static const noImage = "assets/images/no_image.png";
   static const noAnnouncement = "assets/images/no_announcement.png";
-
+  static const icClock = "assets/images/ic_clock.png";
+  static const icCalendar = "assets/images/ic_calendar.png";
+  static const icAchiveAdd = "assets/images/ic_archive_add.png";
+  static const icArchiveRemove = "assets/images/ic_archive_remove.png";
+  static const icArrowLeftWhite = "assets/images/ic_arrow_left_white.png";
 }

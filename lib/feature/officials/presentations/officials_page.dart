@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 
 import '../../../core/resources/assets.dart';
 import '../../../core/resources/custom_colors.dart';
@@ -38,7 +37,6 @@ class OfficialsPage extends GetView<OfficialsController> {
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 30,
-          vertical: 20
         ),
         child: _body(),
       ),
@@ -55,6 +53,7 @@ class OfficialsPage extends GetView<OfficialsController> {
             return Expanded(
               child: ListView.builder(
                 shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: controller.officialsData.length,
                 itemBuilder: (context, index) {
                   var data = controller.officialsData[index];

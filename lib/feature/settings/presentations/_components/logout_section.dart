@@ -11,7 +11,7 @@ class LogoutSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.offAndToNamed(Routes.welcomeRoute),
+      onTap: () => Get.offAndToNamed(Routes.loginRoute),
       child: Container(
         height: 50,
         width: Get.width,

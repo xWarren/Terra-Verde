@@ -5,7 +5,6 @@ import '../../domain/entities/feature_events_data_entity.dart';
 import '../../domain/payload/events_param.dart';
 import '../../mapper/events_data_mapper.dart';
 
-
 class EventsRepositoryImpl implements EventsRepository {
 
   EventsRepositoryImpl({

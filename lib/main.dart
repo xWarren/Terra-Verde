@@ -22,7 +22,7 @@ class TerraVerde extends StatelessWidget {
         fontFamily: "Poppins",
         useMaterial3: false,
       ),
-      initialRoute: Routes.welcomeRoute,
+      initialRoute: Routes.loginRoute,
       getPages: Pages.pages
     );
   }

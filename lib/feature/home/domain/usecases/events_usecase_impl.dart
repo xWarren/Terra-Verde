@@ -12,7 +12,7 @@ class EventsUseCaseImpl implements EventsUseCase {
   final EventsRepository eventsRepository;
 
   @override
-  Future<List<EventsDataEntity>> execute() {
+  Future<List<EventsDataEntity>> getEvents() {
 
     return eventsRepository.events();
   }
