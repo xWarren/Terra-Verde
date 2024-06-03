@@ -11,7 +11,8 @@ class EventsDataMapper {
       id: model.id,
       eventName: model.eventName,
       eventDate: model.eventDate,
-      eventImage: model.eventImage
+      eventImage: model.eventImage,
+      eventDescription: model.eventDescription
     );
   }
 
@@ -21,7 +22,8 @@ class EventsDataMapper {
       id: model.id,
       eventName: model.eventName,
       eventDate: model.eventDate,
-      eventImage: model.eventImage
+      eventImage: model.eventImage,
+      eventDescription: model.eventDescription
     );
   }
 
@@ -31,7 +33,8 @@ class EventsDataMapper {
       id: entity.id,
       eventName: entity.eventName,
       eventDate: entity.eventDate,
-      eventImage: entity.eventImage
+      eventImage: entity.eventImage,
+      eventDescription: entity.eventDescription
     );
   }
 }

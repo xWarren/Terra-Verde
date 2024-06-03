@@ -1,13 +1,17 @@
 import 'package:get/get.dart';
 
+import '../core/data/repositories/announcement_repository.dart';
 import '../core/data/repositories/events_repository.dart';
 import '../core/data/repositories/login_repository.dart';
 import '../core/data/repositories/officials_repository.dart';
+import '../core/data/source/announcement_remote_source.dart';
 import '../core/data/source/events_remote_source.dart';
 import '../core/data/source/login_remote_source.dart';
 import '../core/data/source/officials_remote_source.dart';
 import '../core/domain/services/storage_service.dart';
-import '../feature/home/data/repositories/events_repositories_impl.dart';
+import '../feature/home/data/repositories/announcement_repository_impl.dart';
+import '../feature/home/data/repositories/events_repository_impl.dart';
+import '../feature/home/data/source/announcement_remote_source_impl.dart';
 import '../feature/home/data/source/events_remote_source_impl.dart';
 import '../feature/login/data/repositories/login_repository_impl.dart';
 import '../feature/login/data/source/login_remote_source_impl.dart';
@@ -59,6 +63,20 @@ Future<void> initAppDependecies() async {
   );
   Get.put<EventsRepository>(
     EventsRepositoryImpl(
+      remoteSource: Get.find()
+    ),
+    permanent: true
+  );
+
+   // Announcement
+  Get.put<AnnouncementRemoteSource>(
+    AnnouncementRemoteSourceImpl(
+      storageService: Get.find()
+    ),
+    permanent: true
+  );
+  Get.put<AnnouncementRepository>(
+    AnnouncementRepositoryImpl(
       remoteSource: Get.find()
     ),
     permanent: true

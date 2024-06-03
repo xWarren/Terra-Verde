@@ -51,7 +51,7 @@ abstract class BaseGetConnect extends GetConnect {
         if(exception != null){
           throw exception;
         } else {
-          throw FetchDataException(Strings.somethingWentWrong);
+          throw FetchDataException("User not found");
         }
       } else if (response.statusCode == 500 &&
           (response.body != null || response.body == null)) {
