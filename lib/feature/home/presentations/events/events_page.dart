@@ -43,89 +43,82 @@ class _EventsPageState extends State<EventsPage> {
       body: Stack(
         children: [
           Stack(
+            alignment: Alignment.bottomCenter,
+            clipBehavior: Clip.none,
             children: [
-              Stack(
-                alignment: Alignment.bottomCenter,
-                children: [
-                  ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(50),
-                      bottomRight: Radius.circular(50)
-                    ),
-                    child: Image.asset(
-                      Assets.noImage,
-                      fit: BoxFit.fill,
-                      height: 290,
-                      width: Get.width,
-                    ),
+              ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(50),
+                  bottomRight: Radius.circular(50)
+                ),
+                child: Image.asset(
+                  Assets.noImage,
+                  fit: BoxFit.fill,
+                  height: 290,
+                  width: Get.width,
+                ),
+              ),
+              Positioned(
+                top: 250,
+                left: 0,
+                right: 0,
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 50),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 20
                   ),
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 50),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 20
+                  decoration: ShapeDecoration(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    )
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.idEventsData.eventName,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: CustomColors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500
+                        ),
                       ),
-                      decoration: ShapeDecoration(
-                        color: Colors.yellow,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        )
+                      Text(
+                        "$formattedMonth at $formattedTime",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: CustomColors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500
+                        ),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            widget.idEventsData.eventName,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              color: CustomColors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500
-                            ),
-                          ),
-                          Text(
-                            "$formattedMonth at $formattedTime",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              color: CustomColors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              Column(
-                crossAxisAlignment: widget.idEventsData.eventDescription.isEmpty
-                ? CrossAxisAlignment.center
-                : CrossAxisAlignment.start,
-                mainAxisAlignment: widget.idEventsData.eventDescription.isEmpty 
-                ? MainAxisAlignment.center
-                : MainAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Text(
-                      widget.idEventsData.eventDescription.isEmpty
-                      ? "No description"
-                      : widget.idEventsData.eventDescription,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: widget.idEventsData.eventDescription.isEmpty ? 14 : 13,
-                        fontWeight: FontWeight.w500
-                      ),
-                    ),
-                  )
-                ],
-              ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: Text(
+                  widget.idEventsData.eventDescription.isEmpty
+                  ? "No description"
+                  : widget.idEventsData.eventDescription,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: widget.idEventsData.eventDescription.isEmpty ? 14 : 13,
+                    fontWeight: FontWeight.w500
+                  ),
+                ),
+              )
             ],
           ),
           Positioned(
