@@ -18,7 +18,8 @@ class AddResidentsDataMapper {
       address: model.address,
       birthDate: model.birthDate,
       gender: model.gender,
-      profileImage: model.profileImage
+      profileImage: model.profileImage,
+      relationship: model.relationship
     );
   }
 
@@ -35,7 +36,8 @@ class AddResidentsDataMapper {
       address: model.address,
       birthDate: model.birthDate,
       gender: model.gender,
-      profileImage: model.profileImage
+      profileImage: model.profileImage,
+      relationship: model.relationship
     );
   }
 
@@ -52,7 +54,8 @@ class AddResidentsDataMapper {
       address: entity.address,
       birthDate: entity.birthDate,
       gender: entity.gender,
-      profileImage: entity.profileImage
+      profileImage: entity.profileImage,
+      relationship: entity.relationship
     );
   }
 }

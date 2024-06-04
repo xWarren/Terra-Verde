@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
+import 'package:terra_verde/core/utils/print_utils.dart';
 
 import '../../../core/presentation/common/common_button.dart';
 import '../../../core/presentation/custom/custom_back_button.dart';
@@ -37,136 +37,192 @@ class ProfilePage extends GetView<ProfileController> {
           statusBarIconBrightness: Brightness.dark
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Container(
-              width: Get.width,
-              margin: const EdgeInsets.only(top: 20),
-              decoration: const ShapeDecoration(
-                color: CustomColors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15)
-                  )
-                )
-              ),
-              child: Stack(
-                alignment: Alignment.bottomCenter,
-                clipBehavior: Clip.none,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 80),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: ListView.builder(
-                            itemCount: 1,
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  Container(
-                                    margin: const EdgeInsets.symmetric(
-                                      horizontal: 30,
-                                      vertical: 10
-                                    ),
-                                    decoration: ShapeDecoration(
-                                      color: CustomColors.white,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8),
-                                        side: const BorderSide(color: CustomColors.primaryColor)
-                                      )
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
+      body: GetBuilder<ProfileController>(
+        builder: (context) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Container(
+                  width: Get.width,
+                  margin: const EdgeInsets.only(top: 20),
+                  decoration: const ShapeDecoration(
+                    color: CustomColors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        topRight: Radius.circular(15)
+                      )
+                    )
+                  ),
+                  child: Stack(
+                    alignment: Alignment.bottomCenter,
+                    clipBehavior: Clip.none,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 80),
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: ListView.builder(
+                                itemCount: controller.residentsData.length,
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) {
+                                  var data = controller.residentsData[index];
+                                  return Column(
+                                    children: [
+                                      Container(
+                                        margin: const EdgeInsets.symmetric(
+                                          horizontal: 30,
+                                          vertical: 10
+                                        ),
+                                        decoration: ShapeDecoration(
+                                          color: CustomColors.white,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(8),
+                                            side: const BorderSide(color: CustomColors.primaryColor)
+                                          )
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
-                                            const SizedBox(width: Dimensions.regularSpacing),
-                                            ClipRRect(
-                                              borderRadius: BorderRadius.circular(99),
-                                              child: Hero(
-                                                tag: Strings.image,
-                                                child: Image.asset(
-                                                  Assets.image,
-                                                  height: 64,
-                                                  width: 64
-                                                ),
+                                            Expanded(
+                                              child: Row(
+                                                children: [
+                                                  const SizedBox(width: Dimensions.regularSpacing),
+                                                  ClipRRect(
+                                                    borderRadius: BorderRadius.circular(99),
+                                                    child: Hero(
+                                                      tag: Strings.image,
+                                                      child: Image.asset(
+                                                        Assets.image,
+                                                        height: 64,
+                                                        width: 64
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(width: Dimensions.extraLargeSpacing),
+                                                  Expanded(
+                                                    child: Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        Wrap(
+                                                          children: [
+                                                            Expanded(
+                                                              child: Text(
+                                                                data.firstName.isNotEmpty ? data.firstName : "N/A",
+                                                                maxLines: 1,
+                                                                overflow: TextOverflow.ellipsis,
+                                                                style: const TextStyle(
+                                                                  color: CustomColors.black,
+                                                                  fontSize: 13,
+                                                                  fontWeight: FontWeight.w500,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            const SizedBox(width: 3),
+                                                            Expanded(
+                                                              child: Text(
+                                                                data.middleName.isNotEmpty ? data.middleName : "N/A",
+                                                                maxLines: 1,
+                                                                overflow: TextOverflow.ellipsis,
+                                                                style: const TextStyle(
+                                                                  color: CustomColors.black,
+                                                                  fontSize: 13,
+                                                                  fontWeight: FontWeight.w500,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            const SizedBox(width: 3),
+                                                            Expanded(
+                                                              child: Text(
+                                                                data.lastName.isNotEmpty ? data.lastName : "N/A",
+                                                                maxLines: 1,
+                                                                overflow: TextOverflow.ellipsis,
+                                                                style: const TextStyle(
+                                                                  color: CustomColors.black,
+                                                                  fontSize: 13,
+                                                                  fontWeight: FontWeight.w500,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        const SizedBox(height: Dimensions.largeSpacing),
+                                                        Text(
+                                                          data.relationship.isNotEmpty
+                                                          ? data.relationship
+                                                          : "N/A",
+                                                          maxLines: 1,
+                                                          overflow: TextOverflow.ellipsis,
+                                                          style: const TextStyle(
+                                                            color: CustomColors.grey500,
+                                                            fontSize: 13,
+                                                            fontWeight: FontWeight.w500
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
-                                            const SizedBox(width: Dimensions.extraLargeSpacing),
-                                            const Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text(
-                                                  "Gavino T. Caro",
-                                                  style: TextStyle(
-                                                    color: CustomColors.black,
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.w500
-                                                  ),
-                                                ),
-                                                SizedBox(height: Dimensions.largeSpacing),
-                                                Text(
-                                                  "Spouse",
-                                                  style: TextStyle(
-                                                    color: CustomColors.grey500,
-                                                    fontSize: 13,
-                                                    fontWeight: FontWeight.w500
-                                                  ),
-                                                )
-                                              ],
-                                            ),
+                                            GestureDetector(
+                                              onTap: () {
+                                                printUtil("before${controller.id.value}");
+                                                Get.toNamed(
+                                                  Routes.profileInformationRoute,
+                                                  arguments: {'id': data.id}
+                                                );
+                                                 printUtil("after${controller.id.value}");
+                                                controller.update();
+
+                                              },
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(right: 30),
+                                                child: Image.asset(Assets.icView),
+                                              ),
+                                            )
                                           ],
                                         ),
-                                        GestureDetector(
-                                          onTap: () => Get.toNamed(Routes.profileInformationRoute),
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(right: 30),
-                                            child: Image.asset(Assets.icView),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              );
-                            },
-                          ),
-                        )
-                      ],
-                    ),
+                                      )
+                                    ],
+                                  );
+                                },
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Positioned(
+                        left: 20,
+                        right: 20,
+                        bottom: 20,
+                        child: GetBuilder<ProfileController>(
+                          builder: (context) {
+                            return CommonButton(
+                              isLoading: controller.isLoading.value,
+                              onPressed: () => Get.toNamed(Routes.addFamilyMemberRoute),
+                              width: Get.width,
+                              height: Dimensions.buttonHeight,
+                              text: "Add Family Member",
+                              textStyle: const TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white
+                              ),
+                            );
+                          }
+                        ),
+                      )
+                    ],
                   ),
-                  Positioned(
-                    left: 20,
-                    right: 20,
-                    bottom: 20,
-                    child: GetBuilder<ProfileController>(
-                      builder: (context) {
-                        return CommonButton(
-                          isLoading: controller.isLoading.value,
-                          onPressed: () => Get.toNamed(Routes.addFamilyMemberRoute),
-                          width: Get.width,
-                          height: Dimensions.buttonHeight,
-                          text: "Add Family Member",
-                          textStyle: const TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white
-                          ),
-                        );
-                      }
-                    ),
-                  )
-                ],
-              ),
-            ),
-          )
-        ],
+                ),
+              )
+            ],
+          );
+        }
       ),
     );
   }

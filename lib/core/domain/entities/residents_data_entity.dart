@@ -11,7 +11,8 @@ class ResidentsDataEntity {
     required this.address,
     required this.birthDate,
     required this.gender,
-    required this.profileImage
+    required this.profileImage,
+    required this.relationship
   });
 
   final int id;
@@ -25,4 +26,5 @@ class ResidentsDataEntity {
   final String birthDate;
   final String gender;
   final String profileImage;
+  final String relationship;
 }

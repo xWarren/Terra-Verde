@@ -21,7 +21,7 @@ class ResidentsRemoteSourceImpl extends BaseGetConnect implements ResidentsRemot
   @override
   Future<GetResidentsResponseModel> getResidents() async {
     var response = await methodRequest(
-      APIEndpoint.residents,
+      APIEndpoint.residentsHouseMembers,
       method: Method.get,
       headers: {
       "Authorization": "Bearer ${storageService.getAccessToken()}"
@@ -34,7 +34,7 @@ class ResidentsRemoteSourceImpl extends BaseGetConnect implements ResidentsRemot
   @override
   Future<GetResidentsResponseDataModel> getIdFromResidents({required int id}) async {
     var response = await methodRequest(
-      "${APIEndpoint.residents}/$id",
+      "${APIEndpoint.residentsHouseMembers}/$id",
       method: Method.get,
       headers: {
       "Authorization": "Bearer ${storageService.getAccessToken()}"

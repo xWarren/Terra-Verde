@@ -41,4 +41,15 @@ abstract class Strings {
   static const String male = "Male";
   static const String female = "Female";
   static const String image = "Image";
+  static const String familyRelationship = "Family Relationship";
+  static const String grandfather = "Grandfather";
+  static const String grandmother = "Grandmother";
+  static const String aunt = "Aunt";
+  static const String uncle = "Uncle";
+  static const String cousin = "Cousin";
+  static const String headofthefamily = "Head of the family";
+  static const String mother = "Mother";
+  static const String brother = "Brother";
+  static const String sister = "Sister";
+
 }

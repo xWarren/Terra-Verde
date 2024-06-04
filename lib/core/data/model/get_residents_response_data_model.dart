@@ -11,7 +11,8 @@ class GetResidentsResponseDataModel {
     required this.address,
     required this.birthDate,
     required this.gender,
-    required this.profileImage
+    required this.profileImage,
+    required this.relationship
 
   });
 
@@ -26,4 +27,5 @@ class GetResidentsResponseDataModel {
   final String birthDate;
   final String gender;
   final String profileImage;
+  final String relationship;
 }

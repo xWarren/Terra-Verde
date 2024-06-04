@@ -11,6 +11,7 @@ class FeatureResidentsResponseDataModel {
   final String birthDate;
   final String gender;
   final String profileImage;
+  final String relationship;
 
   const FeatureResidentsResponseDataModel({
     required this.id,
@@ -23,7 +24,8 @@ class FeatureResidentsResponseDataModel {
     required this.address,
     required this.birthDate,
     required this.gender,
-    required this.profileImage
+    required this.profileImage,
+    required this.relationship
   });
 
   factory FeatureResidentsResponseDataModel.fromJson(Map<String, dynamic>? json) => FeatureResidentsResponseDataModel(
@@ -37,6 +39,7 @@ class FeatureResidentsResponseDataModel {
     address: json?["address"] ?? "",
     birthDate: json?["birthDate"] ?? "",
     gender: json?["gender"] ?? "",
-    profileImage: json?["profileImage"] ?? "",                
+    profileImage: json?["profileImage"] ?? "",
+    relationship: json?["relationship"] ?? ""               
   );
 }

@@ -4,10 +4,12 @@ import '../core/data/repositories/announcement_repository.dart';
 import '../core/data/repositories/events_repository.dart';
 import '../core/data/repositories/login_repository.dart';
 import '../core/data/repositories/officials_repository.dart';
+import '../core/data/repositories/residents_repository.dart';
 import '../core/data/source/announcement_remote_source.dart';
 import '../core/data/source/events_remote_source.dart';
 import '../core/data/source/login_remote_source.dart';
 import '../core/data/source/officials_remote_source.dart';
+import '../core/data/source/residents_remote_source.dart';
 import '../core/domain/services/storage_service.dart';
 import '../feature/home/data/repositories/announcement_repository_impl.dart';
 import '../feature/home/data/repositories/events_repository_impl.dart';
@@ -17,6 +19,8 @@ import '../feature/login/data/repositories/login_repository_impl.dart';
 import '../feature/login/data/source/login_remote_source_impl.dart';
 import '../feature/officials/data/repositories/officials_repository_impl.dart';
 import '../feature/officials/data/source/officials_remote_source_impl.dart';
+import '../feature/profile/data/repositories/residents_repository_impl.dart';
+import '../feature/profile/data/source/residents_remote_source_impl.dart';
 
 Future<void> initAppDependecies() async {
 
@@ -68,7 +72,7 @@ Future<void> initAppDependecies() async {
     permanent: true
   );
 
-   // Announcement
+  // Announcement
   Get.put<AnnouncementRemoteSource>(
     AnnouncementRemoteSourceImpl(
       storageService: Get.find()
@@ -77,6 +81,20 @@ Future<void> initAppDependecies() async {
   );
   Get.put<AnnouncementRepository>(
     AnnouncementRepositoryImpl(
+      remoteSource: Get.find()
+    ),
+    permanent: true
+  );
+
+  //Residents
+  Get.put<ResidentsRemoteSource>(
+    ResidentsRemoteSourceImpl(
+      storageService: Get.find()
+    ),
+    permanent: true
+  );
+  Get.put<ResidentsRepository>(
+    ResidentsRepositoryImpl(
       remoteSource: Get.find()
     ),
     permanent: true
