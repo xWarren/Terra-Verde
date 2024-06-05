@@ -81,13 +81,10 @@ class ProfileInformationPage extends GetView<ProfileInformationController> {
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(99),
-                                  child: Hero(
-                                    tag: Strings.image,
-                                    child: Image.asset(
-                                      Assets.image,
-                                      height: 120,
-                                      width: 120
-                                    ),
+                                  child: Image.asset(
+                                    Assets.image,
+                                    height: 120,
+                                    width: 120
                                   ),
                                 ),
                               ),
@@ -99,48 +96,42 @@ class ProfileInformationPage extends GetView<ProfileInformationController> {
                                 children: [
                                   Wrap(
                                     children: [
-                                      Expanded(
-                                        child: Text(
-                                          controller.firstName.value.isNotEmpty
-                                          ? controller.firstName.value
-                                          : "N/A",
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(
-                                            color: CustomColors.black,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w600
-                                          ),
+                                      Text(
+                                        controller.firstName.value.isNotEmpty
+                                        ? controller.firstName.value
+                                        : "N/A",
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                          color: CustomColors.black,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600
                                         ),
                                       ),
                                       const SizedBox(width: 5),
-                                      Expanded(
-                                        child: Text(
-                                          controller.middeName.value.isNotEmpty
-                                          ? controller.middeName.value
-                                          : "N/A",
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(
-                                            color: CustomColors.black,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w600
-                                          ),
+                                      Text(
+                                        controller.middeName.value.isNotEmpty
+                                        ? controller.middeName.value
+                                        : "N/A",
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                          color: CustomColors.black,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600
                                         ),
                                       ),
                                       const SizedBox(width: 5),
-                                      Expanded(
-                                        child: Text(
-                                          controller.lastName.value.isNotEmpty
-                                          ? controller.lastName.value
-                                          : "N/A",
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(
-                                            color: CustomColors.black,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w600
-                                          ),
+                                      Text(
+                                        controller.lastName.value.isNotEmpty
+                                        ? controller.lastName.value
+                                        : "N/A",
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                          color: CustomColors.black,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600
                                         ),
                                       ),
                                     ],

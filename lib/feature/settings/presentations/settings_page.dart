@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import '../../../core/resources/assets.dart';
 import '../../../core/resources/custom_colors.dart';
-import '../../../core/resources/strings.dart';
 import '_components/bookmarks_section.dart';
 import '_components/logout_section.dart';
 import '_components/privacy_policy_section.dart';
@@ -61,13 +60,10 @@ class SettingsPage extends GetView<SettingsController> {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(99),
-                        child: Hero(
-                          tag: Strings.image,
-                          child: Image.asset(
-                            Assets.image,
-                            height: 100,
-                            width: 100,
-                          ),
+                        child: Image.asset(
+                          Assets.image,
+                          height: 100,
+                          width: 100,
                         ),
                       )
                     ),
