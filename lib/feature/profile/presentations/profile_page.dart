@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../../core/presentation/common/common_button.dart';
 import '../../../core/presentation/custom/custom_back_button.dart';
 import '../../../core/resources/assets.dart';
 import '../../../core/resources/custom_colors.dart';
@@ -184,23 +183,28 @@ class ProfilePage extends GetView<ProfileController> {
                         left: 20,
                         right: 20,
                         bottom: 20,
-                        child: GetBuilder<ProfileController>(
-                          builder: (context) {
-                            return CommonButton(
-                              isLoading: controller.isLoading.value,
-                              onPressed: () => Get.toNamed(Routes.addFamilyMemberRoute),
-                              width: Get.width,
-                              height: Dimensions.buttonHeight,
-                              text: "Add Family Member",
-                              textStyle: const TextStyle(
+                        child: SizedBox(
+                          height: 60,
+                          child: ElevatedButton(
+                            onPressed: () => Get.toNamed(Routes.addFamilyMemberRoute),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: CustomColors.primaryColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)
+                              ),
+                              elevation: 0
+                            ),
+                            child: const Text(
+                              "Add Family Member",
+                              style: TextStyle(
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.w700,
                                 color: Colors.white
                               ),
-                            );
-                          }
+                            ),
+                          ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

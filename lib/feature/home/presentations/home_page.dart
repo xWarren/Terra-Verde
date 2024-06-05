@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../../core/resources/custom_colors.dart';
 import '_components/announcements_section.dart';
 import '_components/events_section.dart';
+import '_components/officials_section.dart';
 import 'home_controller.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -15,6 +16,7 @@ class HomePage extends GetView<HomeController> {
     return Scaffold(
       backgroundColor: CustomColors.white,
       body: CustomScrollView(
+        controller: controller.scrollController,
         slivers: [
           const SliverAppBar(
            backgroundColor: CustomColors.white,
@@ -37,22 +39,20 @@ class HomePage extends GetView<HomeController> {
               ),
             ),
           ),
-          SliverFillRemaining(
-            hasScrollBody: true,
-            fillOverscroll: false,
-            child: SingleChildScrollView(
-              controller: controller.scrollController,
-              child: Column(
-                children: [
-                  AnnouncementsSection(
-                    key: controller.announcementSectionKey,
-                  ),
-                  EventsSection(
-                    key: controller.eventSectionKey, 
-                    getIdFromEvents: controller.getIdFromEvents
-                  ),
-                ],
-              ),
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                AnnouncementsSection(
+                  key: controller.announcementSectionKey,
+                ),
+                EventsSection(
+                  key: controller.eventSectionKey, 
+                  getIdFromEvents: controller.getIdFromEvents
+                ),
+                OfficialsSection(
+                  key: controller.officialsSectionKey
+                ),
+              ],
             ),
           ),
         ],

@@ -18,8 +18,6 @@ extension IntExtension on int {
       case 0:
         return TabType.home;
       case 1:
-        return TabType.officials;
-      case 2:
         return TabType.settings;
       default:
         return TabType.home;

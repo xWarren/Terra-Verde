@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../core/presentation/common/common_button.dart';
 import '../../../../core/presentation/common/common_text_field.dart';
 import '../../../../core/presentation/custom/custom_back_button.dart';
 import '../../../../core/presentation/custom/custom_dropdown.dart';
@@ -720,18 +719,28 @@ class AddFamilyMemberPage extends GetView<AddFamilyMemberController> {
                               ) 
                               : const SizedBox.shrink(),
                               const SizedBox(height: Dimensions.textFieldHeight),
-                              CommonButton(
-                                  isLoading: controller.isLoading.value,
+                              SizedBox(
+                                height: 60,
+                                width: Get.width,
+                                child: ElevatedButton(
                                   onPressed: () => controller.addFamilyMember(),
-                                  width: Get.width,
-                                  height: Dimensions.buttonHeight,
-                                  text: "Add",
-                                  textStyle: const TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.white
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: CustomColors.primaryColor,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8)
+                                    ),
+                                    elevation: 0
                                   ),
-                                )
+                                  child: const Text(
+                                    "Add",
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.white
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         )

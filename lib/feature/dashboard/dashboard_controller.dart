@@ -5,7 +5,6 @@ import 'package:terra_verde/core/utils/extensions/int_extensions.dart';
 import '../../core/domain/services/storage_service.dart';
 import '../../core/utils/enums/tab_type.dart';
 import '../home/presentations/home_page.dart';
-import '../officials/presentations/officials_page.dart';
 import '../settings/presentations/settings_page.dart';
 import '_util/scroll_listener.dart';
 
@@ -32,7 +31,6 @@ class DashboardController extends GetxController with GetTickerProviderStateMixi
 
   RxList<Widget> navigationItems = const [
     HomePage(),
-    OfficialsPage(),
     SettingsPage()
   ].obs;
 
@@ -45,13 +43,6 @@ class DashboardController extends GetxController with GetTickerProviderStateMixi
     scrollListener = ScrollListener.initialise(_scrollController);
     super.onInit();
   }
-
-  @override
-  void onClose() {
-    super.onClose();
-    WidgetsBinding.instance.removeObserver(this);
-  }
-
 
   tapNavigation(int value) => setPage(type: value.toTabType());
   

@@ -27,7 +27,7 @@ class OfficialsDataMapper {
     );
   }
 
-    static OfficialsDataEntity fromFeatureOfficialsDataEntity(FeatureOfficialsDataEntity entity) {
+  static OfficialsDataEntity fromFeatureOfficialsDataEntity(FeatureOfficialsDataEntity entity) {
     
     return OfficialsDataEntity(
       id: entity.id,

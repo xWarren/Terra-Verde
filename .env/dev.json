@@ -1,0 +1,8 @@
+{
+    "env": "dev",
+    "base_url_api": "https://trims.azurewebsites.net/api/v1",
+    "android_token": "",
+    "android_secret_key": "",
+    "ios_token": "",
+    "ios_secret_key": ""
+}

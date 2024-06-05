@@ -17,8 +17,8 @@ import '../feature/home/data/source/announcement_remote_source_impl.dart';
 import '../feature/home/data/source/events_remote_source_impl.dart';
 import '../feature/login/data/repositories/login_repository_impl.dart';
 import '../feature/login/data/source/login_remote_source_impl.dart';
-import '../feature/officials/data/repositories/officials_repository_impl.dart';
-import '../feature/officials/data/source/officials_remote_source_impl.dart';
+import '../feature/home/data/repositories/officials_repository_impl.dart';
+import '../feature/home/data/source/officials_remote_source_impl.dart';
 import '../feature/profile/data/repositories/residents_repository_impl.dart';
 import '../feature/profile/data/source/residents_remote_source_impl.dart';
 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../../core/presentation/common/common_button.dart';
 import '../../../core/presentation/common/common_text_field.dart';
 import '../../../core/resources/assets.dart';
 import '../../../core/resources/custom_colors.dart';
@@ -193,16 +192,26 @@ class LoginPage extends GetView<LoginController> {
                             ],
                           ),
                           const SizedBox(height: Dimensions.textFieldHeight),
-                          CommonButton(
-                            isLoading: controller.isLoading.value,
-                            onPressed: () => controller.login(),
+                          SizedBox(
+                            height: 60,
                             width: Get.width,
-                            height: Dimensions.buttonHeight,
-                            text: Strings.login,
-                            textStyle: const TextStyle(
-                              color: CustomColors.white,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w700
+                            child: ElevatedButton(
+                              onPressed: () => controller.login(),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: CustomColors.primaryColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8)
+                                ),
+                                elevation: 0
+                              ),
+                              child: const Text(
+                                "Login",
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.white
+                                ),
+                              ),
                             ),
                           ),
                         ],

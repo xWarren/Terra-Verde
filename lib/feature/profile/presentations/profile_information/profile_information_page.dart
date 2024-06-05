@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/presentation/common/common_button.dart';
 import '../../../../core/presentation/common/common_text_field.dart';
 import '../../../../core/presentation/custom/custom_back_button.dart';
 import '../../../../core/resources/assets.dart';
@@ -97,9 +96,7 @@ class ProfileInformationPage extends GetView<ProfileInformationController> {
                                   Wrap(
                                     children: [
                                       Text(
-                                        controller.firstName.value.isNotEmpty
-                                        ? controller.firstName.value
-                                        : "N/A",
+                                        controller.firstName.value,
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: const TextStyle(
@@ -110,9 +107,7 @@ class ProfileInformationPage extends GetView<ProfileInformationController> {
                                       ),
                                       const SizedBox(width: 5),
                                       Text(
-                                        controller.middeName.value.isNotEmpty
-                                        ? controller.middeName.value
-                                        : "N/A",
+                                        controller.middeName.value,
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: const TextStyle(
@@ -123,9 +118,7 @@ class ProfileInformationPage extends GetView<ProfileInformationController> {
                                       ),
                                       const SizedBox(width: 5),
                                       Text(
-                                        controller.lastName.value.isNotEmpty
-                                        ? controller.lastName.value
-                                        : "N/A",
+                                        controller.lastName.value,
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: const TextStyle(
@@ -137,9 +130,7 @@ class ProfileInformationPage extends GetView<ProfileInformationController> {
                                     ],
                                   ),
                                   Text(
-                                    controller.familyRelationship.value.isNotEmpty
-                                    ? controller.familyRelationship.value
-                                    : "",
+                                    controller.familyRelationship.value,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                     style: const TextStyle(
@@ -267,21 +258,27 @@ class ProfileInformationPage extends GetView<ProfileInformationController> {
                                 ),
                               ),
                               const SizedBox(height: Dimensions.textFieldHeight),
-                              GetBuilder<ProfileInformationController>(
-                                builder: (context) {
-                                  return CommonButton(
-                                    isLoading: controller.isLoading.value,
-                                    onPressed: () {},
-                                    width: Get.width,
-                                    height: Dimensions.buttonHeight,
-                                    text: "Edit Profile",
-                                    textStyle: const TextStyle(
+                             SizedBox(
+                                height: 60,
+                                width: Get.width,
+                                child: ElevatedButton(
+                                  onPressed: () {},
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: CustomColors.primaryColor,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8)
+                                    ),
+                                    elevation: 0
+                                  ),
+                                  child: const Text(
+                                    "Edit Profile",
+                                    style: TextStyle(
                                       fontSize: 16.0,
                                       fontWeight: FontWeight.w700,
                                       color: Colors.white
                                     ),
-                                  );
-                                }
+                                  ),
+                                ),
                               ),
                             ],
                           ),
