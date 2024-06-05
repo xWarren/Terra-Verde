@@ -72,12 +72,12 @@ class SettingsPage extends GetView<SettingsController> {
               ),
             ),
           ),
-          const SliverFillRemaining(
+          SliverFillRemaining(
             hasScrollBody: false,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30),
                   child: Text(
                     "Settings",
@@ -88,10 +88,10 @@ class SettingsPage extends GetView<SettingsController> {
                     ),
                   ),
                 ),
-                ProfileSection(),
-                BookmarksSection(),
-                PrivacyPolicySection(),
-                LogoutSection(),
+                const ProfileSection(),
+                const BookmarksSection(),
+                const PrivacyPolicySection(),
+                LogoutSection(onTap: controller.logout),
               ],
             ),
           )

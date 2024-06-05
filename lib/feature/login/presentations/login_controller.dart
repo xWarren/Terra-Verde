@@ -79,6 +79,7 @@ class LoginController extends GetxController {
       isLoading(true);
       loginSubs?.cancel();
       loginSubs = loginUseCase.execute(email: email, password: password).asStream().listen((value) {
+        storageService.setLoggedIn(true);
         storageService.saveAccessToken(value.token);
         Get.offNamedUntil(Routes.dashboardRoute, (route) => false);
         isLoading(false);

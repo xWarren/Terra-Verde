@@ -38,7 +38,9 @@ class DashboardBinding extends Bindings {
     );
 
     Get.lazyPut<SettingsController>(
-      () => SettingsController(),
+      () => SettingsController(
+        storageService: Get.find()
+      ),
       fenix: true
     );
 

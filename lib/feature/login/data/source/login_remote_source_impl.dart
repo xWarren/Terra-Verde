@@ -20,10 +20,7 @@ class LoginRemoteSourceImpl extends BaseGetConnect implements LoginRemoteSource 
     var response = await methodRequest(
       APIEndpoint.login,
       method: Method.post,
-      params: body,
-      headers: {
-      "Authorization": "Bearer ${storageService.getAccessToken()}"
-      }
+      params: body
     );
     var featureResponseModel = FeatureLoginResponseModel.fromJson(response.body);
     return LoginMapper.fromFeatureLoginResponseModel(featureResponseModel);
