@@ -8,6 +8,8 @@ import '../../../core/domain/services/storage_service.dart';
 import '../../../core/domain/usecases/login_usecase.dart';
 import '../../../core/routes/routes.dart';
 import '../../../core/utils/print_utils.dart';
+import '_components/email_section.dart';
+import '_components/password_section.dart';
 
 class LoginController extends GetxController {
   
@@ -35,6 +37,9 @@ class LoginController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isFieldFilled = false.obs;
 
+   GlobalKey<EmailSectionState> emailKey = GlobalKey<EmailSectionState>();
+  GlobalKey<PasswordSectionState> passwordKey = GlobalKey<PasswordSectionState>();
+
   void dismissKeyboard() => Get.focusScope?.unfocus();
 
   void setIsRememberMe(bool isChecked) {
@@ -44,7 +49,7 @@ class LoginController extends GetxController {
   @override
   void onInit() {
     storageService.setMember(Get.arguments['isHeadOfTheFamily']);
-    log("STORAGE: ${storageService.isHeadFamily().toString()}");
+    log("HEAD OF THE FAMILY: ${storageService.isHeadFamily().toString()}");
     super.onInit();
   }
 
@@ -57,47 +62,55 @@ class LoginController extends GetxController {
 
   void textRefresh() {
     emailController.text = "";
-    passwordController.text = "";
+    passwordKey.currentState?.controller.text = "";
   }
 
   void clearErrors() {
     emailError.value = "";
-    passwordError.value = "";
+    passwordKey.currentState?.passwordError = "";
     errorMessage.value = "";
     update();
   }
 
   void login() {
     
-    var email = emailController.text;
-    var password = passwordController.text;
-    
+    var email = emailKey.currentState?.controller.text;
+    var password = passwordKey.currentState?.controller.text;
+    log(password.toString());
     clearErrors();
 
     bool hasErrors = false;
 
-    if (email.isEmpty) {
-      emailError("Enter your email");
+    if (email.toString().isEmpty) {
+       emailKey.currentState?.emailErrorMessage("Enter your email");
       hasErrors = true;
-    } else if (!emailRegExp.hasMatch(email.trim())) {
-      emailError("Your email is invalid");
+    } else if (!emailRegExp.hasMatch(email.toString().trim())) {
+      emailKey.currentState?.emailErrorMessage("Your email is invalid");
       hasErrors = true;
-    } if (password.isEmpty) {
-      passwordError("Enter your password");
+    } if (password.toString().isEmpty) {
+      passwordKey.currentState?.passwordErrorMessage("Enter your password");
       hasErrors = true;
     } if (!hasErrors) {
       isLoading(true);
+       passwordKey.currentState?.setLoading(true);
+      emailKey.currentState?.setLoading(true);
       loginSubs?.cancel();
-      loginSubs = loginUseCase.execute(email: email, password: password).asStream().listen((value) {
+      loginSubs = loginUseCase.execute(email: email.toString(), password: password.toString()).asStream().listen((value) {
         storageService.setLoggedIn(true);
         storageService.saveAccessToken(value.token);
         Get.offNamedUntil(Routes.dashboardRoute, (route) => false);
         isLoading(false);
+        passwordKey.currentState?.setLoading(false);
+        emailKey.currentState?.setLoading(false);
+        update();
       },
       onError: (error) {
         printUtil("loginErr: $error");
+        passwordKey.currentState?.passwordError.isNotEmpty;
         errorMessage.value = error.toString();
         isLoading(false);
+        passwordKey.currentState?.setLoading(false);
+        emailKey.currentState?.setLoading(false);
         update();
       });
     }

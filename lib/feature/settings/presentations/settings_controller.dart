@@ -13,6 +13,6 @@ class SettingsController extends GetxController {
 
   void logout() {
     storageService.clearAll();
-    Get.offAndToNamed(Routes.loginRoute);
+    Get.offAndToNamed(Routes.welcomeRoute);
   }
 }

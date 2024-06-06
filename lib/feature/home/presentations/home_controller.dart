@@ -9,6 +9,7 @@ import '../../../core/domain/services/storage_service.dart';
 import '../../../core/domain/usecases/announcement_use_case.dart';
 import '../../../core/domain/usecases/events_use_case.dart';
 import '../../../core/domain/usecases/officials_usecase.dart';
+import '../../../core/routes/routes.dart';
 import '../../../core/utils/print_utils.dart';
 import '../../dashboard/dashboard_controller.dart';
 import '_components/announcements_section.dart';
@@ -116,6 +117,7 @@ class HomeController extends GetxController {
     },
     onError: (error) {
       printUtil("getEventsErr: $error");
+      announcementSectionKey.currentState?.setErrorMessage(error.toString());
       isLoading(false);
       update();
     });
@@ -156,6 +158,11 @@ class HomeController extends GetxController {
       isLoading(false);
       update();
     });
+  }
+
+    void logout() {
+    storageService.clearAll();
+    Get.offAndToNamed(Routes.welcomeRoute);
   }
 
   @override

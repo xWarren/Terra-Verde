@@ -189,7 +189,7 @@ class ProfilePage extends GetView<ProfileController> {
                         right: 20,
                         bottom: 20,
                         child: SizedBox(
-                          height: 60,
+                          height: 50,
                           child: ElevatedButton(
                             onPressed: () => Get.toNamed(Routes.addFamilyMemberRoute),
                             style: ElevatedButton.styleFrom(

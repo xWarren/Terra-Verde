@@ -259,7 +259,7 @@ class ProfileInformationPage extends GetView<ProfileInformationController> {
                               ),
                               const SizedBox(height: Dimensions.textFieldHeight),
                              SizedBox(
-                                height: 60,
+                                height: 50,
                                 width: Get.width,
                                 child: ElevatedButton(
                                   onPressed: () {},

@@ -43,16 +43,22 @@ class HomePage extends GetView<HomeController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AnnouncementsSection(
-                  key: controller.announcementSectionKey,
-                ),
-                EventsSection(
-                  key: controller.eventSectionKey, 
-                  getIdFromEvents: controller.getIdFromEvents
-                ),
-                OfficialsSection(
-                  key: controller.officialsSectionKey
-                ),
+                  Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AnnouncementsSection(
+                      key: controller.announcementSectionKey,
+                      logout: controller.logout
+                    ),
+                    EventsSection(
+                      key: controller.eventSectionKey, 
+                      getIdFromEvents: controller.getIdFromEvents
+                    ),
+                    OfficialsSection(
+                      key: controller.officialsSectionKey
+                    ),
+                  ],
+                ) 
               ],
             ),
           ),
