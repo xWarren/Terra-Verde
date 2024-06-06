@@ -12,11 +12,18 @@ import '../../feature/register/register_binding.dart';
 import '../../feature/register/register_page.dart';
 import '../../feature/profile/presentations/profile_binding.dart';
 import '../../feature/profile/presentations/profile_page.dart';
+import '../../feature/splash/splash_binding.dart';
+import '../../feature/splash/splash_page.dart';
 import 'routes.dart';
 
 class Pages {
   
   static final pages = [
+    GetPage(
+      name: Routes.splashRoute,
+      page: () => const SplashPage(),
+      binding: SplashBinding(),
+    ),
     GetPage(
       name: Routes.loginRoute,
       page: () => const LoginPage(),

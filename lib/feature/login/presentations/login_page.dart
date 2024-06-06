@@ -55,10 +55,13 @@ class LoginPage extends GetView<LoginController> {
                             ),
                           ),
                           Center(
-                            child: Image.asset(
-                              Assets.logo,
-                              height: 161,
-                              width: 164,
+                            child: Hero(
+                              tag: "logo",
+                              child: Image.asset(
+                                Assets.logo,
+                                height: 161,
+                                width: 164,
+                              ),
                             ),
                           ),
                           const Text(
