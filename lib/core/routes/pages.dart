@@ -14,6 +14,8 @@ import '../../feature/profile/presentations/profile_binding.dart';
 import '../../feature/profile/presentations/profile_page.dart';
 import '../../feature/splash/splash_binding.dart';
 import '../../feature/splash/splash_page.dart';
+import '../../feature/welcome/welcome_binding.dart';
+import '../../feature/welcome/welcome_page.dart';
 import 'routes.dart';
 
 class Pages {
@@ -23,6 +25,11 @@ class Pages {
       name: Routes.splashRoute,
       page: () => const SplashPage(),
       binding: SplashBinding(),
+    ),
+    GetPage(
+      name: Routes.welcomeRoute,
+      page: () => const WelcomePage(),
+      binding: WelcomeBinding(),
     ),
     GetPage(
       name: Routes.loginRoute,

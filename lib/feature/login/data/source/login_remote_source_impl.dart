@@ -18,7 +18,9 @@ class LoginRemoteSourceImpl extends BaseGetConnect implements LoginRemoteSource 
   @override
   Future<LoginResponseModel> login(body) async {
     var response = await methodRequest(
-      APIEndpoint.login,
+      storageService.isHeadFamily() == true 
+      ? APIEndpoint.headFamily
+      : APIEndpoint.familyMember,
       method: Method.post,
       params: body
     );

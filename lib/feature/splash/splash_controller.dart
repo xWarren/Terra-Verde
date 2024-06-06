@@ -26,7 +26,7 @@ class SplashController extends GetxController {
     } else {
       Future.delayed(
         3.seconds, 
-        () => Get.offAndToNamed(Routes.loginRoute)
+        () => Get.offAndToNamed(Routes.welcomeRoute)
       );
     }
   }

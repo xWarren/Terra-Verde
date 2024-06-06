@@ -7,6 +7,7 @@ class StorageService extends GetxService {
   final String _refreshTokenKey = "refresh_token_key";
   final String _isRememberKey = "is_remember_key";
   final String _isLoginKey = "is_login_key";
+  final String _isHeadFamilyKey = "is_head_family_key";
 
   final storage = GetStorage();
 
@@ -27,12 +28,17 @@ class StorageService extends GetxService {
     storage.write(_isRememberKey, isRemember);
   }
 
-    void setLoggedIn(bool isLoggedIn) {
+  void setLoggedIn(bool isLoggedIn) {
     storage.write(_isLoginKey, isLoggedIn);
+  }
+
+  void setMember(bool isHeadOfTheFamily) {
+    storage.write(_isHeadFamilyKey, isHeadOfTheFamily);
   }
 
   bool isRemember() => storage.read<bool>(_isRememberKey) ?? false;
   bool isLoggedIn() => storage.read<bool>(_isLoginKey) ?? false;
+  bool isHeadFamily() => storage.read<bool>(_isHeadFamilyKey) ?? false;
   String getAccessToken() => storage.read<String>(_accessTokenKey) ?? "";
   String getRefreshToken() => storage.read<String>(_refreshTokenKey) ?? "";
 

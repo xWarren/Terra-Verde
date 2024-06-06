@@ -56,13 +56,10 @@ class LoginPage extends GetView<LoginController> {
                             ),
                           ),
                           Center(
-                            child: Hero(
-                              tag: "logo",
-                              child: Image.asset(
-                                Assets.logo,
-                                height: 161,
-                                width: 164,
-                              ),
+                            child: Image.asset(
+                              Assets.logo,
+                              height: 161,
+                              width: 164,
                             ),
                           ),
                           const Text(
@@ -199,7 +196,7 @@ class LoginPage extends GetView<LoginController> {
                           ),
                           const SizedBox(height: Dimensions.textFieldHeight),
                           SizedBox(
-                            height: 60,
+                            height: 50,
                             width: Get.width,
                             child: ElevatedButton(
                               onPressed: controller.isLoading.value 

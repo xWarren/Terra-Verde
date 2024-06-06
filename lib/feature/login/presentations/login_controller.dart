@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,6 +24,8 @@ class LoginController extends GetxController {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
+  RxBool isHeadOfTheFamily = false.obs;
+
   RxString emailError = "".obs;
   RxString passwordError = "".obs;
   RxString errorMessage = "".obs;
@@ -36,6 +39,13 @@ class LoginController extends GetxController {
 
   void setIsRememberMe(bool isChecked) {
     storageService.setIsRemember(isChecked);
+  }
+
+  @override
+  void onInit() {
+    storageService.setMember(Get.arguments['isHeadOfTheFamily']);
+    log("STORAGE: ${storageService.isHeadFamily().toString()}");
+    super.onInit();
   }
 
   void goToRegister() {
