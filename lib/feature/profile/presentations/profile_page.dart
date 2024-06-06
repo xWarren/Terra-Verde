@@ -59,9 +59,14 @@ class ProfilePage extends GetView<ProfileController> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 80),
                         child: Column(
+                          mainAxisAlignment: controller.isLoading.value 
+                          ? MainAxisAlignment.center
+                          : MainAxisAlignment.start,
                           children: [
-                            Expanded(
-                              child: ListView.builder(
+                            controller.isLoading.value
+                            ? const Center(child: CircularProgressIndicator(color: CustomColors.primaryColor))
+                            : Expanded(
+                               child: ListView.builder(
                                 itemCount: controller.residentsData.length,
                                 shrinkWrap: true,
                                 itemBuilder: (context, index) {

@@ -48,12 +48,15 @@ class OfficialsSectionState extends State<OfficialsSection> with AutomaticKeepAl
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
       const SizedBox(height: Dimensions.largeSpacing),
-        const Text(
-          "Officials",
-          style: TextStyle(
-            color: CustomColors.black,
-            fontSize: 14,
-            fontWeight: FontWeight.w500
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
+            "Officials",
+            style: TextStyle(
+              color: CustomColors.black,
+              fontSize: 14,
+              fontWeight: FontWeight.w500
+            ),
           ),
         ),
         const SizedBox(height: Dimensions.largeSpacing),
@@ -67,7 +70,6 @@ class OfficialsSectionState extends State<OfficialsSection> with AutomaticKeepAl
               var data = officialsData[index];
               return Container(
                 width: 150,
-                margin: const EdgeInsets.symmetric(horizontal: 8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   border: const Border.fromBorderSide(

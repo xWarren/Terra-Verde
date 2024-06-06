@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import '../../../core/presentation/common/common_loading.dart';
 import '../../../core/presentation/common/common_text_field.dart';
 import '../../../core/resources/assets.dart';
 import '../../../core/resources/custom_colors.dart';
@@ -76,6 +77,7 @@ class LoginPage extends GetView<LoginController> {
                             controller: controller.emailController,
                             errorText: controller.emailError.value,
                             maxLines: 1,
+                            readOnly: controller.isLoading.value,
                             textInputAction: TextInputAction.next,
                             contentPadding: const EdgeInsets.only(
                               left: Dimensions.largeSpacing,
@@ -123,6 +125,7 @@ class LoginPage extends GetView<LoginController> {
                             errorText: controller.passwordError.value,
                             maxLines: 1,
                             isSecure: true,
+                            readOnly: controller.isLoading.value,
                             hasShowHideTextIcon: true,
                             textInputAction: TextInputAction.done,
                             contentPadding: const EdgeInsets.only(
@@ -199,7 +202,9 @@ class LoginPage extends GetView<LoginController> {
                             height: 60,
                             width: Get.width,
                             child: ElevatedButton(
-                              onPressed: () => controller.login(),
+                              onPressed: controller.isLoading.value 
+                              ? null
+                              : () => controller.login(),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: CustomColors.primaryColor,
                                 shape: RoundedRectangleBorder(
@@ -207,7 +212,9 @@ class LoginPage extends GetView<LoginController> {
                                 ),
                                 elevation: 0
                               ),
-                              child: const Text(
+                              child: controller.isLoading.value
+                              ? const CommonLoading()
+                              : const Text(
                                 "Login",
                                 style: TextStyle(
                                   fontSize: 16.0,

@@ -41,6 +41,7 @@ class HomePage extends GetView<HomeController> {
           ),
           SliverToBoxAdapter(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AnnouncementsSection(
                   key: controller.announcementSectionKey,
