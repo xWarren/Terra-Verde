@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import '../../../core/presentation/common/common_shimmer.dart';
 import '../../../core/resources/custom_colors.dart';
 import '_components/announcements_section.dart';
 import '_components/events_section.dart';
@@ -15,37 +16,44 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: CustomColors.white,
-      body: CustomScrollView(
-        controller: controller.scrollController,
-        slivers: [
-          const SliverAppBar(
-           backgroundColor: CustomColors.white,
-            systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarColor: CustomColors.white,
-              statusBarBrightness: Brightness.dark,
-              statusBarIconBrightness: Brightness.dark
-            ),
-            elevation: 0,
-            automaticallyImplyLeading: false,
-            title: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5),
-              child: Text(
-                "Home",
-                style: TextStyle(
-                  color: CustomColors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600
+      body: RefreshIndicator(
+        onRefresh: controller.onRefresh,
+        child: CustomScrollView(
+          controller: controller.scrollController,
+          slivers: [
+            SliverAppBar(
+             backgroundColor: CustomColors.white,
+              systemOverlayStyle: const SystemUiOverlayStyle(
+                statusBarColor: CustomColors.white,
+                statusBarBrightness: Brightness.dark,
+                statusBarIconBrightness: Brightness.dark
+              ),
+              elevation: 0,
+              automaticallyImplyLeading: false,
+              title: Obx(
+                () => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: controller.isLoading.value
+                  ? CommonShimmer(
+                    showShimmer: controller.isLoading.value,
+                    width: 50,
+                    height: 20,
+                  )
+                  : const Text(
+                    "Home",
+                    style: TextStyle(
+                      color: CustomColors.black,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w600
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                  Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+            SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                     AnnouncementsSection(
                       key: controller.announcementSectionKey,
                       logout: controller.logout
@@ -56,13 +64,12 @@ class HomePage extends GetView<HomeController> {
                     ),
                     OfficialsSection(
                       key: controller.officialsSectionKey
-                    ),
-                  ],
-                ) 
-              ],
+                    ) 
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

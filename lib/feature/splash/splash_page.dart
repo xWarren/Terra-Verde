@@ -14,10 +14,11 @@ class SplashPage extends GetView<SplashController> {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
         statusBarColor: CustomColors.white,
-        statusBarBrightness: Brightness.dark,
-        statusBarIconBrightness: Brightness.light
+        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark
       ),
       child: Scaffold(
+        backgroundColor: CustomColors.white,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -27,7 +28,7 @@ class SplashPage extends GetView<SplashController> {
                 child: Image.asset(
                   Assets.logo,
                   height: 150,
-                  width: 150,
+                  width: 150
                 ),
               ),
             )

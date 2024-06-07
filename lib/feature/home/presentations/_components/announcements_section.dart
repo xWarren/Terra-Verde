@@ -1,13 +1,14 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; 
+import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../core/domain/entities/announcement_data_entity.dart';
 import '../../../../core/presentation/common/common_state.dart';
 import '../../../../core/resources/assets.dart';
 import '../../../../core/resources/custom_colors.dart';
-import 'countdown_modal.dart';
+import '../../../../core/resources/dimensions.dart';
+import 'announcement_shimmer.dart';
 
 class AnnouncementsSection extends StatefulWidget {
   
@@ -25,12 +26,9 @@ class AnnouncementsSection extends StatefulWidget {
 class AnnouncementsSectionState extends State<AnnouncementsSection> with AutomaticKeepAliveClientMixin {
   
   List<AnnouncementDataEntity> announcementData = [];
-  bool isLoading = false;
+  bool isLoading = true;
 
   String errorMessage = "";
-
-  Timer? countdownTimer;
-  int secondsRemaining = 0;
 
   void setErrorMessage(String value) {
     setState(() {
@@ -47,145 +45,146 @@ class AnnouncementsSectionState extends State<AnnouncementsSection> with Automat
 
   void addAnnouncementData(List<AnnouncementDataEntity> announcement) {
     setState(() {
-      announcementData.addAll(announcement);
+      announcementData.assignAll(announcement);
     });
   }
 
-  @override
-  void initState() {
-    Future.delayed(
-      3.seconds,
-      () {
-        if (errorMessage.contains("User not found")) {
-          setState(() {
-            secondsRemaining = 5;
-          });
-          _startCountdown();
-          showProductModal(context);
-        }
-      }
-    );
-    super.initState();
-  }
-
-  void _startCountdown() {
-    countdownTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (secondsRemaining > 0) {
-        setState(() {
-          secondsRemaining--;
-        });
-      } else {
-        timer.cancel();
-        widget.logout();
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    countdownTimer?.cancel();
-    super.dispose();
-  }
   
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return  Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Announcements",
-            style: TextStyle(
-              color: CustomColors.black,
-              fontSize: 14,
-              fontWeight: FontWeight.w500
-            ),
+    return  Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        isLoading == true
+        ? Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: AnnouncementShimmer(
+            isLoading: isLoading,
           ),
-          ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: announcementData.length,
-            scrollDirection: Axis.vertical,
-            itemBuilder: (context, index) {
-              var data = announcementData[index];
-              String dateString = data.announcementDate;
-              DateTime announcementDate = DateTime.parse(dateString);
-              
-              DateFormat monthFormat = DateFormat('MM DD, YYYYY');
-              String formattedMonth = monthFormat.format(announcementDate);
-              return  announcementData.isEmpty
-              ? const CommonState(
-                title: "No Announcements",
-                image: Assets.noAnnouncement,
-                description: "There are no announcements at the moment. Check back later for updates.",
-              )
-              : Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  border: const Border.fromBorderSide(
-                    BorderSide(color: CustomColors.primaryColor)
-                  ),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color.fromRGBO(0, 0, 0, .25),
-                      blurRadius: 2,
-                      offset: Offset(0, 1)
-                    )
-                  ]
+        )
+        : Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                "Announcements",
+                style: TextStyle(
+                  color: CustomColors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500
                 ),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              ),
+            ),
+            const SizedBox(height: Dimensions.largeSpacing),
+            SizedBox(
+              height: 150,
+              child: PageView.builder(
+                itemCount: announcementData.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  var data = announcementData[index];
+                  String dateString = data.announcementDate;
+                  DateTime announcementDate = DateTime.parse(dateString);
+                  
+                  DateFormat monthFormat = DateFormat('MMMM dd, yyyy');
+                  String formattedMonth = monthFormat.format(announcementDate);
+                  return  announcementData.isEmpty
+                  ? const CommonState(
+                    title: "No Announcements",
+                    image: Assets.noAnnouncement,
+                    description: "There are no announcements at the moment. Check back later for updates.",
+                  )
+                  : Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: Dimensions.largeSpacing,
+                      vertical: Dimensions.largeSpacing
+                    ),
+                    decoration: BoxDecoration(
+                      color: CustomColors.white,
+                      borderRadius: BorderRadius.circular(15),
+                      border: const Border.fromBorderSide(
+                        BorderSide(color: CustomColors.primaryColor)
+                      ),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color.fromRGBO(0, 0, 0, .25),
+                          blurRadius: 2,
+                          offset: Offset(0, 1)
+                        )
+                      ]
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
                       children: [
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Image.asset(Assets.icCalendar),
-                            Text(
-                              formattedMonth,
-                              style: const TextStyle(
-                                color: CustomColors.black,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500
+                            Expanded(
+                              child: Text(
+                                data.announcementName,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  color: CustomColors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600
+                                ),
                               ),
-                            )
+                            ),
+                            const SizedBox(width: Dimensions.regularSpacing),
+                            Row(
+                              children: [
+                                Image.asset(
+                                  Assets.icCalendar,
+                                  height: 18,
+                                  width: 18
+                                ),
+                                const SizedBox(width: Dimensions.smallSpacing),
+                                Text(
+                                  formattedMonth,
+                                  style: const TextStyle(
+                                    color: CustomColors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500
+                                  ),
+                                )
+                              ],
+                            ),
                           ],
-                        )
+                        ),
+                        const SizedBox(height: Dimensions.extraLargeSpacing),
+                        Expanded(
+                          child: Text(
+                            data.announcementDescription,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(
+                              color: CustomColors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600
+                            ),
+                          ),
+                        ),
                       ],
-                    )
-                  ],
-                ),
-              );
-            }
-          )
-        ],
-      ),
+                    ),
+                  );
+                }
+              ),
+            )
+          ],
+        )
+      ],
     );
   }
 
-  void showProductModal(context) {
-    showModalBottomSheet(
-      sheetAnimationStyle: AnimationStyle(
-        duration: 500.milliseconds,
-        curve: Curves.easeInOut
-      ),
-      isDismissible: false,
-      enableDrag: false,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      barrierColor: Colors.black38,
-      context: context, 
-      builder: (context) {
-        return CountdownModal(
-          errorMessage: errorMessage, 
-          secondsRemaining: secondsRemaining
-        );
-      }
-    );
-  }
-  
   @override
   bool get wantKeepAlive => true;
 }

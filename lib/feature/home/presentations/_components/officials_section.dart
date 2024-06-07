@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:terra_verde/core/utils/print_utils.dart';
+import 'package:get/get.dart';
 
 import '../../../../core/domain/entities/officials_data_entity.dart';
 import '../../../../core/resources/assets.dart';
 import '../../../../core/resources/custom_colors.dart';
 import '../../../../core/resources/dimensions.dart';
+import 'officials_shimmer.dart';
 
 class OfficialsSection extends StatefulWidget {
   const OfficialsSection({super.key});
@@ -19,7 +20,7 @@ class OfficialsSectionState extends State<OfficialsSection> with AutomaticKeepAl
 
   OfficialsDataEntity? idOfficialsData;
 
-  bool isLoading = false;
+  bool isLoading = true;
 
   void setLoading(bool value) {
     setState(() {
@@ -30,7 +31,7 @@ class OfficialsSectionState extends State<OfficialsSection> with AutomaticKeepAl
 
   void addOfficialsData(List<OfficialsDataEntity> officials) {
     setState(() {
-      officialsData.addAll(officials);
+      officialsData.assignAll(officials);
     });
   }
 
@@ -42,79 +43,92 @@ class OfficialsSectionState extends State<OfficialsSection> with AutomaticKeepAl
 
   @override
   Widget build(BuildContext context) {
-    printUtil(officialsData.length);
     super.build(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-      const SizedBox(height: Dimensions.largeSpacing),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Text(
-            "Officials",
-            style: TextStyle(
-              color: CustomColors.black,
-              fontSize: 14,
-              fontWeight: FontWeight.w500
-            ),
-          ),
-        ),
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [ 
         const SizedBox(height: Dimensions.largeSpacing),
-        SizedBox(
-          height: 150,
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: officialsData.length,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              var data = officialsData[index];
-              return Container(
-                width: 150,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  border: const Border.fromBorderSide(
-                    BorderSide(color: CustomColors.primaryColor)
-                  ),
-                  image: const DecorationImage(
-                    image: AssetImage(
-                      Assets.noImage
-                    ),
-                    fit: BoxFit.fill     
-                  )
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(
-                        left: 8,
-                        bottom: 20
-                      ),
-                      decoration: const BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromRGBO(0, 0, 0, 0.75),
-                            blurRadius: 40
-                          )
-                        ]
-                      ),
-                      child: Text(
-                        data.name,
-                        maxLines: 2,
-                        style: const TextStyle(
-                          color: CustomColors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              );
-            }
-          ),
+        isLoading == true
+        ? Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: OfficialsShimmer(isLoading: isLoading),
         )
+        : Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+          const SizedBox(height: Dimensions.largeSpacing),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                "Officials",
+                style: TextStyle(
+                  color: CustomColors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500
+                ),
+              ),
+            ),
+            const SizedBox(height: Dimensions.largeSpacing),
+            SizedBox(
+              height: 150,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: officialsData.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  var data = officialsData[index];
+                  return Container(
+                    width: 150,
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border: const Border.fromBorderSide(
+                        BorderSide(color: CustomColors.primaryColor)
+                      ),
+                      image: const DecorationImage(
+                        image: AssetImage(Assets.logo),
+                        fit: BoxFit.fill
+                      )
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(
+                            left: 8,
+                            bottom: 20
+                          ),
+                          decoration: const BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(0, 0, 0, 0.75),
+                                blurRadius: 40
+                              )
+                            ]
+                          ),
+                          child: Text(
+                            data.name,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              color: CustomColors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                }
+              ),
+            ),
+            const SizedBox(height: 60),
+          ],
+        ),
       ],
     );
   }
