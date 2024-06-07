@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,22 +21,16 @@ class LoginController extends GetxController {
 
   final LoginUseCase loginUseCase;
   StreamSubscription? loginSubs;
-  
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
 
   RxBool isHeadOfTheFamily = false.obs;
 
-  RxString emailError = "".obs;
-  RxString passwordError = "".obs;
   RxString errorMessage = "".obs;
 
   final emailRegExp = RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
 
   RxBool isLoading = false.obs;
-  RxBool isFieldFilled = false.obs;
 
-   GlobalKey<EmailSectionState> emailKey = GlobalKey<EmailSectionState>();
+  GlobalKey<EmailSectionState> emailKey = GlobalKey<EmailSectionState>();
   GlobalKey<PasswordSectionState> passwordKey = GlobalKey<PasswordSectionState>();
 
   void dismissKeyboard() => Get.focusScope?.unfocus();
@@ -49,7 +42,7 @@ class LoginController extends GetxController {
   @override
   void onInit() {
     storageService.setMember(Get.arguments['isHeadOfTheFamily']);
-    log("HEAD OF THE FAMILY: ${storageService.isHeadFamily().toString()}");
+    printUtil("HEAD OF THE FAMILY: ${storageService.isHeadFamily().toString()}");
     super.onInit();
   }
 
@@ -61,12 +54,12 @@ class LoginController extends GetxController {
   }
 
   void textRefresh() {
-    emailController.text = "";
+    emailKey.currentState?.controller.text = "";
     passwordKey.currentState?.controller.text = "";
   }
 
   void clearErrors() {
-    emailError.value = "";
+    emailKey.currentState?.emailError = "";
     passwordKey.currentState?.passwordError = "";
     errorMessage.value = "";
     update();
@@ -76,7 +69,6 @@ class LoginController extends GetxController {
     
     var email = emailKey.currentState?.controller.text;
     var password = passwordKey.currentState?.controller.text;
-    log(password.toString());
     clearErrors();
 
     bool hasErrors = false;
