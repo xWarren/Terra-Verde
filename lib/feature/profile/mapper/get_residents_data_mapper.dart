@@ -3,7 +3,7 @@ import '../../../core/domain/entities/residents_data_entity.dart';
 import '../data/model/feature_residents_response_data_model.dart';
 import '../domain/entities/feature_residents_data_entity.dart';
 
-class AddResidentsDataMapper {
+class GetResidentsDataMapper {
 
   static GetResidentsResponseDataModel fromFeatureResidentsResponseDataModel(FeatureResidentsResponseDataModel model) {
     

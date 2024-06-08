@@ -258,6 +258,10 @@ class ProfileInformationPage extends GetView<ProfileInformationController> {
                                 ),
                               ),
                               const SizedBox(height: Dimensions.textFieldHeight),
+                             if (controller.isHeadFamily.isTrue ||
+                              controller.emailChecker.value == controller.email.value
+                             )
+                             
                              SizedBox(
                                 height: 50,
                                 width: Get.width,

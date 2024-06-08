@@ -1,7 +1,7 @@
 class GetIdResidentsParam {
 
   GetIdResidentsParam({
-    required this.id,
+    required this.id
   });
 
   final int id;

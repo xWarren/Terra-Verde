@@ -6,6 +6,7 @@ class FeatureLoginResponseModel {
   final int codeInfo;
   final int errors;
   final String token;
+  final String userName;
 
   const FeatureLoginResponseModel({
     required this.message,
@@ -13,7 +14,8 @@ class FeatureLoginResponseModel {
     required this.code,
     required this.codeInfo,
     required this.errors,
-    required this.token
+    required this.token,
+    required this.userName
   });
 
   factory FeatureLoginResponseModel.fromJson(Map<String, dynamic>? json) => FeatureLoginResponseModel(
@@ -23,5 +25,6 @@ class FeatureLoginResponseModel {
     codeInfo: json?["CodeInfo"] ?? 0,
     errors: json?["Errors"] ?? 0,
     token: json?["token"] ?? "",
+    userName: json?["userName"] ?? "",
   );
 }

@@ -68,51 +68,6 @@ class AddFamilyMemberPage extends GetView<AddFamilyMemberController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text(
-                                Strings.uniqueCode,
-                                style: TextStyle(
-                                  color: CustomColors.grey400,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500
-                                ),
-                              ),
-                              CommonTextField(
-                                controller: controller.uniqueCodeController,
-                                errorText: controller.uniqueCodeError.value,
-                                maxLines: 1,
-                                textInputAction: TextInputAction.next,
-                                contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 20, 
-                                  vertical: 10
-                                ),
-                                onChanged: (value) {
-                                    controller.isFieldFilled.value = value.isNotEmpty;
-                                    controller.uniqueCodeError.value = "";
-                                    controller.update();
-                                },
-                                hintText: Strings.uniqueCode,
-                                textStyle: const TextStyle(
-                                  fontSize: 16.0,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w500
-                                ),
-                              ),
-                              controller.uniqueCodeError.value.isNotEmpty
-                              ? AnimatedContainer(
-                                duration: 100.milliseconds,
-                                height: controller.uniqueCodeError.value.isEmpty ? 0 : 30.0,
-                                padding: const EdgeInsets.only(top: 8.0),
-                                child: Text(
-                                  controller.uniqueCodeError.value,
-                                  style: const TextStyle(
-                                    color: CustomColors.red,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ) 
-                              : const SizedBox.shrink(),
-                              const SizedBox(height: Dimensions.regularSpacing),
-                              const Text(
                                 Strings.firstName,
                                 style: TextStyle(
                                   color: CustomColors.grey400,
@@ -309,7 +264,7 @@ class AddFamilyMemberPage extends GetView<AddFamilyMemberController> {
                                     lastDate: DateTime.now()
                                   );
                                   if (pickedDate != null) {
-                                    String formattedDate = DateFormat('MM/dd/yyyy').format(pickedDate);
+                                    String formattedDate = DateFormat('yyyy-dd-mm').format(pickedDate);
                                     controller.birthdayError.value = "";
                                     controller.birthday.value = formattedDate;
                                   }

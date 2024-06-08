@@ -1,7 +1,6 @@
 class AddResidentsParam {
 
   AddResidentsParam({
-    required this.id,
     required this.residentId,
     required this.firstName,
     required this.middleName,
@@ -16,7 +15,6 @@ class AddResidentsParam {
     required this.password
   });
 
-  final int id;
   final int residentId;
   final String firstName;
   final String middleName;
@@ -31,7 +29,6 @@ class AddResidentsParam {
   final String password;
 
   toJson() => {
-    "id": id,
     "residentId": residentId,
     "firstName": firstName,
     "middleName": middleName,

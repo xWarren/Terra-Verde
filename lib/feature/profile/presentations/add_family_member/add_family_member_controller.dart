@@ -1,12 +1,30 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/domain/usecases/residents_use_case.dart';
 import '../../../../core/resources/strings.dart';
-import '../../../../core/utils/print_utils.dart';
+import '../profile_controller.dart';
+
 
 class AddFamilyMemberController extends GetxController {
 
-  final uniqueCodeController = TextEditingController();
+  AddFamilyMemberController({
+    required this.residentsUseCase,
+    required this.profileDelegate
+  });
+
+  final ResidentsUseCase residentsUseCase;
+  StreamSubscription? residentsSubs;
+
+  final ProfileDelegate profileDelegate;
+
+  RxInt residentId = 0.obs;
+
+  RxString emailChecker = "".obs;
+
   final firstNameController = TextEditingController();
   final middleNameController = TextEditingController();
   final lastNameController = TextEditingController();
@@ -18,8 +36,7 @@ class AddFamilyMemberController extends GetxController {
   RxString birthday = "".obs;
   RxString gender = "".obs;
   RxString relationship = "".obs;
-
-  RxString uniqueCodeError = "".obs;
+  
   RxString firstNameError = "".obs;
   RxString middleNameError = "".obs;
   RxString lastNameError = "".obs;
@@ -49,11 +66,19 @@ class AddFamilyMemberController extends GetxController {
   ].obs;
 
   final emailRegExp = RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
+
+
+  @override
+  void onInit() {
+    residentId.value = Get.arguments['residentId'];
+    log(residentId.value.toString());
+    super.onInit();
+  }
+
   
   void dismissKeyboard() => Get.focusScope?.unfocus();
   
   void addFamilyMember() {
-    var uniqueCode = uniqueCodeController.text;
     var firstName = firstNameController.text;
     var middleName = middleNameController.text;
     var lastName = lastNameController.text;
@@ -64,11 +89,6 @@ class AddFamilyMemberController extends GetxController {
     var confirmPassword = confirmPasswordController.text;
 
     bool hasErrors = false;
-
-    if (uniqueCode.isEmpty) {
-      uniqueCodeError.value = "Enter your unique code";
-      hasErrors = true;
-    }
 
     if (firstName.isEmpty) {
       firstNameError.value = "Enter your first name";
@@ -135,8 +155,33 @@ class AddFamilyMemberController extends GetxController {
     }
 
     if (!hasErrors) {
-      printUtil("ok na");
+      residentsSubs?.cancel();
+      residentsSubs = residentsUseCase.addResident(
+        residentId: residentId.value, 
+        firstName: firstName, 
+        middleName: middleName, 
+        lastName: lastName, 
+        contactNumber: int.parse(phoneNumber), 
+        emailAddress: email, 
+        address: address, 
+        birthDate: birthday.value, 
+        gender: gender.value, 
+        profileImage: "", 
+        relationship: relationship.value, 
+        password: password
+      ).asStream().listen((response) {
+        log("success");
+        profileDelegate.getResident();
+        Get.back();
+        update();
+      });
     }
     update();
+  }
+
+  @override
+  void onClose() {
+    residentsSubs?.cancel();
+    super.onClose();
   }
 }

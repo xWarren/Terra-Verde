@@ -1,18 +1,23 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/domain/services/storage_service.dart';
 import '../../../../core/domain/usecases/residents_use_case.dart';
 import '../../../../core/utils/print_utils.dart';
 
 class ProfileInformationController extends GetxController {
 
   ProfileInformationController({
-    required this.residentsUseCase
+    required this.residentsUseCase,
+    required this.storageService
   });
 
   final ResidentsUseCase residentsUseCase;
   StreamSubscription? residentsSubs;
+
+  final StorageService storageService;
 
   RxInt id = 0.obs;
 
@@ -21,6 +26,7 @@ class ProfileInformationController extends GetxController {
   RxString middeName = "".obs;
   RxString lastName = "".obs;
   RxString familyRelationship = "".obs;
+  RxString email = "".obs;
 
   final birthdayController = TextEditingController();
   final genderController = TextEditingController();
@@ -29,12 +35,17 @@ class ProfileInformationController extends GetxController {
 
   RxBool isLoading = false.obs;
 
+  RxBool isHeadFamily = false.obs;
+
+  RxString emailChecker = "".obs;
+
 
   @override
   void onInit() {
-      
+    isHeadFamily.value = storageService.isHeadFamily();
+    emailChecker.value = storageService.getEmail();
     getResidentsMember();
-    printUtil("ID KO DITO${id.value}");
+    log("adsad ${emailChecker.value}");
     super.onInit();
   }
 
@@ -53,6 +64,7 @@ class ProfileInformationController extends GetxController {
       familyRelationship.value = response.relationship;
       contactNumberController.text = response.contactNumber.toString();
       addressController.text = response.address;
+      email.value = response.emailAddress;
       isLoading(false);
       update();
     },

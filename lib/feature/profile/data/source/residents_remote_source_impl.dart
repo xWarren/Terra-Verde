@@ -1,3 +1,4 @@
+import '../../../../core/data/model/add_resident_response_model.dart';
 import '../../../../core/data/model/get_residents_response_data_model.dart';
 import '../../../../core/data/model/get_residents_response_model.dart';
 import '../../../../core/data/source/residents_remote_source.dart';
@@ -5,8 +6,10 @@ import '../../../../core/domain/services/storage_service.dart';
 import '../../../../core/resources/api_endpoint.dart';
 import '../../../../core/utils/base_get_connect.dart';
 import '../../../../core/utils/enums/enums.dart';
-import '../../mapper/add_residents_data_mapper.dart';
-import '../../mapper/add_residents_mapper.dart';
+import '../../mapper/add_resident_mapper.dart';
+import '../../mapper/get_residents_data_mapper.dart';
+import '../../mapper/get_residents_mapper.dart';
+import '../model/feature_add_resident_response_model.dart';
 import '../model/feature_residents_response_data_model.dart';
 import '../model/feature_residents_response_model.dart';
 
@@ -28,7 +31,7 @@ class ResidentsRemoteSourceImpl extends BaseGetConnect implements ResidentsRemot
       }
     );
     var featureResponseModel = FeatureResidentsResponseModel.fromJson(response.body);
-    return AddResidentsMapper.fromFeatureResidentsResponseModel(featureResponseModel);
+    return GetResidentsMapper.fromFeatureResidentsResponseModel(featureResponseModel);
   }
 
   @override
@@ -41,6 +44,20 @@ class ResidentsRemoteSourceImpl extends BaseGetConnect implements ResidentsRemot
       }
     );
     var featureResponseModel = FeatureResidentsResponseDataModel.fromJson(response.body);
-    return AddResidentsDataMapper.fromFeatureResidentsResponseDataModel(featureResponseModel);
+    return GetResidentsDataMapper.fromFeatureResidentsResponseDataModel(featureResponseModel);
+  }
+
+    @override
+  Future<AddResidentResponseModel> addResident(body) async {
+    var response = await methodRequest(
+      APIEndpoint.residentsHouseMembers,
+      method: Method.post,
+      params: body,
+      headers: {
+      "Authorization": "Bearer ${storageService.getAccessToken()}"
+      }
+    );
+    var featureResponseModel = FeatureAddResidentResponseModel.fromJson(response.body);
+    return AddResidentMapper.fromFeatureAddResidentResponseModel(featureResponseModel);
   }
 }

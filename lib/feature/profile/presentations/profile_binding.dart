@@ -16,6 +16,7 @@ class ProfileBinding extends Bindings {
 
     Get.put(
       ProfileController(
+        storageService: Get.find(),
         residentsUseCase: Get.find()
       ),
     );

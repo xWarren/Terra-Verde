@@ -6,7 +6,8 @@ class LoginResponseModel {
     required this.code,
     required this.codeInfo,
     required this.errors,
-    required this.token
+    required this.token,
+    required this.userName
   });
 
   final String message;
@@ -15,4 +16,5 @@ class LoginResponseModel {
   final int codeInfo;
   final int errors;
   final String token;
+  final String userName;
 }

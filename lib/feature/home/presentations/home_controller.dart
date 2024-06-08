@@ -12,7 +12,6 @@ import '../../dashboard/dashboard_controller.dart';
 import '_components/announcements_section.dart';
 import '_components/events_section.dart';
 import '_components/officials_section.dart';
-import 'events/events_page.dart';
 
 class HomeController extends GetxController {
   
@@ -92,7 +91,6 @@ class HomeController extends GetxController {
   void getIdFromEvents({required int id}) {
     idEventSubs?.cancel();
     idEventSubs = eventsUseCase.getIdFromEvent(id: id).asStream().listen((response) {
-      Get.to(EventsPage(idEventsData: response));
       printUtil(response.eventDate);
       update();
     },
