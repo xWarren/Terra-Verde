@@ -23,12 +23,11 @@ class _FamilyMemberSectionState extends State<FamilyMemberSection> {
   @override
   Widget build(BuildContext context) {
     return  Expanded(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
+      child: Column(
+        children: [
+          Expanded(
+            child: Container(
               width: Get.width,
-               height: Get.height,
                margin: const EdgeInsets.only(
                 top: Dimensions.extraLargeSpacing
                ),
@@ -64,7 +63,6 @@ class _FamilyMemberSectionState extends State<FamilyMemberSection> {
                         Expanded(
                             child: ListView.builder(
                             itemCount: widget.residentsData.length,
-                            physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
                               var data = widget.residentsData[index];
@@ -183,9 +181,9 @@ class _FamilyMemberSectionState extends State<FamilyMemberSection> {
                   )
                 ]
               )
-            )
-          ]
-        ),
+            ),
+          )
+        ]
       ),
     );
   }

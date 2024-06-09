@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/domain/usecases/residents_use_case.dart';
+import '../../../../core/presentation/custom/custom_modal.dart';
 import '../../../../core/resources/strings.dart';
 import '../profile_controller.dart';
-
 
 class AddFamilyMemberController extends GetxController {
 
@@ -49,6 +49,8 @@ class AddFamilyMemberController extends GetxController {
   RxString passwordError = "".obs;
   RxString confirmPasswordError = "".obs;
 
+  RxString birthDate = "".obs;
+
   RxBool isFieldFilled = false.obs;
   RxBool isLoading = false.obs;
 
@@ -78,7 +80,7 @@ class AddFamilyMemberController extends GetxController {
   
   void dismissKeyboard() => Get.focusScope?.unfocus();
   
-  void addFamilyMember() {
+  void addFamilyMember(BuildContext context) {
     var firstName = firstNameController.text;
     var middleName = middleNameController.text;
     var lastName = lastNameController.text;
@@ -170,13 +172,22 @@ class AddFamilyMemberController extends GetxController {
         relationship: relationship.value, 
         password: password
       ).asStream().listen((response) {
-        log("success");
-        profileDelegate.getResident();
-        Get.back();
+        showModal(
+          context: context, 
+          title: "Lorem ipsum", 
+          description: "Lorem ipsum", 
+          onTap: () => onTap(), 
+          buttonText: "Return"
+        );
         update();
       });
     }
     update();
+  }
+
+  void onTap() {
+    profileDelegate.getResident();
+    Get.back(result: 2);
   }
 
   @override

@@ -62,9 +62,9 @@ class HomeController extends GetxController {
     getEvents();
     getOfficials();
     Future.wait([
-      announcementSubs!.asFuture(),
-      eventsSubs!.asFuture(),
-      officialsSubs!.asFuture()
+      announcementSubs!.asFuture(true),
+      eventsSubs!.asFuture(true),
+      officialsSubs!.asFuture(true)
     ]);
   }
 

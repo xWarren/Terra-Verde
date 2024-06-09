@@ -264,9 +264,12 @@ class AddFamilyMemberPage extends GetView<AddFamilyMemberController> {
                                     lastDate: DateTime.now()
                                   );
                                   if (pickedDate != null) {
-                                    String formattedDate = DateFormat('yyyy-dd-mm').format(pickedDate);
+                                    String formattedDate = DateFormat('yyyy-dd-MM').format(pickedDate);
                                     controller.birthdayError.value = "";
                                     controller.birthday.value = formattedDate;
+                                    DateTime announcementDate = DateTime.parse(controller.birthday.value);
+                                     DateFormat monthFormat = DateFormat('MMMM dd, yyyy');
+                                    controller.birthDate.value = monthFormat.format(announcementDate);
                                   }
                                     controller.birthday.value;
                                     controller.update();
@@ -297,7 +300,7 @@ class AddFamilyMemberPage extends GetView<AddFamilyMemberController> {
                                           Text(
                                             controller.birthday.value.isEmpty 
                                             ? "MM/DD/YYYY"    
-                                            : controller.birthday.value,
+                                            : controller.birthDate.value,
                                             style: TextStyle(
                                               color: controller.birthday.value.isEmpty
                                               ? CustomColors.grey  
@@ -678,7 +681,7 @@ class AddFamilyMemberPage extends GetView<AddFamilyMemberController> {
                                 height: 50,
                                 width: Get.width,
                                 child: ElevatedButton(
-                                  onPressed: () => controller.addFamilyMember(),
+                                  onPressed: () => controller.addFamilyMember(context),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: CustomColors.primaryColor,
                                     shape: RoundedRectangleBorder(
