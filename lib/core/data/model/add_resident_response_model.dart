@@ -4,5 +4,5 @@ class AddResidentResponseModel {
     required this.message
   });
 
-  String message;
+  int message;
 }

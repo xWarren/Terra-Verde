@@ -8,4 +8,5 @@ class Routes {
   static const profileRoute = "/profile_page";
   static const addFamilyMemberRoute = "/add_family_member_page";
   static const profileInformationRoute = "/profile_information_page";
+  static const editProfileRoute = "/edit_profile_page";
 }

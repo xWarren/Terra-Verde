@@ -24,7 +24,7 @@ class FeatureLoginResponseModel {
     code: json?["Code"] ?? 0,
     codeInfo: json?["CodeInfo"] ?? 0,
     errors: json?["Errors"] ?? 0,
-    token: json?["token"] ?? "",
+    token: json?["tokenString"] ?? "",
     userName: json?["userName"] ?? "",
   );
 }

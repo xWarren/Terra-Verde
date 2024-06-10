@@ -4,5 +4,5 @@ class FeatureAddResidentDataEntity {
     required this.message
   });
 
-  final String message;
+  final int message;
 }

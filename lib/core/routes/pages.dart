@@ -6,6 +6,8 @@ import '../../feature/login/presentations/login_binding.dart';
 import '../../feature/login/presentations/login_page.dart';
 import '../../feature/profile/presentations/add_family_member/add_family_member_binding.dart';
 import '../../feature/profile/presentations/add_family_member/add_family_member_page.dart';
+import '../../feature/profile/presentations/edit_profile/edit_profile_binding.dart';
+import '../../feature/profile/presentations/edit_profile/edit_profile_page.dart';
 import '../../feature/profile/presentations/profile_information/profile_information_binding.dart';
 import '../../feature/profile/presentations/profile_information/profile_information_page.dart';
 import '../../feature/register/register_binding.dart';
@@ -24,17 +26,17 @@ class Pages {
     GetPage(
       name: Routes.splashRoute,
       page: () => const SplashPage(),
-      binding: SplashBinding(),
+      binding: SplashBinding()
     ),
     GetPage(
       name: Routes.welcomeRoute,
       page: () => const WelcomePage(),
-      binding: WelcomeBinding(),
+      binding: WelcomeBinding()
     ),
     GetPage(
       name: Routes.loginRoute,
       page: () => const LoginPage(),
-      binding: LoginBinding(),
+      binding: LoginBinding()
     ),
     GetPage(
       name: Routes.registerRoute,
@@ -44,22 +46,27 @@ class Pages {
     GetPage(
       name: Routes.dashboardRoute,
       page: () => const DashboardPage(),
-      binding: DashboardBinding(),
+      binding: DashboardBinding()
     ),
     GetPage(
       name: Routes.profileRoute,
       page: () => const ProfilePage(),
-      binding: ProfileBinding(),
+      binding: ProfileBinding()
     ),
     GetPage(
       name: Routes.addFamilyMemberRoute,
       page: () => const AddFamilyMemberPage(),
-      binding: AddFamilyMemberBinding(),
+      binding: AddFamilyMemberBinding()
     ),
     GetPage(
       name: Routes.profileInformationRoute,
       page: () => const ProfileInformationPage(),
-      binding: ProfileInformationBinding(),
+      binding: ProfileInformationBinding()
+    ),
+    GetPage(
+      name: Routes.editProfileRoute,
+      page: () => const EditProfilePage(),
+      binding: EditProfileBinding()
     ),
   ];
 }

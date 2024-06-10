@@ -87,7 +87,10 @@ class LoginController extends GetxController {
        passwordKey.currentState?.setLoading(true);
       emailKey.currentState?.setLoading(true);
       loginSubs?.cancel();
-      loginSubs = loginUseCase.execute(email: email.toString(), password: password.toString()).asStream().listen((value) {
+      loginSubs = loginUseCase.execute(
+        email: email.toString(), 
+        password: password.toString()
+      ).asStream().listen((value) {
         storageService.setLoggedIn(true);
         storageService.saveAccessToken(value.token);
         storageService.setEmail(value.userName);

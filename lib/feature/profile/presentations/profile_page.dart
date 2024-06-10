@@ -43,7 +43,7 @@ class ProfilePage extends GetView<ProfileController> {
                 FamilyMemberSection(
                   residentsData: controller.residentsData,
                 ),
-                if(controller.isHeadFamily.isFalse)
+                if(controller.isHeadFamily.isTrue)
                 Container(
                   color: CustomColors.white,
                   child: Container(
@@ -55,7 +55,12 @@ class ProfilePage extends GetView<ProfileController> {
                       vertical: Dimensions.extraLargeSpacing
                     ),
                     child: ElevatedButton(
-                      onPressed: () => Get.toNamed(Routes.addFamilyMemberRoute),
+                      onPressed: () => Get.toNamed(
+                        Routes.addFamilyMemberRoute,
+                        arguments: {
+                          "residentId": controller.residentId.value
+                        }
+                      ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: CustomColors.primaryColor,
                         shape: RoundedRectangleBorder(

@@ -172,6 +172,7 @@ class AddFamilyMemberController extends GetxController {
         relationship: relationship.value, 
         password: password
       ).asStream().listen((response) {
+        log("hllo");
         showModal(
           context: context, 
           title: "Lorem ipsum", 
@@ -179,8 +180,13 @@ class AddFamilyMemberController extends GetxController {
           onTap: () => onTap(), 
           buttonText: "Return"
         );
-        update();
-      });
+      },
+      cancelOnError: true,
+      onError: (error) {
+      log("getResidentsMember: $error");
+      isLoading(false);
+      update();
+    });
     }
     update();
   }

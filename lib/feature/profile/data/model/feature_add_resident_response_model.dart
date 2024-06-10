@@ -1,12 +1,12 @@
 class FeatureAddResidentResponseModel {
 
-  final String message;
+  final int message;
 
   const FeatureAddResidentResponseModel({
     required this.message
   });
 
-  factory FeatureAddResidentResponseModel.fromJson(Map<String, dynamic>? json) => FeatureAddResidentResponseModel(
-     message: json?[""] ?? "",
+  factory FeatureAddResidentResponseModel.fromJson(int json) => const FeatureAddResidentResponseModel(
+     message: 0,
   );
 }
