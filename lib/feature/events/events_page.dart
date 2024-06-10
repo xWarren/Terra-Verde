@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../core/resources/assets.dart';
 import '../../core/resources/custom_colors.dart';
@@ -9,21 +10,6 @@ import 'events_controller.dart';
 class EventsPage extends GetView<EventsController>  {
   const EventsPage({super.key});
 
-   // String formattedMonth = "";
-  // String formattedTime = "";
-
-  // @override
-  // void initState() {
-  //   String dateString = widget.idEventsData.eventDate;
-  //   DateTime eventDate = DateTime.parse(dateString);
-
-  //   DateFormat monthFormat = DateFormat('MMMM dd, yyyy');
-  //   formattedMonth = monthFormat.format(eventDate);
-
-  //   DateFormat timeFormat = DateFormat('hh:mma');
-  //   formattedTime = timeFormat.format(eventDate);
-  //   super.initState();
-  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,16 +63,14 @@ class EventsPage extends GetView<EventsController>  {
                           ),
                         ),
                       ),
-                      Obx(
-                        () => Text(
-                          controller.eventDate.call(),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            color: CustomColors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500
-                          ),
+                      Text(
+                        "${controller.formattedMonth} at ${controller.formattedTime}",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: CustomColors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500
                         ),
                       ),
                     ],

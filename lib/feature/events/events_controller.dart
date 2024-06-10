@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class EventsController extends GetxController {
 
@@ -7,13 +8,26 @@ class EventsController extends GetxController {
   RxString eventDate = "".obs;
   RxString eventDescription = "".obs;
 
+    String formattedMonth = "";
+  String formattedTime = "";
+
   @override
   void onInit() {
+   super.onInit();
+
     id(Get.arguments["id"] ?? 0);
     eventName(Get.arguments["eventName"] ?? "");
     eventDate(Get.arguments["eventDate"] ?? "");
     eventDescription(Get.arguments["eventDescription"] ?? "");
-    super.onInit();
+
+    String dateString = eventDate.value; // Access the RxString's value
+    DateTime parsedEventDate = DateTime.parse(dateString);
+
+    DateFormat monthFormat = DateFormat('MMMM dd, yyyy');
+    formattedMonth = monthFormat.format(parsedEventDate);
+
+    DateFormat timeFormat = DateFormat('hh:mma');
+    formattedTime = timeFormat.format(parsedEventDate);
   }
   
 }
