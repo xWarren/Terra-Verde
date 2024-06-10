@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:get/get.dart';
 
 import '../../../core/domain/entities/residents_data_entity.dart';
@@ -73,6 +74,7 @@ class ProfileController extends GetxController implements ProfileDelegate {
   @override
   void getResident() {
     getResidentsMember();
+    log("nag update naman");
     update();
   }
 }

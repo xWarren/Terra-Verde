@@ -60,4 +60,18 @@ class ResidentsRemoteSourceImpl extends BaseGetConnect implements ResidentsRemot
     var featureResponseModel = FeatureAddResidentResponseModel.fromJson(response.body);
     return AddResidentMapper.fromFeatureAddResidentResponseModel(featureResponseModel);
   }
+  
+  @override
+  Future<AddResidentResponseModel> editProfile(body) async {
+    var response = await methodRequest(
+      APIEndpoint.residentsHouseMembers,
+      method: Method.put,
+      params: body,
+      headers: {
+      "Authorization": "Bearer ${storageService.getAccessToken()}"
+      }
+    );
+    var featureResponseModel = FeatureAddResidentResponseModel.fromJson(response.body);
+    return AddResidentMapper.fromFeatureAddResidentResponseModel(featureResponseModel);
+  }
 }

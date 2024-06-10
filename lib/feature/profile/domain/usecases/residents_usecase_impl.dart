@@ -5,6 +5,7 @@ import '../../../../core/domain/entities/add_resident_entity.dart';
 import '../../../../core/domain/entities/residents_data_entity.dart';
 import '../../../../core/domain/usecases/residents_use_case.dart';
 import '../payload/add_residents_param.dart';
+import '../payload/edit_profile_param.dart';
 import '../payload/get_id_residents_param.dart';
 
 class ResidentsUseCaseImpl implements ResidentsUseCase {
@@ -63,5 +64,41 @@ class ResidentsUseCaseImpl implements ResidentsUseCase {
     );
 
     return residentsRepository.addResident(params);
+  }
+  
+  @override
+  Future<AddResidentEntity> editProfile({
+    required int id, 
+    required int residentId, 
+    required String firstName, 
+    required String middleName, 
+    required String lastName, 
+    required int contactNumber,
+    required String emailAddress, 
+    required String address, 
+    required String birthDate, 
+    required String gender, 
+    required String profileImage, 
+    required String relationship, 
+    required String password
+  }) {
+
+   var params = EditProfileParam(
+    id: id,
+    residentId: residentId, 
+    firstName: firstName, 
+    middleName: middleName, 
+    lastName: lastName, 
+    contactNumber: contactNumber, 
+    emailAddress: emailAddress, 
+    address: address, 
+    birthDate: birthDate, 
+    gender: gender, 
+    profileImage: profileImage, 
+    relationship: relationship, 
+    password: password
+  );
+  
+  return residentsRepository.editProfile(params);
   }
 }

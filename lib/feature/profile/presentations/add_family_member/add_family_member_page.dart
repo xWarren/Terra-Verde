@@ -268,7 +268,7 @@ class AddFamilyMemberPage extends GetView<AddFamilyMemberController> {
                                     controller.birthdayError.value = "";
                                     controller.birthday.value = formattedDate;
                                     DateTime announcementDate = DateTime.parse(controller.birthday.value);
-                                     DateFormat monthFormat = DateFormat('MMMM dd, yyyy');
+                                    DateFormat monthFormat = DateFormat('MMMM dd, yyyy');
                                     controller.birthDate.value = monthFormat.format(announcementDate);
                                   }
                                     controller.birthday.value;

@@ -175,8 +175,8 @@ class AddFamilyMemberController extends GetxController {
         log("hllo");
         showModal(
           context: context, 
-          title: "Lorem ipsum", 
-          description: "Lorem ipsum", 
+          title: "Family Member Added Successfully", 
+          description: "The family member has been added to your profile.", 
           onTap: () => onTap(), 
           buttonText: "Return"
         );

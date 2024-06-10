@@ -261,12 +261,11 @@ class ProfileInformationPage extends GetView<ProfileInformationController> {
                              if (controller.isHeadFamily.isTrue ||
                               controller.emailChecker.value == controller.email.value
                              )
-                             
                              SizedBox(
                                 height: 50,
                                 width: Get.width,
                                 child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () => controller.goToEditProfile(),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: CustomColors.primaryColor,
                                     shape: RoundedRectangleBorder(

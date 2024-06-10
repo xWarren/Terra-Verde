@@ -20,6 +20,15 @@ class FamilyMemberSection extends StatefulWidget {
 }
 
 class _FamilyMemberSectionState extends State<FamilyMemberSection> {
+
+  late List<ResidentsDataEntity> _residentsData;
+
+  @override
+  void initState() {
+    super.initState();
+    _residentsData = widget.residentsData;
+  }
+
   @override
   Widget build(BuildContext context) {
     return  Expanded(
@@ -62,7 +71,7 @@ class _FamilyMemberSectionState extends State<FamilyMemberSection> {
                         ),
                         Expanded(
                             child: ListView.builder(
-                            itemCount: widget.residentsData.length,
+                            itemCount: _residentsData.length,
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
                               var data = widget.residentsData[index];

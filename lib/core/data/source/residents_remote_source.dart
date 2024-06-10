@@ -7,4 +7,5 @@ abstract class ResidentsRemoteSource {
   Future<GetResidentsResponseModel> getResidents();
   Future<GetResidentsResponseDataModel> getIdFromResidents({required int id});
   Future<AddResidentResponseModel> addResident(body);
+  Future<AddResidentResponseModel> editProfile(body);
 }

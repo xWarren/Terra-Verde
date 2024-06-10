@@ -2,12 +2,20 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../core/domain/services/storage_service.dart';
 import '../../../../core/domain/usecases/residents_use_case.dart';
+import '../../../../core/routes/routes.dart';
 import '../../../../core/utils/print_utils.dart';
 
-class ProfileInformationController extends GetxController {
+abstract class ProfileInformationDelegate {
+
+  void profileInformation();
+
+}
+
+class ProfileInformationController extends GetxController implements ProfileInformationDelegate {
 
   ProfileInformationController({
     required this.residentsUseCase,
@@ -20,6 +28,7 @@ class ProfileInformationController extends GetxController {
   final StorageService storageService;
 
   RxInt id = 0.obs;
+  RxInt residentId = 0.obs;
 
   RxString image = "".obs;
   RxString firstName = "".obs;
@@ -27,11 +36,13 @@ class ProfileInformationController extends GetxController {
   RxString lastName = "".obs;
   RxString familyRelationship = "".obs;
   RxString email = "".obs;
+  RxString birthday = "".obs;
 
   final birthdayController = TextEditingController();
   final genderController = TextEditingController();
   final addressController = TextEditingController();
   final contactNumberController = TextEditingController();
+  
 
   RxBool isLoading = false.obs;
 
@@ -56,10 +67,14 @@ class ProfileInformationController extends GetxController {
     residentsSubs?.cancel();
     residentsSubs = residentsUseCase.getIdFromResidents(id: id.value).asStream().listen((response) {
       printUtil(response);
+      residentId.value = response.residentId;
       firstName.value = response.firstName;
       middeName.value = response.middleName;
       lastName.value = response.lastName;
-      birthdayController.text = response.birthDate;
+      birthday.value = response.birthDate;
+      DateTime announcementDate = DateTime.parse(response.birthDate);
+      DateFormat monthFormat = DateFormat('MMMM dd, yyyy');
+      birthdayController.text = monthFormat.format(announcementDate);
       genderController.text = response.gender;
       familyRelationship.value = response.relationship;
       contactNumberController.text = response.contactNumber.toString();
@@ -74,11 +89,36 @@ class ProfileInformationController extends GetxController {
       update();
     });
   }
+
+  void goToEditProfile() {
+    Get.toNamed(
+      Routes.editProfileRoute,
+      arguments: {
+        "id": id.value,
+        "residentId": residentId.value,
+        "firstName": firstName.value,
+        "middleName": middeName.value,
+        "lastName": lastName.value,
+        "address": addressController.text,
+        "phoneNumber": contactNumberController.text,
+        "email": email.value,
+        "familyRelationship": familyRelationship.value,
+        "birthday": birthday.value,
+        "gender": genderController.text,
+      }
+    );
+  }
   
 
   @override
   void onClose() {
     residentsSubs?.cancel();
     super.onClose();
+  }
+  
+  @override
+  void profileInformation() {
+    getResidentsMember();
+    update();
   }
 }

@@ -94,6 +94,7 @@ class LoginController extends GetxController {
         storageService.setLoggedIn(true);
         storageService.saveAccessToken(value.token);
         storageService.setEmail(value.userName);
+        storageService.setPassword(password.toString());
         Get.offNamedUntil(Routes.dashboardRoute, (route) => false);
         isLoading(false);
         passwordKey.currentState?.setLoading(false);

@@ -91,7 +91,21 @@ class HomeController extends GetxController {
   void getIdFromEvents({required int id}) {
     idEventSubs?.cancel();
     idEventSubs = eventsUseCase.getIdFromEvent(id: id).asStream().listen((response) {
-      printUtil(response.eventDate);
+      
+      int id = response.id;
+      String eventName = response.eventName;
+      String eventDate = response.eventDate;
+      String eventDescription = response.eventDescription;
+
+      Get.toNamed(
+        Routes.eventRoute,
+        arguments: {
+          "id": id,
+          "eventName": eventName,
+          "eventDate": eventDate,
+          "eventDescription": eventDescription
+        }
+      );
       update();
     },
     onError: (error) {

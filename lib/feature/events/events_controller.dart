@@ -1,17 +1,19 @@
 import 'package:get/get.dart';
 
-import '../../core/domain/entities/events_data_entity.dart';
+class EventsController extends GetxController {
 
-abstract class EventsDelegate {
-  void getEventById({EventsDataEntity? eventData});  
-}
+  RxInt id = 0.obs;
+  RxString eventName = "".obs;
+  RxString eventDate = "".obs;
+  RxString eventDescription = "".obs;
 
-class EventsController extends GetxController implements EventsDelegate {
-
-  EventsDataEntity? eventData;
-  
   @override
-  void getEventById({EventsDataEntity? eventData}) {
-    this.eventData = eventData;
+  void onInit() {
+    id(Get.arguments["id"] ?? 0);
+    eventName(Get.arguments["eventName"] ?? "");
+    eventDate(Get.arguments["eventDate"] ?? "");
+    eventDescription(Get.arguments["eventDescription"] ?? "");
+    super.onInit();
   }
+  
 }
