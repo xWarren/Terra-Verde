@@ -1,7 +1,7 @@
 import '../../../../core/data/repositories/resident_house_member_repository.dart';
 import '../../../../core/domain/entities/add_resident_entity.dart';
 import '../../../../core/domain/entities/resident_house_member_data_entity.dart';
-import '../../../../core/domain/usecases/resident_house_member_use_case.dart';
+import '../../../../core/domain/usecases/resident_house_member_usecase.dart';
 import '../payload/add_resident_house_member_param.dart';
 import '../payload/edit_profile_param.dart';
 import '../payload/get_id_resident_house_member_param.dart';

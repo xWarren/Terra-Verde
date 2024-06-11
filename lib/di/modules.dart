@@ -5,11 +5,13 @@ import '../core/data/repositories/events_repository.dart';
 import '../core/data/repositories/login_repository.dart';
 import '../core/data/repositories/officials_repository.dart';
 import '../core/data/repositories/resident_house_member_repository.dart';
+import '../core/data/repositories/resident_repository.dart';
 import '../core/data/source/announcement_remote_source.dart';
 import '../core/data/source/events_remote_source.dart';
 import '../core/data/source/login_remote_source.dart';
 import '../core/data/source/officials_remote_source.dart';
 import '../core/data/source/resident_house_member_remote_source.dart';
+import '../core/data/source/resident_remote_source.dart';
 import '../core/domain/services/storage_service.dart';
 import '../feature/home/data/repositories/announcement_repository_impl.dart';
 import '../feature/home/data/repositories/events_repository_impl.dart';
@@ -21,6 +23,8 @@ import '../feature/home/data/repositories/officials_repository_impl.dart';
 import '../feature/home/data/source/officials_remote_source_impl.dart';
 import '../feature/profile/data/repositories/resident_house_member_repository_impl.dart';
 import '../feature/profile/data/source/resident_house_member_remote_source_impl.dart';
+import '../feature/settings/data/repositories/resident_repository_impl.dart';
+import '../feature/settings/data/source/resident_remote_source_impl.dart';
 
 Future<void> initAppDependecies() async {
 
@@ -86,7 +90,7 @@ Future<void> initAppDependecies() async {
     permanent: true
   );
 
-  //Residents
+  //Residents House Member
   Get.put<ResidentHouseMemberRemoteSource>(
     ResidentHouseMemberRemoteSourceImpl(
       storageService: Get.find()
@@ -95,6 +99,20 @@ Future<void> initAppDependecies() async {
   );
   Get.put<ResidentHouseMemberRepository>(
     ResidentHouseMemberRepositoryImpl(
+      remoteSource: Get.find()
+    ),
+    permanent: true
+  );
+
+  //Residents
+  Get.put<ResidentRemoteSource>(
+    ResidentRemoteSourceImpl(
+      storageService: Get.find()
+    ),
+    permanent: true
+  );
+  Get.put<ResidentRepository>(
+    ResidentRepositoryImpl(
       remoteSource: Get.find()
     ),
     permanent: true

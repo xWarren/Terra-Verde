@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../core/domain/services/storage_service.dart';
-import '../../../core/domain/usecases/announcement_use_case.dart';
-import '../../../core/domain/usecases/events_use_case.dart';
+import '../../../core/domain/usecases/announcement_usecase.dart';
+import '../../../core/domain/usecases/events_usecase.dart';
 import '../../../core/domain/usecases/officials_usecase.dart';
 import '../../../core/routes/routes.dart';
 import '../../../core/utils/print_utils.dart';

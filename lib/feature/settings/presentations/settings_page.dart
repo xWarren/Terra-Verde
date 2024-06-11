@@ -89,7 +89,7 @@ class SettingsPage extends GetView<SettingsController> {
                     ),
                   ),
                 ),
-                const ProfileSection(),
+                ProfileSection(onTap: controller.goToProfile),
                 const BookmarksSection(),
                 const PrivacyPolicySection(),
                 LogoutSection(onTap: controller.logout),

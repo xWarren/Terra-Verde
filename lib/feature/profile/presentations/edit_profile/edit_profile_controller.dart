@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../core/domain/services/storage_service.dart';
-import '../../../../core/domain/usecases/resident_house_member_use_case.dart';
+import '../../../../core/domain/usecases/resident_house_member_usecase.dart';
 import '../../../../core/presentation/custom/custom_modal.dart';
 import '../../../../core/resources/strings.dart';
 import '../profile_controller.dart';

@@ -1,18 +1,27 @@
 import 'package:get/get.dart';
 
-import '../../core/domain/usecases/announcement_use_case.dart';
-import '../../core/domain/usecases/events_use_case.dart';
+import '../../core/domain/usecases/announcement_usecase.dart';
+import '../../core/domain/usecases/events_usecase.dart';
 import '../../core/domain/usecases/officials_usecase.dart';
+import '../../core/domain/usecases/resident_usecase.dart';
 import '../home/domain/usecases/announcement_usecase_impl.dart';
 import '../home/domain/usecases/events_usecase_impl.dart';
 import '../home/presentations/home_controller.dart';
 import '../home/domain/usecases/officials_usecase_impl.dart';
+import '../settings/domain/usecases/resident_usecase_impl.dart';
 import '../settings/presentations/settings_controller.dart';
 import 'dashboard_controller.dart';
 
 class DashboardBinding extends Bindings {
   @override
   void dependencies() {
+
+    Get.lazyPut<ResidentUseCase>(
+      () => ResidentUseCaseImpl(
+        residentRepository: Get.find()
+      ),
+      fenix: true
+    );
     
     Get.lazyPut<AnnouncementUseCase>(
       () => AnnouncementUseCaseImpl(
@@ -37,7 +46,8 @@ class DashboardBinding extends Bindings {
 
     Get.lazyPut<SettingsController>(
       () => SettingsController(
-        storageService: Get.find()
+        storageService: Get.find(),
+        residentUseCase: Get.find()
       ),
       fenix: true
     );

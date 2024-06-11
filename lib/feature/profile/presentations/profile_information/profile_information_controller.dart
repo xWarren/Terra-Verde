@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../core/domain/services/storage_service.dart';
-import '../../../../core/domain/usecases/resident_house_member_use_case.dart';
+import '../../../../core/domain/usecases/resident_house_member_usecase.dart';
 import '../../../../core/routes/routes.dart';
 import '../../../../core/utils/print_utils.dart';
 
