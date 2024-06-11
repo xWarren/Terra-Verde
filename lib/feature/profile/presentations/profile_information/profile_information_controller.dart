@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../core/domain/services/storage_service.dart';
-import '../../../../core/domain/usecases/residents_use_case.dart';
+import '../../../../core/domain/usecases/resident_house_member_use_case.dart';
 import '../../../../core/routes/routes.dart';
 import '../../../../core/utils/print_utils.dart';
 
@@ -18,11 +18,11 @@ abstract class ProfileInformationDelegate {
 class ProfileInformationController extends GetxController implements ProfileInformationDelegate {
 
   ProfileInformationController({
-    required this.residentsUseCase,
+    required this.residentHouseMemberUseCase,
     required this.storageService
   });
 
-  final ResidentsUseCase residentsUseCase;
+  final ResidentHouseMemberUseCase residentHouseMemberUseCase;
   StreamSubscription? residentsSubs;
 
   final StorageService storageService;
@@ -65,7 +65,7 @@ class ProfileInformationController extends GetxController implements ProfileInfo
     isLoading(true);
 
     residentsSubs?.cancel();
-    residentsSubs = residentsUseCase.getIdFromResidents(id: id.value).asStream().listen((response) {
+    residentsSubs = residentHouseMemberUseCase.getIdFromResidentHouseMember(id: id.value).asStream().listen((response) {
       printUtil(response);
       residentId.value = response.residentId;
       firstName.value = response.firstName;

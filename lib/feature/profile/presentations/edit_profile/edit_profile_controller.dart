@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../core/domain/services/storage_service.dart';
-import '../../../../core/domain/usecases/residents_use_case.dart';
+import '../../../../core/domain/usecases/resident_house_member_use_case.dart';
 import '../../../../core/presentation/custom/custom_modal.dart';
 import '../../../../core/resources/strings.dart';
 import '../profile_controller.dart';
@@ -16,14 +16,14 @@ class EditProfileController extends GetxController {
 
   EditProfileController({
     required this.storageService,
-    required this.residentsUseCase,
+    required this.residentHouseMemberUseCase,
     required this.profileInformationDelegate,
     required this.profileDelegate
   });
 
   final StorageService storageService;
 
-  final ResidentsUseCase residentsUseCase;
+  final ResidentHouseMemberUseCase residentHouseMemberUseCase;
   StreamSubscription? residentsSubs;
   
   final ProfileInformationDelegate profileInformationDelegate;
@@ -136,7 +136,7 @@ class EditProfileController extends GetxController {
 
     if (!hasErrors) {
       residentsSubs?.cancel();
-      residentsSubs = residentsUseCase.editProfile(
+      residentsSubs = residentHouseMemberUseCase.editProfile(
         id: id.value,
         residentId: residentId.value, 
         firstName: firstName, 

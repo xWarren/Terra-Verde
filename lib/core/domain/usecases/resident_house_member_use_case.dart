@@ -1,11 +1,11 @@
 import '../entities/add_resident_entity.dart';
-import '../entities/residents_data_entity.dart';
+import '../entities/resident_house_member_data_entity.dart';
 
-abstract class ResidentsUseCase {
+abstract class ResidentHouseMemberUseCase {
 
-  Future<List<ResidentsDataEntity>> getResidents();
-  Future<ResidentsDataEntity> getIdFromResidents({required int id});
-  Future<AddResidentEntity> addResident({
+  Future<List<ResidentHouseMemberDataEntity>> getResidentHouseMember();
+  Future<ResidentHouseMemberDataEntity> getIdFromResidentHouseMember({required int id});
+  Future<AddResidentEntity> addResidentHouseMember({
     required int residentId,
     required String firstName,
     required String middleName,

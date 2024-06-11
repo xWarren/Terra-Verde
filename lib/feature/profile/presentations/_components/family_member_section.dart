@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/domain/entities/residents_data_entity.dart';
+import '../../../../core/domain/entities/resident_house_member_data_entity.dart';
 import '../../../../core/resources/assets.dart';
 import '../../../../core/resources/custom_colors.dart';
 import '../../../../core/resources/dimensions.dart';
@@ -13,7 +13,7 @@ class FamilyMemberSection extends StatefulWidget {
     required this.residentsData
   });
 
-  final List<ResidentsDataEntity> residentsData;
+  final List<ResidentHouseMemberDataEntity> residentsData;
 
   @override
   State<FamilyMemberSection> createState() => _FamilyMemberSectionState();
@@ -21,12 +21,12 @@ class FamilyMemberSection extends StatefulWidget {
 
 class _FamilyMemberSectionState extends State<FamilyMemberSection> {
 
-  late List<ResidentsDataEntity> _residentsData;
+  late List<ResidentHouseMemberDataEntity> _residentHouseMemberData;
 
   @override
   void initState() {
     super.initState();
-    _residentsData = widget.residentsData;
+    _residentHouseMemberData = widget.residentsData;
   }
 
   @override
@@ -71,7 +71,7 @@ class _FamilyMemberSectionState extends State<FamilyMemberSection> {
                         ),
                         Expanded(
                             child: ListView.builder(
-                            itemCount: _residentsData.length,
+                            itemCount: _residentHouseMemberData.length,
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
                               var data = widget.residentsData[index];

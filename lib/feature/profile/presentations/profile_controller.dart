@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:get/get.dart';
 
-import '../../../core/domain/entities/residents_data_entity.dart';
+import '../../../core/domain/entities/resident_house_member_data_entity.dart';
 import '../../../core/domain/services/storage_service.dart';
-import '../../../core/domain/usecases/residents_use_case.dart';
+import '../../../core/domain/usecases/resident_house_member_use_case.dart';
 import '../../../core/utils/print_utils.dart';
 
 abstract class ProfileDelegate {
@@ -15,15 +15,15 @@ class ProfileController extends GetxController implements ProfileDelegate {
 
   ProfileController({
     required this.storageService,
-    required this.residentsUseCase
+    required this.residentHouseMemberUseCase
   });
 
   final StorageService storageService;
 
-  final ResidentsUseCase residentsUseCase;
+  final ResidentHouseMemberUseCase residentHouseMemberUseCase;
   StreamSubscription? residentsSubs;
   
-  RxList<ResidentsDataEntity> residentsData = <ResidentsDataEntity>[].obs;
+  RxList<ResidentHouseMemberDataEntity> residentsData = <ResidentHouseMemberDataEntity>[].obs;
 
   RxInt residentId = 0.obs;
 
@@ -50,7 +50,7 @@ class ProfileController extends GetxController implements ProfileDelegate {
     isLoading(true);
 
     residentsSubs?.cancel();
-    residentsSubs = residentsUseCase.getResidents().asStream().listen((response) {
+    residentsSubs = residentHouseMemberUseCase.getResidentHouseMember().asStream().listen((response) {
       for (var item in response ) {
         residentId.value = item.residentId;
       }

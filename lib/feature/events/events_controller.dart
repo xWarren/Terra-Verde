@@ -20,7 +20,7 @@ class EventsController extends GetxController {
     eventDate(Get.arguments["eventDate"] ?? "");
     eventDescription(Get.arguments["eventDescription"] ?? "");
 
-    String dateString = eventDate.value; // Access the RxString's value
+    String dateString = eventDate.value;
     DateTime parsedEventDate = DateTime.parse(dateString);
 
     DateFormat monthFormat = DateFormat('MMMM dd, yyyy');

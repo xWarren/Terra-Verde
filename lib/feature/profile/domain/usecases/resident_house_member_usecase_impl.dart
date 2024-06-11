@@ -1,39 +1,37 @@
-
-
-import '../../../../core/data/repositories/residents_repository.dart';
+import '../../../../core/data/repositories/resident_house_member_repository.dart';
 import '../../../../core/domain/entities/add_resident_entity.dart';
-import '../../../../core/domain/entities/residents_data_entity.dart';
-import '../../../../core/domain/usecases/residents_use_case.dart';
-import '../payload/add_residents_param.dart';
+import '../../../../core/domain/entities/resident_house_member_data_entity.dart';
+import '../../../../core/domain/usecases/resident_house_member_use_case.dart';
+import '../payload/add_resident_house_member_param.dart';
 import '../payload/edit_profile_param.dart';
-import '../payload/get_id_residents_param.dart';
+import '../payload/get_id_resident_house_member_param.dart';
 
-class ResidentsUseCaseImpl implements ResidentsUseCase {
+class ResidentHouseMemberUseCaseImpl implements ResidentHouseMemberUseCase {
 
-  ResidentsUseCaseImpl({
-    required this.residentsRepository
+  ResidentHouseMemberUseCaseImpl({
+    required this.residentHouseMemberRepository
   });
 
-  final ResidentsRepository residentsRepository;
+  final ResidentHouseMemberRepository residentHouseMemberRepository;
 
   @override
-  Future<List<ResidentsDataEntity>> getResidents() {
+  Future<List<ResidentHouseMemberDataEntity>> getResidentHouseMember() {
 
-    return residentsRepository.getResidents();
+    return residentHouseMemberRepository.getResidentHouseMember();
   }
   
   @override
-  Future<ResidentsDataEntity> getIdFromResidents({required int id}) {
+  Future<ResidentHouseMemberDataEntity> getIdFromResidentHouseMember({required int id}) {
 
-    var param = GetIdResidentsParam(
+    var param = GetIdResidentHouseMemberParam(
       id: id
     );
 
-    return residentsRepository.getIdFromResidents(param);
+    return residentHouseMemberRepository.getIdFromResidentHouseMember(param);
   }
   
   @override
-  Future<AddResidentEntity> addResident({
+  Future<AddResidentEntity> addResidentHouseMember({
     required int residentId, 
     required String firstName, 
     required String middleName, 
@@ -48,7 +46,7 @@ class ResidentsUseCaseImpl implements ResidentsUseCase {
     required String password
   }) {
 
-    var params = AddResidentsParam(
+    var params = AddResidentHouseMemberParam(
       residentId: residentId, 
       firstName: firstName, 
       middleName: middleName, 
@@ -63,7 +61,7 @@ class ResidentsUseCaseImpl implements ResidentsUseCase {
       password: password
     );
 
-    return residentsRepository.addResident(params);
+    return residentHouseMemberRepository.addResidentHouseMember(params);
   }
   
   @override
@@ -99,6 +97,6 @@ class ResidentsUseCaseImpl implements ResidentsUseCase {
     password: password
   );
   
-  return residentsRepository.editProfile(params);
+  return residentHouseMemberRepository.editProfile(params);
   }
 }

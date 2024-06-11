@@ -14,7 +14,8 @@ class LoginMapper {
       codeInfo: model.codeInfo,
       errors: model.errors,
       token: model.token,
-      userName: model.userName
+      userName: model.userName,
+      residentId: model.residentId
     );
   }
 
@@ -27,7 +28,8 @@ class LoginMapper {
       codeInfo: model.codeInfo,
       errors: model.errors,
       token: model.token,
-      userName: model.userName
+      userName: model.userName,
+      residentId: model.residentId
     );
   }
 
@@ -40,7 +42,8 @@ class LoginMapper {
       codeInfo: entity.codeInfo,
       errors: entity.errors,
       token: entity.token,
-      userName: entity.userName
+      userName: entity.userName,
+      residentId: entity.residentId
     );
   }
 }

@@ -1,6 +1,6 @@
-class AddResidentsParam {
+class AddResidentHouseMemberParam {
 
-  AddResidentsParam({
+  AddResidentHouseMemberParam({
     required this.residentId,
     required this.firstName,
     required this.middleName,

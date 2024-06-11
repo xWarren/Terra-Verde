@@ -1,13 +1,13 @@
-import '../../../core/data/model/get_residents_response_data_model.dart';
-import '../../../core/domain/entities/residents_data_entity.dart';
-import '../data/model/feature_residents_response_data_model.dart';
-import '../domain/entities/feature_residents_data_entity.dart';
+import '../../../core/data/model/get_resident_house_member_data_model.dart';
+import '../../../core/domain/entities/resident_house_member_data_entity.dart';
+import '../data/model/feature_resident_house_member_data_model.dart';
+import '../domain/entities/feature_resident_house_member_data_entity.dart';
 
-class GetResidentsDataMapper {
+class GetResidentHouseMemberDataMapper {
 
-  static GetResidentsResponseDataModel fromFeatureResidentsResponseDataModel(FeatureResidentsResponseDataModel model) {
+  static GetResidentHouseMemberDataModel fromFeatureResidentHouseMemberDataModel(FeatureResidentHouseMemberDataModel model) {
     
-    return GetResidentsResponseDataModel(
+    return GetResidentHouseMemberDataModel(
       id: model.id,
       residentId: model.residentId,
       firstName: model.firstName,
@@ -23,9 +23,9 @@ class GetResidentsDataMapper {
     );
   }
 
-  static FeatureResidentsDataEntity fromGetResidentsResponseDataModel(GetResidentsResponseDataModel model) {
+  static FeatureResidentHouseMemberDataEntity fromGetResidentsResponseDataModel(GetResidentHouseMemberDataModel model) {
     
-    return FeatureResidentsDataEntity(
+    return FeatureResidentHouseMemberDataEntity(
       id: model.id,
       residentId: model.residentId,
       firstName: model.firstName,
@@ -41,9 +41,9 @@ class GetResidentsDataMapper {
     );
   }
 
-    static ResidentsDataEntity fromFeatureResidentsDataEntity(FeatureResidentsDataEntity entity) {
+    static ResidentHouseMemberDataEntity fromFeatureResidentHouseMemberDataEntity(FeatureResidentHouseMemberDataEntity entity) {
     
-    return ResidentsDataEntity(
+    return ResidentHouseMemberDataEntity(
       id: entity.id,
       residentId: entity.residentId,
       firstName: entity.firstName,

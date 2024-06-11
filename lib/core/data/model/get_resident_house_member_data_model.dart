@@ -1,6 +1,6 @@
-class GetResidentsResponseDataModel {
+class GetResidentHouseMemberDataModel {
 
-  const GetResidentsResponseDataModel({
+  const GetResidentHouseMemberDataModel({
     required this.id,
     required this.residentId,
     required this.firstName,

@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/domain/usecases/residents_use_case.dart';
+import '../../../../core/domain/usecases/resident_house_member_use_case.dart';
 import '../../../../core/presentation/custom/custom_modal.dart';
 import '../../../../core/resources/strings.dart';
 import '../profile_controller.dart';
@@ -12,11 +12,11 @@ import '../profile_controller.dart';
 class AddFamilyMemberController extends GetxController {
 
   AddFamilyMemberController({
-    required this.residentsUseCase,
+    required this.residentHouseMemberUseCase,
     required this.profileDelegate
   });
 
-  final ResidentsUseCase residentsUseCase;
+  final ResidentHouseMemberUseCase residentHouseMemberUseCase;
   StreamSubscription? residentsSubs;
 
   final ProfileDelegate profileDelegate;
@@ -158,7 +158,7 @@ class AddFamilyMemberController extends GetxController {
 
     if (!hasErrors) {
       residentsSubs?.cancel();
-      residentsSubs = residentsUseCase.addResident(
+      residentsSubs = residentHouseMemberUseCase.addResidentHouseMember(
         residentId: residentId.value, 
         firstName: firstName, 
         middleName: middleName, 

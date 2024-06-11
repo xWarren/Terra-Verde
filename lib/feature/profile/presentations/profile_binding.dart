@@ -1,15 +1,15 @@
 import 'package:get/get.dart';
 
-import '../../../core/domain/usecases/residents_use_case.dart';
-import '../domain/usecases/residents_usecase_impl.dart';
+import '../../../core/domain/usecases/resident_house_member_use_case.dart';
+import '../domain/usecases/resident_house_member_usecase_impl.dart';
 import 'profile_controller.dart';
 class ProfileBinding extends Bindings {
   @override
   void dependencies() {
 
-    Get.lazyPut<ResidentsUseCase>(
-      () => ResidentsUseCaseImpl(
-        residentsRepository: Get.find()
+    Get.lazyPut<ResidentHouseMemberUseCase>(
+      () => ResidentHouseMemberUseCaseImpl(
+        residentHouseMemberRepository: Get.find()
       ),
       fenix: true
     );
@@ -17,7 +17,7 @@ class ProfileBinding extends Bindings {
     Get.put(
       ProfileController(
         storageService: Get.find(),
-        residentsUseCase: Get.find()
+        residentHouseMemberUseCase: Get.find()
       ),
     );
   }

@@ -1,4 +1,4 @@
-class FeatureResidentsResponseDataModel {
+class FeatureResidentHouseMemberDataModel {
 
   final int id;
   final int residentId;
@@ -13,7 +13,7 @@ class FeatureResidentsResponseDataModel {
   final String profileImage;
   final String relationship;
 
-  const FeatureResidentsResponseDataModel({
+  const FeatureResidentHouseMemberDataModel({
     required this.id,
     required this.residentId,
     required this.firstName,
@@ -28,7 +28,7 @@ class FeatureResidentsResponseDataModel {
     required this.relationship
   });
 
-  factory FeatureResidentsResponseDataModel.fromJson(Map<String, dynamic>? json) => FeatureResidentsResponseDataModel(
+  factory FeatureResidentHouseMemberDataModel.fromJson(Map<String, dynamic>? json) => FeatureResidentHouseMemberDataModel(
     id: json?["id"] ?? 0,
     residentId: json?["residentId"] ?? 0,
     firstName: json?["firstName"] ?? "",

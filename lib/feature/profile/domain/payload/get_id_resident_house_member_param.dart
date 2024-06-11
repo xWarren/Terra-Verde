@@ -1,6 +1,6 @@
-class GetIdResidentsParam {
+class GetIdResidentHouseMemberParam {
 
-  GetIdResidentsParam({
+  GetIdResidentHouseMemberParam({
     required this.id
   });
 

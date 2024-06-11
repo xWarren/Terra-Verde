@@ -7,7 +7,8 @@ class LoginEntity {
     required this.codeInfo,
     required this.errors,
     required this.token,
-    required this.userName
+    required this.userName,
+    required this.residentId
   });
 
   String message;
@@ -17,4 +18,5 @@ class LoginEntity {
   int errors;
   String token;
   String userName;
+  String residentId;
 }

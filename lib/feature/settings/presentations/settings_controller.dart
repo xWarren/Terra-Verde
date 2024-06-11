@@ -11,8 +11,22 @@ class SettingsController extends GetxController {
 
   final StorageService storageService;
 
+  RxString residentId = "".obs;
+
+
+  @override
+  void onInit() {
+    residentId(storageService.getResidentId());
+    super.onInit();
+  }
+
   void logout() {
     storageService.clearAll();
     Get.offAndToNamed(Routes.welcomeRoute);
+  }
+
+
+  void getResident() {
+
   }
 }

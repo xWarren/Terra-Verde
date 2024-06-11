@@ -1,6 +1,6 @@
-class FeatureResidentsDataEntity {
-
-  FeatureResidentsDataEntity({
+class ResidentHouseMemberDataEntity {
+  
+  const ResidentHouseMemberDataEntity({
     required this.id,
     required this.residentId,
     required this.firstName,
