@@ -63,7 +63,6 @@ class _EventSliverRemainingState extends State<EventSliverRemaining> {
                       const SizedBox(width: Dimensions.smallSpacing),
                       Text(
                         "${widget.formattedMonth} at ${widget.formattedTime}",
-                        textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 13,
@@ -94,7 +93,6 @@ class _EventSliverRemainingState extends State<EventSliverRemaining> {
                         widget.eventLocation.isEmpty
                         ? "No set location"
                         : widget.eventLocation,
-                        textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 13,
@@ -106,7 +104,6 @@ class _EventSliverRemainingState extends State<EventSliverRemaining> {
                   const SizedBox(height: Dimensions.doubleExtraLargeSpacing),
                   const Text(
                     "Description",
-                    textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 14,
@@ -116,7 +113,7 @@ class _EventSliverRemainingState extends State<EventSliverRemaining> {
                   const SizedBox(height: Dimensions.extraLargeSpacing),
                   Text(
                     widget.eventDescription,
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.left,
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 13,
