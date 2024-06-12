@@ -94,6 +94,8 @@ class HomeController extends GetxController {
 
 
   void getIdFromEvents({required int id}) {
+    isLoading(true);
+
     idEventSubs?.cancel();
     idEventSubs = eventsUseCase.getIdFromEvent(id: id).asStream().listen((response) {
       
@@ -101,14 +103,19 @@ class HomeController extends GetxController {
       String eventName = response.eventName;
       String eventDate = response.eventDate;
       String eventDescription = response.eventDescription;
+      String eventLocation = response.eventLocation;
 
+      isLoading(false);
+       
       Get.toNamed(
         Routes.eventRoute,
         arguments: {
           "id": id,
           "eventName": eventName,
           "eventDate": eventDate,
-          "eventDescription": eventDescription
+          "eventDescription": eventDescription,
+          "eventLocation": eventLocation,
+          "isLoading": isLoading.value
         }
       );
       update();
@@ -138,12 +145,25 @@ class HomeController extends GetxController {
   }
 
 
-  void getIdFromAnnouncement({required int id}) {
+  void getIdFromAnnouncement(int id) {
+    
     idAnnouncementSubs?.cancel();
     idAnnouncementSubs = announcementUseCase.getIdFromAnnouncement(id: id).asStream().listen((response) {
-      printUtil(response.announcementDate);
-      // eventsData.assignAll(response);
-      // eventSectionKey.currentState?.addEventsData(response);
+      
+      int id = response.id;
+      String announcementName = response.announcementName;
+      String announcementDate = response.announcementDate;
+      String announcementDescription = response.announcementDescription;
+
+      Get.toNamed(
+        Routes.announcementRoute,
+        arguments: {
+          "id": id,
+          "announcementName": announcementName,
+          "announcementDate": announcementDate,
+          "announcementDescription": announcementDescription
+        }
+      );
       update();
     },
     onError: (error) {

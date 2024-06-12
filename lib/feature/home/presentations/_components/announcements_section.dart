@@ -16,12 +16,14 @@ class AnnouncementsSection extends StatefulWidget {
     super.key,
     required this.logout,
     required this.onPageChanged,
-    required this.currentPageIndex
+    required this.currentPageIndex,
+    required this.getIdFromAnnouncement
     });
 
   final VoidCallback logout;
   final Function(int) onPageChanged;
   final int currentPageIndex;
+  final Function(int) getIdFromAnnouncement;
 
   @override
   State<AnnouncementsSection> createState() => AnnouncementsSectionState();
@@ -104,82 +106,85 @@ class AnnouncementsSectionState extends State<AnnouncementsSection> with Automat
                    
                    DateFormat monthFormat = DateFormat('MMMM dd, yyyy');
                    String formattedMonth = monthFormat.format(announcementDate);
-                   return Container(
-                     margin: const EdgeInsets.symmetric(horizontal: 20),
-                     padding: const EdgeInsets.symmetric(
-                       horizontal: Dimensions.largeSpacing,
-                       vertical: Dimensions.largeSpacing
-                     ),
-                     decoration: BoxDecoration(
-                       color: CustomColors.white,
-                       borderRadius: BorderRadius.circular(15),
-                       border: const Border.fromBorderSide(
-                         BorderSide(color: CustomColors.primaryColor)
+                   return GestureDetector(
+                    onTap: () => widget.getIdFromAnnouncement(data.id),
+                     child: Container(
+                       margin: const EdgeInsets.symmetric(horizontal: 20),
+                       padding: const EdgeInsets.symmetric(
+                         horizontal: Dimensions.largeSpacing,
+                         vertical: Dimensions.largeSpacing
                        ),
-                       boxShadow: const [
-                         BoxShadow(
-                           color: Color.fromRGBO(0, 0, 0, .25),
-                           blurRadius: 2,
-                           offset: Offset(0, 1)
-                         )
-                       ]
-                     ),
-                     child: Column(
-                       crossAxisAlignment: CrossAxisAlignment.start,
-                       mainAxisAlignment: MainAxisAlignment.start,
-                       mainAxisSize: MainAxisSize.max,
-                       children: [
-                         Row(
-                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                           children: [
-                             Expanded(
-                               child: Text(
-                                 data.announcementName,
-                                 maxLines: 1,
-                                 overflow: TextOverflow.ellipsis,
-                                 style: const TextStyle(
-                                   color: CustomColors.black,
-                                   fontSize: 16,
-                                   fontWeight: FontWeight.w600
-                                 ),
-                               ),
-                             ),
-                             const SizedBox(width: Dimensions.regularSpacing),
-                             Row(
-                               children: [
-                                 Image.asset(
-                                   Assets.icCalendar,
-                                   height: 18,
-                                   width: 18
-                                 ),
-                                 const SizedBox(width: Dimensions.smallSpacing),
-                                 Text(
-                                   formattedMonth,
+                       decoration: BoxDecoration(
+                         color: CustomColors.white,
+                         borderRadius: BorderRadius.circular(15),
+                         border: const Border.fromBorderSide(
+                           BorderSide(color: CustomColors.primaryColor)
+                         ),
+                         boxShadow: const [
+                           BoxShadow(
+                             color: Color.fromRGBO(0, 0, 0, .25),
+                             blurRadius: 2,
+                             offset: Offset(0, 1)
+                           )
+                         ]
+                       ),
+                       child: Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         mainAxisAlignment: MainAxisAlignment.start,
+                         mainAxisSize: MainAxisSize.max,
+                         children: [
+                           Row(
+                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                             children: [
+                               Expanded(
+                                 child: Text(
+                                   data.announcementName,
+                                   maxLines: 1,
+                                   overflow: TextOverflow.ellipsis,
                                    style: const TextStyle(
                                      color: CustomColors.black,
-                                     fontSize: 14,
-                                     fontWeight: FontWeight.w500
+                                     fontSize: 16,
+                                     fontWeight: FontWeight.w600
                                    ),
-                                 )
-                               ],
-                             ),
-                           ],
-                         ),
-                         const SizedBox(height: Dimensions.extraLargeSpacing),
-                         Expanded(
-                           child: Text(
-                             data.announcementDescription,
-                             maxLines: 2,
-                             overflow: TextOverflow.ellipsis,
-                             textAlign: TextAlign.left,
-                             style: const TextStyle(
-                               color: CustomColors.black,
-                               fontSize: 16,
-                               fontWeight: FontWeight.w600
+                                 ),
+                               ),
+                               const SizedBox(width: Dimensions.regularSpacing),
+                               Row(
+                                 children: [
+                                   Image.asset(
+                                     Assets.icCalendar,
+                                     height: 18,
+                                     width: 18
+                                   ),
+                                   const SizedBox(width: Dimensions.smallSpacing),
+                                   Text(
+                                     formattedMonth,
+                                     style: const TextStyle(
+                                       color: CustomColors.black,
+                                       fontSize: 14,
+                                       fontWeight: FontWeight.w500
+                                     ),
+                                   )
+                                 ],
+                               ),
+                             ],
+                           ),
+                           const SizedBox(height: Dimensions.extraLargeSpacing),
+                           Expanded(
+                             child: Text(
+                               data.announcementDescription,
+                               maxLines: 2,
+                               overflow: TextOverflow.ellipsis,
+                               textAlign: TextAlign.left,
+                               style: const TextStyle(
+                                 color: CustomColors.black,
+                                 fontSize: 16,
+                                 fontWeight: FontWeight.w600
+                               ),
                              ),
                            ),
-                         ),
-                       ],
+                         ],
+                       ),
                      ),
                    );
                  }

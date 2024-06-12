@@ -59,7 +59,8 @@ class HomePage extends GetView<HomeController> {
                         key: controller.announcementSectionKey,
                         logout: controller.logout,
                         onPageChanged: controller.onPageChanged,
-                        currentPageIndex: controller.currentPageIndex.call(),   
+                        currentPageIndex: controller.currentPageIndex.call(),
+                        getIdFromAnnouncement: controller.getIdFromAnnouncement  
                       ),
                     ),
                     EventsSection(

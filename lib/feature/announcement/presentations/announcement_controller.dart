@@ -23,10 +23,10 @@ class AnnouncementController extends GetxController {
     String dateString = announcementDate.value;
     DateTime parsedEventDate = DateTime.parse(dateString);
 
-    DateFormat monthFormat = DateFormat('MMMM dd, yyyy');
+    DateFormat monthFormat = DateFormat('MMMM dd');
     formattedMonth = monthFormat.format(parsedEventDate);
 
-    DateFormat timeFormat = DateFormat('hh:mma');
+    DateFormat timeFormat = DateFormat('hh:mm a');
     formattedTime = timeFormat.format(parsedEventDate);
   }
 }

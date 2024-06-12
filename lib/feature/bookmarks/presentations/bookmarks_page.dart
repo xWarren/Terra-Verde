@@ -78,7 +78,7 @@ class BookmarksPage extends GetView<BookmarksController> {
                               Wrap(
                                 children: [
                                   Text(
-                                   data.eventId.toString(),
+                                   data.eventName.toString(),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                     style: const TextStyle(

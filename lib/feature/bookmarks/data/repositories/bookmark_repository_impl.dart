@@ -1,6 +1,9 @@
 import '../../../../core/data/repositories/bookmark_repository.dart';
 import '../../../../core/data/source/bookmark_remote_source.dart';
+import '../../../../core/domain/entities/add_bookmark_entity.dart';
 import '../../../../core/domain/entities/bookmark_data_entity.dart';
+import '../../../events/domain/payload/add_bookmark_param.dart';
+import '../../../events/mapper/add_bookmark_mapper.dart';
 import '../../domain/entities/feature_bookmark_data_entity.dart';
 import '../../domain/payload/bookmark_param.dart';
 import '../../mapper/bookmark_data_mapper.dart';
@@ -26,6 +29,14 @@ class BookmarkRepositoryImpl implements BookmarkRepository {
     var response = await remoteSource.getIdFromBookmark(id: param.id);
     var featureEntity = BookmarkDataMapper.fromGetBookmarkDataModel(response);
     var entity = BookmarkDataMapper.fromFeatureBookmarkDataEntity(featureEntity);
+    return entity;
+  }
+
+  @override
+  Future<AddBookmarkEntity> addBookmark(AddBookmarkParam param) async {
+    var response = await remoteSource.addBookmark(param.toJson());
+    var featureEntity = AddBookmarkMapper.fromAddBookmarkResponseModel(response);
+    var entity = AddBookmarkMapper.fromFeatureAddBookmarkEntity(featureEntity);
     return entity;
   }
 }
