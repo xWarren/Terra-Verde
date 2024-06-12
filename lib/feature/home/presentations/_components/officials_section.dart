@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/domain/entities/officials_data_entity.dart';
+import '../../../../core/presentation/common/common_state.dart';
 import '../../../../core/resources/assets.dart';
 import '../../../../core/resources/custom_colors.dart';
 import '../../../../core/resources/dimensions.dart';
@@ -71,7 +72,15 @@ class OfficialsSectionState extends State<OfficialsSection> with AutomaticKeepAl
               ),
             ),
             const SizedBox(height: Dimensions.largeSpacing),
-            SizedBox(
+            officialsData.isEmpty
+            ? const CommonState(
+              title: "No Official",
+              image: Assets.noAnnouncement,
+              height: 120,
+              width: 120,
+              description: "There are no official at the moment. Check back later for updates.",
+            )
+            : SizedBox(
               height: 150,
               child: ListView.builder(
                 shrinkWrap: true,

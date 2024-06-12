@@ -54,9 +54,13 @@ class HomePage extends GetView<HomeController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                    AnnouncementsSection(
-                      key: controller.announcementSectionKey,
-                      logout: controller.logout
+                    Obx(
+                      () => AnnouncementsSection(
+                        key: controller.announcementSectionKey,
+                        logout: controller.logout,
+                        onPageChanged: controller.onPageChanged,
+                        currentPageIndex: controller.currentPageIndex.call(),   
+                      ),
                     ),
                     EventsSection(
                       key: controller.eventSectionKey, 

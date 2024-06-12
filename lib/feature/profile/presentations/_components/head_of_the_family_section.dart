@@ -21,6 +21,7 @@ class HeadOfTheFamilySection extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),

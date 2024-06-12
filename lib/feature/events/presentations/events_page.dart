@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../core/resources/assets.dart';
-import '../../core/resources/custom_colors.dart';
+import '../../../core/resources/assets.dart';
+import '../../../core/resources/custom_colors.dart';
 import 'events_controller.dart';
 
 class EventsPage extends GetView<EventsController>  {
@@ -14,9 +14,10 @@ class EventsPage extends GetView<EventsController>  {
     return Scaffold(
       backgroundColor: CustomColors.grey100,
       body: Stack(
+        alignment: Alignment.topCenter,
         children: [
           Stack(
-            alignment: Alignment.bottomCenter,
+            alignment: Alignment.center,
             clipBehavior: Clip.none,
             children: [
               ClipRRect(
@@ -24,11 +25,14 @@ class EventsPage extends GetView<EventsController>  {
                   bottomLeft: Radius.circular(50),
                   bottomRight: Radius.circular(50)
                 ),
-                child: Image.asset(
-                  Assets.noImage,
-                  fit: BoxFit.fill,
-                  height: 290,
-                  width: Get.width,
+                child: Container(
+                  color: CustomColors.primaryColor, //remove when have a image
+                  child: Image.asset(
+                    Assets.logo,
+                    fit: BoxFit.fill,
+                    height: 290,
+                    width: Get.width,
+                  ),
                 ),
               ),
               Positioned(
@@ -81,18 +85,17 @@ class EventsPage extends GetView<EventsController>  {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
             children: [
               Obx(
-                () => Center(
-                  child: Text(
-                    controller.eventDescription.isEmpty
-                    ? "No description"
-                    : controller.eventDescription.call(),
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: controller.eventDescription.isEmpty ? 14 : 13,
-                      fontWeight: FontWeight.w500
-                    ),
+                () => Text(
+                  controller.eventDescription.isEmpty
+                  ? "No description"
+                  : controller.eventDescription.call(),
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500
                   ),
                 ),
               )
@@ -113,25 +116,9 @@ class EventsPage extends GetView<EventsController>  {
               ),
               leading: GestureDetector(
                 onTap:  () => Get.back(),
-                child: Container(
-                  decoration: ShapeDecoration(
-                    color: const Color(0xFFD5D5D5),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(99),
-                      side: const BorderSide(
-                        color: Colors.white,
-                        width: 2
-                      )
-                    )
-                  ),
-                  child: Image.asset(Assets.icArrowLeftWhite)
-                )
-              ),
-              actions: [
-                GestureDetector(
-                  onTap:  () {},
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    margin: const EdgeInsets.only(right: 10),
                     decoration: ShapeDecoration(
                       color: const Color(0xFFD5D5D5),
                       shape: RoundedRectangleBorder(
@@ -142,7 +129,29 @@ class EventsPage extends GetView<EventsController>  {
                         )
                       )
                     ),
-                    child: Image.asset(Assets.icAchiveAdd)
+                    child: Image.asset(Assets.icArrowLeftWhite)
+                  ),
+                )
+              ),
+              actions: [
+                GestureDetector(
+                  onTap:  () {},
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 10),
+                      decoration: ShapeDecoration(
+                        color: const Color(0xFFD5D5D5),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(99),
+                          side: const BorderSide(
+                            color: Colors.white,
+                            width: 2
+                          )
+                        )
+                      ),
+                      child: Image.asset(Assets.icAchiveAdd)
+                    ),
                   )
                 ),
               ],

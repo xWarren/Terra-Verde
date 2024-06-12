@@ -4,6 +4,7 @@ import '../../../../core/domain/entities/add_resident_entity.dart';
 import '../../../../core/domain/entities/resident_house_member_data_entity.dart';
 import '../../domain/entities/feature_resident_house_member_data_entity.dart';
 import '../../domain/payload/add_resident_house_member_param.dart';
+import '../../domain/payload/delete_resident_house_member_param.dart';
 import '../../domain/payload/edit_profile_param.dart';
 import '../../domain/payload/get_id_resident_house_member_param.dart';
 import '../../mapper/add_resident_mapper.dart';
@@ -44,6 +45,14 @@ class ResidentHouseMemberRepositoryImpl implements ResidentHouseMemberRepository
   @override
   Future<AddResidentEntity> editProfile(EditProfileParam param) async {
     var response = await remoteSource.editProfile(param.toJson());
+    var featureEntity = AddResidentMapper.fromAddResidentResponseModel(response);
+    var entity = AddResidentMapper.fromFeatureAddResidentDataEntity(featureEntity);
+    return entity;
+  }
+
+  @override
+  Future<AddResidentEntity> deleteResidentHouseMember(DeleteResidentHouseMemberParam param) async {
+    var response = await remoteSource.deleteResidentHouseMember(id: param.id);
     var featureEntity = AddResidentMapper.fromAddResidentResponseModel(response);
     var entity = AddResidentMapper.fromFeatureAddResidentDataEntity(featureEntity);
     return entity;

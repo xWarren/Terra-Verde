@@ -6,8 +6,11 @@ class Routes {
   static const registerRoute = "/register_page";
   static const dashboardRoute = "/dashboard_page";
   static const profileRoute = "/profile_page";
+  static const announcementRoute = "/announcement_page";
   static const eventRoute = "/event_page";
+  static const officialsRoute = "/officials_page";
   static const addFamilyMemberRoute = "/add_family_member_page";
   static const profileInformationRoute = "/profile_information_page";
   static const editProfileRoute = "/edit_profile_page";
+  static const bookmarksRoute = "/bookmarks_page";
 }

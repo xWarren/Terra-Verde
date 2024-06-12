@@ -22,16 +22,21 @@ class SettingsController extends GetxController {
 
   RxInt id = 0.obs;
 
+  RxString headFirstName = "".obs;
+  RxString headLastName = "".obs;
+  RxString headEmail = "".obs;
+  RxString headAddress = "".obs;
+  RxString headProfileImage = "".obs;
+
   RxString firstName = "".obs;
   RxString lastName = "".obs;
-  RxString email = "".obs;
-  RxString address = "".obs;
-  RxString profileImage = "".obs;
 
 
   @override
   void onInit() {
     residentId(storageService.getResidentId());
+    firstName(storageService.getFirstName());
+    lastName(storageService.getLastName());
     getResident();
     super.onInit();
   }
@@ -47,10 +52,10 @@ class SettingsController extends GetxController {
     _residentSubs?.cancel();
 
     _residentSubs = residentUseCase.getResident(id: int.parse(residentId.value)).asStream().listen((response) {
-      firstName(response.firstName);
-      lastName(response.lastName);
-      address(response.address);
-      email(response.email);
+      headFirstName(response.firstName);
+      headLastName(response.lastName);
+      headAddress(response.address);
+      headEmail(response.email);
       id(response.id);
       update();
     });
@@ -63,10 +68,10 @@ class SettingsController extends GetxController {
       Routes.profileRoute,
       arguments: {
         "residentId": id.value,
-        "firstName": firstName.value,
-        "lastName": lastName.value,
-        "address": address.value,
-        "email": email.value,
+        "firstName": headFirstName.value,
+        "lastName": headLastName.value,
+        "address": headAddress.value,
+        "email": headEmail.value,
       }
     );
   }

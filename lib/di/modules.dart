@@ -1,18 +1,22 @@
 import 'package:get/get.dart';
 
 import '../core/data/repositories/announcement_repository.dart';
+import '../core/data/repositories/bookmark_repository.dart';
 import '../core/data/repositories/events_repository.dart';
 import '../core/data/repositories/login_repository.dart';
 import '../core/data/repositories/officials_repository.dart';
 import '../core/data/repositories/resident_house_member_repository.dart';
 import '../core/data/repositories/resident_repository.dart';
 import '../core/data/source/announcement_remote_source.dart';
+import '../core/data/source/bookmark_remote_source.dart';
 import '../core/data/source/events_remote_source.dart';
 import '../core/data/source/login_remote_source.dart';
 import '../core/data/source/officials_remote_source.dart';
 import '../core/data/source/resident_house_member_remote_source.dart';
 import '../core/data/source/resident_remote_source.dart';
 import '../core/domain/services/storage_service.dart';
+import '../feature/bookmarks/data/repositories/bookmark_repository_impl.dart';
+import '../feature/bookmarks/data/source/bookmark_remote_source_impl.dart';
 import '../feature/home/data/repositories/announcement_repository_impl.dart';
 import '../feature/home/data/repositories/events_repository_impl.dart';
 import '../feature/home/data/source/announcement_remote_source_impl.dart';
@@ -113,6 +117,20 @@ Future<void> initAppDependecies() async {
   );
   Get.put<ResidentRepository>(
     ResidentRepositoryImpl(
+      remoteSource: Get.find()
+    ),
+    permanent: true
+  );
+
+  //Bookmark
+  Get.put<BookmarkRemoteSource>(
+    BookmarkRemoteSourceImpl(
+      storageService: Get.find()
+    ),
+    permanent: true
+  );
+  Get.put<BookmarkRepository>(
+    BookmarkRepositoryImpl(
       remoteSource: Get.find()
     ),
     permanent: true

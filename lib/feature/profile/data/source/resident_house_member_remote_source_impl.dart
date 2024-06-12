@@ -74,4 +74,17 @@ class ResidentHouseMemberRemoteSourceImpl extends BaseGetConnect implements Resi
     var featureResponseModel = FeatureAddResidentResponseModel.fromJson(response.body);
     return AddResidentMapper.fromFeatureAddResidentResponseModel(featureResponseModel);
   }
+  
+  @override
+  Future<AddResidentResponseModel> deleteResidentHouseMember({required int id}) async {
+    var response = await methodRequest(
+      "${APIEndpoint.residentsHouseMembers}/$id",
+      method: Method.delete,
+      headers: {
+      "Authorization": "Bearer ${storageService.getAccessToken()}"
+      }
+    );
+    var featureResponseModel = FeatureAddResidentResponseModel.fromJson(response.body);
+    return AddResidentMapper.fromFeatureAddResidentResponseModel(featureResponseModel);
+  }
 }

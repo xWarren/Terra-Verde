@@ -193,7 +193,8 @@ class AddFamilyMemberController extends GetxController {
 
   void onTap() {
     profileDelegate.getResident();
-    Get.back(result: 2);
+    Get.back();
+    Get.back();
   }
 
   @override

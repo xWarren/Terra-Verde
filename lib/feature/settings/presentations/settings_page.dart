@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../core/resources/assets.dart';
@@ -25,17 +26,24 @@ class SettingsPage extends GetView<SettingsController> {
             collapsedHeight: collapsedHeight,
             floating: true,
             snap: true,
+            systemOverlayStyle: const SystemUiOverlayStyle(
+              statusBarColor: CustomColors.primaryColor,
+              statusBarBrightness: Brightness.dark,
+              statusBarIconBrightness: Brightness.light
+            ),
             automaticallyImplyLeading: false,
             backgroundColor: CustomColors.white,
             flexibleSpace: FlexibleSpaceBar(
               collapseMode: CollapseMode.pin,
               centerTitle: true,
-              title: const Text(
-                "Gavino T. Caro",
-                style: TextStyle(
-                  color: CustomColors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600
+              title: Obx(
+                () => Text(
+                  "${controller.firstName.call()} ${controller.lastName.call()}",
+                  style: const TextStyle(
+                    color: CustomColors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600
+                  ),
                 ),
               ),
               background: Stack(

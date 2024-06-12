@@ -93,9 +93,16 @@ class LoginController extends GetxController {
       ).asStream().listen((value) {
         storageService.setLoggedIn(true);
         storageService.saveAccessToken(value.token);
+        storageService.setFirstName(value.firstName);
+        storageService.setLastName(value.lastName);
         storageService.setEmail(value.userName);
         storageService.setPassword(password.toString());
-        storageService.setResidentId(value.residentId.toString());
+        storageService.setId(value.id);
+        storageService.setResidentId(
+          storageService.isHeadFamily() == true
+          ? value.id.toString()
+          : value.residentId.toString()
+        );
         Get.offNamedUntil(Routes.dashboardRoute, (route) => false);
         isLoading(false);
         passwordKey.currentState?.setLoading(false);

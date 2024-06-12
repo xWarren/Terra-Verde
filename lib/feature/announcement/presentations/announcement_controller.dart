@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-class EventsController extends GetxController {
-
+class AnnouncementController extends GetxController {
+  
   RxInt id = 0.obs;
-  RxString eventName = "".obs;
-  RxString eventDate = "".obs;
-  RxString eventDescription = "".obs;
+  RxString announcementName = "".obs;
+  RxString announcementDate = "".obs;
+  RxString announcementDescription = "".obs;
 
     String formattedMonth = "";
   String formattedTime = "";
@@ -16,11 +16,11 @@ class EventsController extends GetxController {
    super.onInit();
 
     id(Get.arguments["id"] ?? 0);
-    eventName(Get.arguments["eventName"] ?? "");
-    eventDate(Get.arguments["eventDate"] ?? "");
-    eventDescription(Get.arguments["eventDescription"] ?? "");
+    announcementName(Get.arguments["announcementName"] ?? "");
+    announcementDate(Get.arguments["announcementDate"] ?? "");
+    announcementDescription(Get.arguments["announcementDescription"] ?? "");
 
-    String dateString = eventDate.value;
+    String dateString = announcementDate.value;
     DateTime parsedEventDate = DateTime.parse(dateString);
 
     DateFormat monthFormat = DateFormat('MMMM dd, yyyy');
@@ -29,5 +29,4 @@ class EventsController extends GetxController {
     DateFormat timeFormat = DateFormat('hh:mma');
     formattedTime = timeFormat.format(parsedEventDate);
   }
-  
 }

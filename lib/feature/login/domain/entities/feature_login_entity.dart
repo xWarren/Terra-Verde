@@ -8,6 +8,10 @@ class FeatureLoginEntity {
     required this.errors,
     required this.token,
     required this.userName,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.id,
     required this.residentId
   });
 
@@ -18,5 +22,9 @@ class FeatureLoginEntity {
   int errors;
   String token;
   String userName;
+  String firstName;
+  String lastName;
+  String email;
+  String id;
   String residentId;
 }

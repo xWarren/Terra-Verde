@@ -24,4 +24,5 @@ class Assets {
   static const icArchiveRemove = "assets/images/ic_archive_remove.png";
   static const icArrowLeftWhite = "assets/images/ic_arrow_left_white.png";
   static const success = "assets/images/success.png";
+  static const noData = "assets/images/no_data.png";
 }

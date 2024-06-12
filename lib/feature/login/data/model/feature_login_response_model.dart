@@ -7,6 +7,10 @@ class FeatureLoginResponseModel {
   final int errors;
   final String token;
   final String userName;
+  final String firstName;
+  final String lastName;
+  final String email;
+  final String id;
   final String residentId;
 
   const FeatureLoginResponseModel({
@@ -17,6 +21,10 @@ class FeatureLoginResponseModel {
     required this.errors,
     required this.token,
     required this.userName,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.id,
     required this.residentId
   });
 
@@ -28,6 +36,10 @@ class FeatureLoginResponseModel {
     errors: json?["Errors"] ?? 0,
     token: json?["tokenString"] ?? "",
     userName: json?["userName"] ?? "",
-    residentId: json?["id"] ?? "",
+    firstName: json?["firstName"] ?? "",
+    lastName: json?["lastName"] ?? "",
+    email: json?["email"] ?? "",
+    id: json?["id"] ?? "",
+    residentId: json?["residentId"] ?? ""
   );
 }

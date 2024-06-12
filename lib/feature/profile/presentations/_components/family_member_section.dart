@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/domain/entities/resident_house_member_data_entity.dart';
+import '../../../../core/presentation/common/common_state.dart';
 import '../../../../core/resources/assets.dart';
 import '../../../../core/resources/custom_colors.dart';
 import '../../../../core/resources/dimensions.dart';
@@ -10,10 +11,14 @@ import '../../../../core/routes/routes.dart';
 class FamilyMemberSection extends StatefulWidget {
   const FamilyMemberSection({
     super.key,
-    required this.residentsData
+    required this.residentsData,
+    required this.deleteResidentHouseMember,
+    required this.isHeadFamily
   });
 
   final List<ResidentHouseMemberDataEntity> residentsData;
+  final Function(int) deleteResidentHouseMember;
+  final bool isHeadFamily;
 
   @override
   State<FamilyMemberSection> createState() => _FamilyMemberSectionState();
@@ -23,10 +28,25 @@ class _FamilyMemberSectionState extends State<FamilyMemberSection> {
 
   late List<ResidentHouseMemberDataEntity> _residentHouseMemberData;
 
+  late bool isHeadFamily;
+
   @override
   void initState() {
     super.initState();
     _residentHouseMemberData = widget.residentsData;
+    isHeadFamily = widget.isHeadFamily;
+    _sortFamilyMembers();
+  }
+
+  void _sortFamilyMembers() {
+    _residentHouseMemberData.sort((a, b) {
+      List<String> order = ['Grandmother', 'Grandfather', 'Mother', 'Brother', 'Sister'];
+      int indexA = order.indexOf(a.relationship);
+      int indexB = order.indexOf(b.relationship);
+      if (indexA == -1  ) indexA = order.length;
+      if (indexB == -1) indexB = order.length;
+      return indexA.compareTo(indexB);
+    });
   }
 
   @override
@@ -46,7 +66,15 @@ class _FamilyMemberSectionState extends State<FamilyMemberSection> {
             ),
           ),
         ),
-        ListView.builder(
+        _residentHouseMemberData.isEmpty
+        ? const CommonState(
+          title: "No Family Member Found", 
+          image: Assets.noData, 
+          height: 240,
+          width: 240,
+          description: "Please add family member to see listed here."
+        )
+        : ListView.builder(
           itemCount: _residentHouseMemberData.length,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -83,7 +111,7 @@ class _FamilyMemberSectionState extends State<FamilyMemberSection> {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(99),
                                 child: Image.asset(
-                                  Assets.image,
+                                  Assets.logo,
                                   height: 64,
                                   width: 64
                                 ),
@@ -147,6 +175,18 @@ class _FamilyMemberSectionState extends State<FamilyMemberSection> {
                                 ),
                               ),
                             ],
+                          ),
+                        ),
+                        if(isHeadFamily == true)
+                        GestureDetector(
+                          onTap: () => widget.deleteResidentHouseMember(data.id),
+                          child: const Padding(
+                            padding: EdgeInsets.only(right: 30),
+                            child: Icon(
+                              Icons.delete,
+                              color: CustomColors.red,
+                              size: 24
+                            )
                           ),
                         ),
                         Padding(

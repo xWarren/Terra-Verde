@@ -27,6 +27,8 @@ class ProfileInformationController extends GetxController implements ProfileInfo
 
   final StorageService storageService;
 
+  RxString getId = "".obs;
+
   RxInt id = 0.obs;
   RxInt residentId = 0.obs;
 
@@ -55,6 +57,8 @@ class ProfileInformationController extends GetxController implements ProfileInfo
   void onInit() {
     isHeadFamily.value = storageService.isHeadFamily();
     emailChecker.value = storageService.getEmail();
+    getId(storageService.getId());
+    log("ID ${getId.toString()}");
     getResidentsMember();
     log("adsad ${emailChecker.value}");
     super.onInit();

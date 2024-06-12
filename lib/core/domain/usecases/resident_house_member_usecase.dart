@@ -34,4 +34,5 @@ abstract class ResidentHouseMemberUseCase {
     required String relationship,
     required String password
   });
+  Future<AddResidentEntity> deleteIdFromResidentHouseMember({required int id});
 }

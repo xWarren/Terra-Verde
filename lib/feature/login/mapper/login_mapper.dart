@@ -15,6 +15,10 @@ class LoginMapper {
       errors: model.errors,
       token: model.token,
       userName: model.userName,
+      firstName: model.firstName,
+      lastName: model.lastName,
+      email: model.email,
+      id: model.id,
       residentId: model.residentId
     );
   }
@@ -29,6 +33,10 @@ class LoginMapper {
       errors: model.errors,
       token: model.token,
       userName: model.userName,
+      firstName: model.firstName,
+      lastName: model.lastName,
+      email: model.email,
+      id: model.id,
       residentId: model.residentId
     );
   }
@@ -43,6 +51,10 @@ class LoginMapper {
       errors: entity.errors,
       token: entity.token,
       userName: entity.userName,
+      firstName: entity.firstName,
+      lastName: entity.lastName,
+      email: entity.email,
+      id: entity.id,
       residentId: entity.residentId
     );
   }

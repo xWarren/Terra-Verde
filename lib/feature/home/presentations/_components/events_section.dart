@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../core/domain/entities/events_data_entity.dart';
+import '../../../../core/presentation/common/common_state.dart';
 import '../../../../core/resources/assets.dart';
 import '../../../../core/resources/custom_colors.dart';
 import '../../../../core/resources/dimensions.dart';
@@ -107,7 +108,15 @@ class EventsSectionState extends State<EventsSection> with TickerProviderStateMi
                 ),
               ),
             ),
-            SizedBox(
+            eventsData.isEmpty
+            ? const CommonState(
+              title: "No Event",
+              image: Assets.noAnnouncement,
+              height: 120,
+              width: 120,
+              description: "There are no event at the moment. Check back later for updates.",
+            )
+            : SizedBox(
               height: 200,
               child: PageView.builder(
                 controller: pageController,

@@ -1,11 +1,17 @@
 import 'package:get/get.dart';
 
+import '../../feature/announcement/presentations/announcement_binding.dart';
+import '../../feature/announcement/presentations/announcement_page.dart';
+import '../../feature/bookmarks/presentations/bookmarks_binding.dart';
+import '../../feature/bookmarks/presentations/bookmarks_page.dart';
 import '../../feature/dashboard/dashboard_binding.dart';
 import '../../feature/dashboard/dashboard_page.dart';
-import '../../feature/events/events_binding.dart';
-import '../../feature/events/events_page.dart';
+import '../../feature/events/presentations/events_binding.dart';
+import '../../feature/events/presentations/events_page.dart';
 import '../../feature/login/presentations/login_binding.dart';
 import '../../feature/login/presentations/login_page.dart';
+import '../../feature/officials/presentations/officials_binding.dart';
+import '../../feature/officials/presentations/officials_page.dart';
 import '../../feature/profile/presentations/add_family_member/add_family_member_binding.dart';
 import '../../feature/profile/presentations/add_family_member/add_family_member_page.dart';
 import '../../feature/profile/presentations/edit_profile/edit_profile_binding.dart';
@@ -56,9 +62,19 @@ class Pages {
       binding: ProfileBinding()
     ),
     GetPage(
+      name: Routes.announcementRoute,
+      page: () => const AnnouncementPage(),
+      binding: AnnouncementBinding()
+    ),
+    GetPage(
       name: Routes.eventRoute,
       page: () => const EventsPage(),
       binding: EventsBinding()
+    ),
+    GetPage(
+      name: Routes.officialsRoute,
+      page: () => const OfficialsPage(),
+      binding: OfficialsBinding()
     ),
     GetPage(
       name: Routes.addFamilyMemberRoute,
@@ -74,6 +90,11 @@ class Pages {
       name: Routes.editProfileRoute,
       page: () => const EditProfilePage(),
       binding: EditProfileBinding()
+    ),
+    GetPage(
+      name: Routes.bookmarksRoute,
+      page: () => const BookmarksPage(),
+      binding: BookmarksBinding()
     ),
   ];
 }

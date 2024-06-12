@@ -44,6 +44,7 @@ class HomeController extends GetxController {
 
   RxInt id = 0.obs;
 
+  RxInt currentPageIndex = 0.obs;
 
   GlobalKey<EventsSectionState> eventSectionKey = GlobalKey<EventsSectionState>();
   GlobalKey<AnnouncementsSectionState> announcementSectionKey = GlobalKey<AnnouncementsSectionState>();
@@ -66,6 +67,10 @@ class HomeController extends GetxController {
       eventsSubs!.asFuture(true),
       officialsSubs!.asFuture(true)
     ]);
+  }
+
+  void onPageChanged(int value) {
+    currentPageIndex.value = value;
   }
 
   void getEvents() {

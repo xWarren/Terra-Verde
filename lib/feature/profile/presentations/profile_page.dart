@@ -47,7 +47,9 @@ class ProfilePage extends GetView<ProfileController> {
                   borderRadius: BorderRadius.circular(20)
                 )
               ),
-              child: Stack(
+              child: controller.isLoading.value
+              ? const Center(child: CircularProgressIndicator(color: CustomColors.primaryColor,))
+              : Stack(
                 alignment: Alignment.bottomCenter,
                 children: [
                   Column(
@@ -63,7 +65,11 @@ class ProfilePage extends GetView<ProfileController> {
                                 lastName: controller.residentLastName.call(),
                                 onTap: controller.onTap
                               ),
-                              FamilyMemberSection(residentsData: controller.residentsData)
+                              FamilyMemberSection(
+                                residentsData: controller.residentsData,
+                                deleteResidentHouseMember: controller.deleteResidentHouseMember,
+                                isHeadFamily: controller.isHeadFamily.value
+                              )
                             ],
                           ),
                         ),

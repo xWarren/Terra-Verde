@@ -9,4 +9,5 @@ class APIEndpoint {
   static String get officials => "/Officials";
   static String get announcement => "/Announcement";
   static String get events => "/Events";
+  static String get bookmark => "/Bookmarks";
 } 

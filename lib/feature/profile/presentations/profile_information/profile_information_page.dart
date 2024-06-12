@@ -53,7 +53,9 @@ class ProfileInformationPage extends GetView<ProfileInformationController> {
                       )
                     )
                   ),
-                  child: SingleChildScrollView(
+                  child: controller.isLoading.value
+                  ? const Center(child: CircularProgressIndicator(color: CustomColors.primaryColor,))
+                  : SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -81,7 +83,7 @@ class ProfileInformationPage extends GetView<ProfileInformationController> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(99),
                                   child: Image.asset(
-                                    Assets.image,
+                                    Assets.logo,
                                     height: 120,
                                     width: 120
                                   ),
@@ -259,7 +261,7 @@ class ProfileInformationPage extends GetView<ProfileInformationController> {
                               ),
                               const SizedBox(height: Dimensions.textFieldHeight),
                              if (controller.isHeadFamily.isTrue ||
-                              controller.emailChecker.value == controller.email.value
+                              controller.getId.value == controller.id.value.toString()
                              )
                              SizedBox(
                                 height: 50,

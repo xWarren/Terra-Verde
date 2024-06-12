@@ -5,13 +5,15 @@ class FeatureEventsResponseDataModel {
   final String eventDate;
   final String eventImage;
   final String eventDescription;
+  final String eventLocation;
 
   const FeatureEventsResponseDataModel({
     required this.id,
     required this.eventName,
     required this.eventDate,
     required this.eventImage,
-    required this.eventDescription
+    required this.eventDescription,
+    required this.eventLocation
   });
 
   factory FeatureEventsResponseDataModel.fromJson(Map<String, dynamic>? json) => FeatureEventsResponseDataModel(
@@ -19,6 +21,7 @@ class FeatureEventsResponseDataModel {
     eventName: json?["eventName"] ?? "",
     eventDate: json?["eventDate"] ?? "",
     eventImage: json?["eventImage"] ?? "",
-    eventDescription: json?["eventDescription"] ?? ""
+    eventDescription: json?["eventDescription"] ?? "",
+    eventLocation: json?["eventLocation"] ?? ""
   );
 }

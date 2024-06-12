@@ -3,6 +3,7 @@ import '../../../../core/domain/entities/add_resident_entity.dart';
 import '../../../../core/domain/entities/resident_house_member_data_entity.dart';
 import '../../../../core/domain/usecases/resident_house_member_usecase.dart';
 import '../payload/add_resident_house_member_param.dart';
+import '../payload/delete_resident_house_member_param.dart';
 import '../payload/edit_profile_param.dart';
 import '../payload/get_id_resident_house_member_param.dart';
 
@@ -98,5 +99,15 @@ class ResidentHouseMemberUseCaseImpl implements ResidentHouseMemberUseCase {
   );
   
   return residentHouseMemberRepository.editProfile(params);
+  }
+  
+  @override
+  Future<AddResidentEntity> deleteIdFromResidentHouseMember({required int id}) {
+    
+    var param = DeleteResidentHouseMemberParam(
+      id: id
+    );
+
+    return residentHouseMemberRepository.deleteResidentHouseMember(param);
   }
 }

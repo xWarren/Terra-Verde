@@ -8,4 +8,5 @@ abstract class ResidentHouseMemberRemoteSource {
   Future<GetResidentHouseMemberDataModel> getIdFromResidents({required int id});
   Future<AddResidentResponseModel> addResident(body);
   Future<AddResidentResponseModel> editProfile(body);
+  Future<AddResidentResponseModel> deleteResidentHouseMember({required int id});
 }

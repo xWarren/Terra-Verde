@@ -22,7 +22,9 @@ class ProfileController extends GetxController implements ProfileDelegate {
   final StorageService storageService;
 
   final ResidentHouseMemberUseCase residentHouseMemberUseCase;
+
   StreamSubscription? residentsSubs;
+  StreamSubscription? deleteResidentSubs;
   
   RxList<ResidentHouseMemberDataEntity> residentsData = <ResidentHouseMemberDataEntity>[].obs;
 
@@ -69,8 +71,27 @@ class ProfileController extends GetxController implements ProfileDelegate {
       isLoading(false);
       update();
     },
+    cancelOnError: true,
     onError: (error) {
-      printUtil("getResidentsMember: $error");
+      printUtil("getResidentsMemberErr: $error");
+      isLoading(false);
+      update();
+    });
+  }
+
+  void deleteResidentHouseMember(int id) {
+    isLoading(true);
+
+    deleteResidentSubs?.cancel();
+
+    deleteResidentSubs = residentHouseMemberUseCase.deleteIdFromResidentHouseMember(id: id).asStream().listen((response){
+      getResidentsMember();
+      log("Deleted na");
+      isLoading(false);
+    },
+    cancelOnError: true,
+    onError: (error) {
+      printUtil("deleteResidentHouseMemberErr: $error");
       isLoading(false);
       update();
     });
@@ -88,6 +109,7 @@ class ProfileController extends GetxController implements ProfileDelegate {
   @override
   void onClose() {
     residentsSubs?.cancel();
+    deleteResidentSubs?.cancel();
     super.onClose();
   }
   
