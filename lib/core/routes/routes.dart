@@ -13,4 +13,6 @@ class Routes {
   static const profileInformationRoute = "/profile_information_page";
   static const editProfileRoute = "/edit_profile_page";
   static const bookmarksRoute = "/bookmarks_page";
+  static const headFamilyRoute = "/head_family_page";
+  static const editHeadFamilyRoute = "/edit_head_family_page";
 }

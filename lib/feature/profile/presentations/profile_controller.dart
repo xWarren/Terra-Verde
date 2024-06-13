@@ -6,6 +6,7 @@ import 'package:terra_verde/core/utils/extensions/getx_extension.dart';
 import '../../../core/domain/entities/resident_house_member_data_entity.dart';
 import '../../../core/domain/services/storage_service.dart';
 import '../../../core/domain/usecases/resident_house_member_usecase.dart';
+import '../../../core/domain/usecases/resident_usecase.dart';
 import '../../../core/routes/routes.dart';
 import '../../../core/utils/print_utils.dart';
 
@@ -17,7 +18,8 @@ class ProfileController extends GetxController implements ProfileDelegate {
 
   ProfileController({
     required this.storageService,
-    required this.residentHouseMemberUseCase
+    required this.residentHouseMemberUseCase,
+    required this.residentUseCase
   });
 
   final StorageService storageService;
@@ -26,6 +28,9 @@ class ProfileController extends GetxController implements ProfileDelegate {
 
   StreamSubscription? residentsSubs;
   StreamSubscription? deleteResidentSubs;
+
+  final ResidentUseCase residentUseCase;
+  StreamSubscription? _residentSubs;
   
   RxList<ResidentHouseMemberDataEntity> residentsData = <ResidentHouseMemberDataEntity>[].obs;
 
@@ -33,6 +38,7 @@ class ProfileController extends GetxController implements ProfileDelegate {
 
   RxBool isLoading = false.obs;
 
+  String profileImage = "";
   RxString firstName = "".obs;
   RxString middleName = "".obs;
   RxString lastName = "".obs;
@@ -43,21 +49,46 @@ class ProfileController extends GetxController implements ProfileDelegate {
   RxString residentAddress = "".obs;
   RxString residentEmail = "".obs;
 
+  RxString getId = "".obs;
+
   RxInt id = 0.obs;
 
   RxBool isHeadFamily = false.obs;
 
+  String get getResidentId => storageService.getResidentId();
+
   @override
   void onInit() {
+    headFamily();
     getResidentsMember();
     isHeadFamily.value = storageService.isHeadFamily();
+    getId(storageService.getId());
+    log("DITO $isHeadFamily");
     printUtil("hello");
-    id(Get.arguments["residentId"]);
-    residentFirstName(Get.arguments["firstName"]);
-    residentLastName(Get.arguments["lastName"]);
-    residentAddress(Get.arguments["address"]);
-    residentEmail(Get.arguments["email"]);
     super.onInit();
+  }
+
+
+  void headFamily() {
+    isLoading(true);
+
+    _residentSubs?.cancel();
+
+    _residentSubs = residentUseCase.getResident(id: int.parse(getResidentId)).asStream().listen((response) {
+      residentFirstName(response.firstName);
+      profileImage = response.profileImage;
+      residentLastName(response.lastName);
+      residentAddress(response.address);
+      residentEmail(response.email);
+      id(response.id);
+      isLoading(false);
+      update();
+    },
+    cancelOnError: true,
+    onError: (error) {
+      log("headFamilyErr = $error");
+      isLoading(false);
+    });
   }
 
   void getResidentsMember() {
@@ -80,20 +111,24 @@ class ProfileController extends GetxController implements ProfileDelegate {
     });
   }
 
-  void showModal(int id) {
-    showCustomDialog("Delete family member", "Are you sure you want to delete?",
-    onPressedDelete: () {
-      deleteResidentHouseMember(id);
-    },
+  void showModal({required int id}) {
+    showCustomDialog(
+      "Delete Family Member(1)",
+      "Are you sure you want to delete?",
+      onPressedDelete: () {
+        deleteResidentHouseMember(id: id);
+      }
     );
   }
 
-  void deleteResidentHouseMember(int id) {
+
+  void deleteResidentHouseMember({required int id}) {
     isLoading(true);
 
     deleteResidentSubs?.cancel();
 
     deleteResidentSubs = residentHouseMemberUseCase.deleteIdFromResidentHouseMember(id: id).asStream().listen((response){
+      Get.back();
       getResidentsMember();
       isLoading(false);
     },
@@ -107,7 +142,7 @@ class ProfileController extends GetxController implements ProfileDelegate {
 
   void onTap() {
     Get.toNamed(
-      Routes.profileInformationRoute,
+      Routes.headFamilyRoute,
       arguments: {
         "id": id.value
       }
@@ -117,6 +152,7 @@ class ProfileController extends GetxController implements ProfileDelegate {
   @override
   void onClose() {
     residentsSubs?.cancel();
+    _residentSubs?.cancel();
     deleteResidentSubs?.cancel();
     super.onClose();
   }

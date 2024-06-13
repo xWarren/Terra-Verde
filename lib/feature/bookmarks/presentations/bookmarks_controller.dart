@@ -13,19 +13,25 @@ class BookmarksController extends GetxController {
   });
 
   final BookmarkUseCase bookmarkUseCase;
+
   StreamSubscription? _bookmarkSubs;
+  StreamSubscription? _bookmarkIdSubs;
 
   RxBool isLoading = false.obs;
 
   RxList<BookmarkDataEntity> bookmarkData = <BookmarkDataEntity>[].obs;
 
   RxInt id = 0.obs;
+  RxString eventName = "".obs;
+  RxString eventDate = "".obs;
+  RxString eventDescription = "".obs;
+  RxString eventLocation = "".obs;
 
 
   @override
   void onInit() {
-    bookmark();
     super.onInit();
+    bookmark();
   }
 
 
@@ -34,13 +40,14 @@ class BookmarksController extends GetxController {
     _bookmarkSubs?.cancel();
 
     _bookmarkSubs = bookmarkUseCase.bookmark().asStream().listen((response) {
-
-       bookmarkData.assignAll(response);
-       isLoading(false); 
-
-       for (var bookmark in response ) {
-         id.value =  bookmark.id;
-       }
+      bookmarkData.assignAll(response);
+    log("asdasdas");
+      for (var bookmark in response ) {
+        id.value =  bookmark.id;
+      }
+      
+      isLoading(false); 
+      update();
 
     },
     cancelOnError: true,
@@ -56,6 +63,7 @@ class BookmarksController extends GetxController {
     required String eventDescription,
     required String eventLocation,
   }) {
+
     _bookmarkSubs?.cancel();
 
     _bookmarkSubs = bookmarkUseCase.addBookmark(
@@ -85,12 +93,30 @@ class BookmarksController extends GetxController {
       log("deleteBookmarkErr = $error");
     });
   }
+
+  void getIdFromBookmark({required int id}) {
+    
+    _bookmarkIdSubs?.cancel();
+    _bookmarkIdSubs = bookmarkUseCase.getIdFromBookmark(id: id).asStream().listen((response){
+    log("asdasdas");
+        // Get.toNamed(
+        //   Routes.eventRoute,
+        //   arguments: {
+        //     "id": id;
+        //   }
+        // )
+
+    });
+    
+
+  }
   
 
   
   @override
   void onClose() {
     _bookmarkSubs?.cancel();
+    _bookmarkIdSubs?.cancel();
     super.onClose();
   }
 }

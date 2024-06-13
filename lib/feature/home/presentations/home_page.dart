@@ -65,7 +65,7 @@ class HomePage extends GetView<HomeController> {
                     ),
                     EventsSection(
                       key: controller.eventSectionKey, 
-                      getIdFromEvents: controller.getIdFromEvents
+                      getIdFromEvents: controller.getIdFromEvent
                     ),
                     OfficialsSection(
                       key: controller.officialsSectionKey

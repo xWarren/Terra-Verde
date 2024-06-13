@@ -3,15 +3,16 @@ import 'package:get/get.dart';
 
 import '../../../../core/resources/assets.dart';
 import '../../../../core/resources/custom_colors.dart';
-import '../../../../core/routes/routes.dart';
 
 class BookmarksSection extends StatelessWidget {
-  const BookmarksSection({super.key});
+   const BookmarksSection({super.key, required this.onTap});
+
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.toNamed(Routes.bookmarksRoute),
+      onTap: onTap,
       child: Container(
         height: 50,
         width: Get.width,

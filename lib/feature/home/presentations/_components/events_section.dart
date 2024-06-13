@@ -228,13 +228,15 @@ class EventsSectionState extends State<EventsSection> with TickerProviderStateMi
                                             vertical: Dimensions.largeSpacing
                                           ),
                                           child: Text(
-                                            data.eventName,
+                                             data.eventName.isEmpty
+                                            ? "No title"
+                                            : data.eventName,
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
                                             style: const TextStyle(
                                               color: CustomColors.black,
                                               fontSize: 15,
-                                              fontWeight: FontWeight.w500
+                                              fontWeight: FontWeight.bold
                                             ),
                                           ),
                                         ),

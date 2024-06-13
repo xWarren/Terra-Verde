@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/widgets.dart';
 
 import '../../../../core/resources/assets.dart';
@@ -9,12 +11,17 @@ class HeadOfTheFamilySection extends StatelessWidget {
     super.key,
     required this.onTap,
     required this.firstName,
-    required this.lastName
+    required this.lastName,
+    required this.isHeadFamily,
+    required this.imageData
   });
 
   final VoidCallback onTap;
   final String firstName;
   final String lastName;
+  final bool isHeadFamily;
+  final Uint8List imageData;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +62,13 @@ class HeadOfTheFamilySection extends StatelessWidget {
                       const SizedBox(width: Dimensions.regularSpacing),
                       ClipRRect(
                         borderRadius: BorderRadius.circular(99),
-                        child: Image.asset(
-                          Assets.logo,
+                        child: imageData.isNotEmpty
+                        ? Image.memory(
+                          imageData,
                           height: 64,
                           width: 64
-                        ),
+                        )
+                        : null
                       ),
                       const SizedBox(width: Dimensions.extraLargeSpacing),
                       Expanded(

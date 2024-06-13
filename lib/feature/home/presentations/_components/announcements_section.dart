@@ -144,7 +144,7 @@ class AnnouncementsSectionState extends State<AnnouncementsSection> with Automat
                                    style: const TextStyle(
                                      color: CustomColors.black,
                                      fontSize: 16,
-                                     fontWeight: FontWeight.w600
+                                     fontWeight: FontWeight.bold
                                    ),
                                  ),
                                ),

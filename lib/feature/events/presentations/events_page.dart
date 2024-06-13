@@ -13,27 +13,39 @@ class EventsPage extends GetView<EventsController>  {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: CustomColors.white,
-      body: CustomScrollView(
-        slivers: [
-          Obx(
-            () {
-              bool isBookmarked = controller.checkIsBookmarked();
-              return  EventSliverAppBar(
-                bookmark: controller.bookmark,
-                isBookmarked: isBookmarked
-              );
-            }
-          ),
-          Obx(
-            () => EventSliverRemaining(
+      body: 
+      Obx(
+        () => controller.isLoading.value
+        ? const Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: CircularProgressIndicator(
+                color: CustomColors.primaryColor,
+              ),
+            )
+          ],
+        )
+        : CustomScrollView(
+          slivers: [
+            Obx( 
+              () {
+                bool isBookmarked = controller.checkIsBookmarked();
+                return EventSliverAppBar(
+                  bookmark: controller.bookmark,
+                  isBookmarked: isBookmarked
+                );
+              }
+            ),
+            EventSliverRemaining(
               eventName: controller.eventName.call(), 
               formattedMonth: controller.formattedMonth, 
               formattedTime: controller.formattedTime, 
               eventDescription: controller.eventDescription.call(), 
               eventLocation: controller.eventLocation.call()
             ),
-          ),
-        ],
+          ],
+        ),
       )
     );
   }

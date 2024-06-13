@@ -1,22 +1,15 @@
-import 'dart:async';
-
 import 'package:get/get.dart';
 
 import '../../../core/domain/services/storage_service.dart';
-import '../../../core/domain/usecases/resident_usecase.dart';
 import '../../../core/routes/routes.dart';
 
 class SettingsController extends GetxController {
   
   SettingsController({
-    required this.storageService,
-    required this.residentUseCase
+    required this.storageService
   });
 
   final StorageService storageService;
-
-  final ResidentUseCase residentUseCase;
-  StreamSubscription? _residentSubs;
 
   RxString residentId = "".obs;
 
@@ -37,7 +30,6 @@ class SettingsController extends GetxController {
     residentId(storageService.getResidentId());
     firstName(storageService.getFirstName());
     lastName(storageService.getLastName());
-    getResident();
     super.onInit();
   }
 
@@ -47,20 +39,20 @@ class SettingsController extends GetxController {
   }
 
 
-  void getResident() {
+  // void getResident() {
 
-    _residentSubs?.cancel();
+  //   _residentSubs?.cancel();
 
-    _residentSubs = residentUseCase.getResident(id: int.parse(residentId.value)).asStream().listen((response) {
-      headFirstName(response.firstName);
-      headLastName(response.lastName);
-      headAddress(response.address);
-      headEmail(response.email);
-      id(response.id);
-      update();
-    });
+  //   _residentSubs = residentUseCase.getResident(id: int.parse(residentId.value)).asStream().listen((response) {
+  //     headFirstName(response.firstName);
+  //     headLastName(response.lastName);
+  //     headAddress(response.address);
+  //     headEmail(response.email);
+  //     id(response.id);
+  //     update();
+  //   });
 
-  }
+  // }
 
 
   void goToProfile() {
@@ -76,9 +68,8 @@ class SettingsController extends GetxController {
     );
   }
 
-  @override
-  void onClose() {
-    _residentSubs?.cancel();
-    super.onClose();
+
+   void goToBookmark() {
+    Get.toNamed(Routes.bookmarksRoute);
   }
 }

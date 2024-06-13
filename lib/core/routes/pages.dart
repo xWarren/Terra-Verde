@@ -14,8 +14,12 @@ import '../../feature/officials/presentations/officials_binding.dart';
 import '../../feature/officials/presentations/officials_page.dart';
 import '../../feature/profile/presentations/add_family_member/add_family_member_binding.dart';
 import '../../feature/profile/presentations/add_family_member/add_family_member_page.dart';
+import '../../feature/profile/presentations/edit_head_family/edit_head_family_binding.dart';
+import '../../feature/profile/presentations/edit_head_family/edit_head_family_page.dart';
 import '../../feature/profile/presentations/edit_profile/edit_profile_binding.dart';
 import '../../feature/profile/presentations/edit_profile/edit_profile_page.dart';
+import '../../feature/profile/presentations/head_family/head_family_binding.dart';
+import '../../feature/profile/presentations/head_family/head_family_page.dart';
 import '../../feature/profile/presentations/profile_information/profile_information_binding.dart';
 import '../../feature/profile/presentations/profile_information/profile_information_page.dart';
 import '../../feature/register/register_binding.dart';
@@ -95,6 +99,16 @@ class Pages {
       name: Routes.bookmarksRoute,
       page: () => const BookmarksPage(),
       binding: BookmarksBinding()
+    ),
+    GetPage(
+      name: Routes.headFamilyRoute,
+      page: () => const HeadFamilyPage(),
+      binding: HeadFamilyBinding()
+    ),
+    GetPage(
+      name: Routes.editHeadFamilyRoute,
+      page: () => const EditHeadFamilyPage(),
+      binding: EditHeadFamilyBinding()
     ),
   ];
 }

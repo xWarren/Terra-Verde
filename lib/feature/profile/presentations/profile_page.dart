@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -36,6 +38,9 @@ class ProfilePage extends GetView<ProfileController> {
       ),
       body: GetBuilder<ProfileController>(
         builder: (context) {
+          String base64String = controller.profileImage.split(',').last;
+          List<int> bytes = base64.decode(base64String);
+          Uint8List imageData = Uint8List.fromList(bytes);
           return Container(
             color: Colors.grey.shade300,
             child: Container(
@@ -63,12 +68,15 @@ class ProfilePage extends GetView<ProfileController> {
                               HeadOfTheFamilySection(
                                 firstName: controller.residentFirstName.call(),
                                 lastName: controller.residentLastName.call(),
-                                onTap: controller.onTap
+                                onTap: controller.onTap,
+                                isHeadFamily: controller.isHeadFamily.call(),
+                                imageData: imageData,
                               ),
                               FamilyMemberSection(
                                 residentsData: controller.residentsData,
-                                showModal: controller.showModal,
-                                isHeadFamily: controller.isHeadFamily.value
+                                deleteResidentHouseMember: controller.showModal,
+                                isHeadFamily: controller.isHeadFamily.value,
+                                getId: controller.getId.call()
                               )
                             ],
                           ),

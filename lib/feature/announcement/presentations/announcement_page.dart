@@ -55,7 +55,9 @@ class AnnouncementPage extends GetView<AnnouncementController> {
               const SizedBox(height: Dimensions.largeSpacing),
               Obx(
                 () => Text(
-                  controller.announcementName.call(),
+                  controller.announcementName.isEmpty
+                  ? "No title"
+                  : controller.announcementName.call(),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
@@ -86,7 +88,9 @@ class AnnouncementPage extends GetView<AnnouncementController> {
               const SizedBox(height: Dimensions.extraLargeSpacing),
               Obx(
                 () => Text(
-                  controller.announcementDescription.call(),
+                  controller.announcementDescription.isEmpty
+                  ? "No description"
+                  : controller.announcementDescription.call(),
                   style: const TextStyle(
                     color: Colors.black,
                     fontSize: 13,

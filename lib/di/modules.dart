@@ -27,8 +27,8 @@ import '../feature/home/data/repositories/officials_repository_impl.dart';
 import '../feature/home/data/source/officials_remote_source_impl.dart';
 import '../feature/profile/data/repositories/resident_house_member_repository_impl.dart';
 import '../feature/profile/data/source/resident_house_member_remote_source_impl.dart';
-import '../feature/settings/data/repositories/resident_repository_impl.dart';
-import '../feature/settings/data/source/resident_remote_source_impl.dart';
+import '../feature/profile/data/repositories/resident_repository_impl.dart';
+import '../feature/profile/data/source/resident_remote_source_impl.dart';
 
 Future<void> initAppDependecies() async {
 

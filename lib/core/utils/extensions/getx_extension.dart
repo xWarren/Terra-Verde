@@ -47,8 +47,8 @@ extension GetxExtension on GetxController {
           fontWeight: FontWeight.w600,
           borderRadius: 10,
           onPressed: onPressed ?? () => Get.back(),
-          text: buttonTitle,
-          backgroundColor: CustomColors.red,
+          text: "Cancel",
+          backgroundColor: CustomColors.primaryColor,
         ),
         if (onPressedDelete != null) CommonButton(
           isLoading: false,
@@ -57,7 +57,7 @@ extension GetxExtension on GetxController {
           borderRadius: 10,
           onPressed: onPressedDelete,
           text: "Yes, delete",
-          backgroundColor:CustomColors.primaryColor,
+          backgroundColor:CustomColors.red,
         ),
       ],
       barrierDismissible: false

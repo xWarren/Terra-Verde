@@ -81,39 +81,62 @@ class OfficialsSectionState extends State<OfficialsSection> with AutomaticKeepAl
               description: "There are no official at the moment. Check back later for updates.",
             )
             : SizedBox(
-              height: 150,
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: officialsData.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  var data = officialsData[index];
-                  return Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 20),
-                         foregroundDecoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            colors: [Colors.transparent, Colors.black54],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            stops: [0.5, 1],
+                height: 150,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: officialsData.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    var data = officialsData[index];
+                    return Stack(
+                      alignment: Alignment.bottomLeft,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 20),
+                          foregroundDecoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              colors: [Colors.transparent, Colors.black54],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              stops: [0.5, 1],
+                            ),
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                          borderRadius: BorderRadius.circular(8)
+                          child: Image.asset(
+                            Assets.logo,
+                            height: 120,
+                            width: 150,
+                            fit: BoxFit.fill,
+                          ),
                         ),
-                        child: Image.asset(
-                          Assets.logo,
-                          height: 120,
+                        Container(
                           width: 150,
-                          fit: BoxFit.fill,
-                        )
-                      ),
-                    ],
-                  );
-                }
+                          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  data.name.isEmpty
+                                  ? "No name"
+                                  : data.name,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    color: CustomColors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
-            ),
             const SizedBox(height: 100),
           ],
         ),

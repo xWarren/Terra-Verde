@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -24,6 +23,7 @@ class ProfileInformationController extends GetxController implements ProfileInfo
 
   final ResidentHouseMemberUseCase residentHouseMemberUseCase;
   StreamSubscription? residentsSubs;
+
 
   final StorageService storageService;
 
@@ -52,17 +52,16 @@ class ProfileInformationController extends GetxController implements ProfileInfo
 
   RxString emailChecker = "".obs;
 
-
   @override
   void onInit() {
     isHeadFamily.value = storageService.isHeadFamily();
     emailChecker.value = storageService.getEmail();
     getId(storageService.getId());
-    log("ID ${getId.toString()}");
     getResidentsMember();
-    log("adsad ${emailChecker.value}");
     super.onInit();
   }
+
+
 
   void getResidentsMember() {
     id.value = Get.arguments['id'] ?? 0;
@@ -123,6 +122,5 @@ class ProfileInformationController extends GetxController implements ProfileInfo
   @override
   void profileInformation() {
     getResidentsMember();
-    update();
   }
 }

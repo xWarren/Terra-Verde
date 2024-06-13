@@ -98,7 +98,7 @@ class SettingsPage extends GetView<SettingsController> {
                   ),
                 ),
                 ProfileSection(onTap: controller.goToProfile),
-                const BookmarksSection(),
+                BookmarksSection(onTap: controller.goToBookmark),
                 const PrivacyPolicySection(),
                 LogoutSection(onTap: controller.logout),
                 const SizedBox(height: 150)

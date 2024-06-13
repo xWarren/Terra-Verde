@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:get/get.dart';
@@ -5,15 +6,26 @@ import 'package:intl/intl.dart';
 
 import '../../../core/domain/entities/add_bookmark_entity.dart';
 import '../../../core/domain/entities/bookmark_data_entity.dart';
+import '../../../core/domain/usecases/events_usecase.dart';
+import '../../../core/utils/print_utils.dart';
 import '../../bookmarks/presentations/bookmarks_controller.dart';
 
-class EventsController extends GetxController {
+abstract class EventDelegate {
+
+  void getEvent({required int id});
+}
+
+class EventsController extends GetxController implements EventDelegate {
 
   EventsController({
     required this.bookmarkController,
+    required this.eventsUseCase
   });
 
   final BookmarksController bookmarkController;
+
+  final EventsUseCase eventsUseCase;
+  StreamSubscription? eventsSubs;
 
   RxBool isLoading = false.obs;
   
@@ -36,23 +48,45 @@ class EventsController extends GetxController {
   @override
   void onInit() {
    super.onInit();
-    isLoading(true);
-    id(Get.arguments["id"] ?? 0);
-    eventName(Get.arguments["eventName"] ?? "");
-    eventDate(Get.arguments["eventDate"] ?? "");
-    eventDescription(Get.arguments["eventDescription"] ?? "");
-    eventLocation(Get.arguments["eventLocation"] ?? "No set location");
-    isLoading(Get.arguments["isLoading"] ?? false);
-
-    String dateString = eventDate.value;
-    DateTime parsedEventDate = DateTime.parse(dateString);
-
-    DateFormat monthFormat = DateFormat('MMMM dd, yyyy');
-    formattedMonth = monthFormat.format(parsedEventDate);
-
-    DateFormat timeFormat = DateFormat('hh:mm a');
-    formattedTime = timeFormat.format(parsedEventDate);
+    // id(Get.arguments["id"] ?? 0);
+    // eventName(Get.arguments["eventName"] ?? "");
+    // eventDate(Get.arguments["eventDate"] ?? "");
+    // eventDescription(Get.arguments["eventDescription"] ?? "");
+    // eventLocation(Get.arguments["eventLocation"] ?? "No set location");
+    // // isLoading(Get.arguments["isLoading"] ?? false);
     checkIsBookmarked();
+  }
+
+
+  void getIdFromEvents({required int id}) {
+    isLoading(true);
+
+    eventsSubs?.cancel();
+    eventsSubs = eventsUseCase.getIdFromEvent(id: id).asStream().listen((response) {
+      
+      this.id(response.id);
+      eventName(response.eventName);
+      eventDate(response.eventDate);
+      eventDescription(response.eventDescription);
+      eventLocation(response.eventLocation);
+
+      
+      String dateString = eventDate.value;
+      DateTime parsedEventDate = DateTime.parse(dateString);
+
+      DateFormat monthFormat = DateFormat('MMMM dd, yyyy');
+      formattedMonth = monthFormat.format(parsedEventDate);
+
+      DateFormat timeFormat = DateFormat('hh:mm a');
+      formattedTime = timeFormat.format(parsedEventDate);
+
+      isLoading(false);
+
+      update();
+    },
+    onError: (error) {
+      printUtil("getEventsErr: $error");
+    });
   }
 
    bool checkIsBookmarked() {
@@ -75,5 +109,16 @@ class EventsController extends GetxController {
         eventLocation: eventLocation.value,
       );
     }
-  }  
+  } 
+
+  @override
+  void onClose() {
+    eventsSubs?.cancel();
+    super.onClose();
+  }
+  
+  @override
+  void getEvent({required int id}) {
+   getIdFromEvents(id: id);
+  }
 }

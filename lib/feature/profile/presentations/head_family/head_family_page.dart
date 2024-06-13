@@ -1,20 +1,23 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/presentation/common/common_text_field.dart';
 import '../../../../core/presentation/custom/custom_back_button.dart';
-import '../../../../core/resources/assets.dart';
 import '../../../../core/resources/custom_colors.dart';
 import '../../../../core/resources/dimensions.dart';
 import '../../../../core/resources/strings.dart';
-import 'profile_information_controller.dart';
+import 'head_family_controller.dart';
 
-class ProfileInformationPage extends GetView<ProfileInformationController> {
-  const ProfileInformationPage({super.key});
-
+class HeadFamilyPage extends GetView<HeadFamilyController> {
+  const HeadFamilyPage({super.key});
+  
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       backgroundColor: CustomColors.grey200,
       appBar: AppBar(
@@ -35,8 +38,11 @@ class ProfileInformationPage extends GetView<ProfileInformationController> {
           statusBarIconBrightness: Brightness.dark
         ),
       ),
-      body: GetBuilder<ProfileInformationController>(
+      body: GetBuilder<HeadFamilyController>(
         builder: (context) {
+          String base64String = controller.profileImage.split(',').last;
+          List<int> bytes = base64.decode(base64String);
+          Uint8List imageData = Uint8List.fromList(bytes);
           return Column(
             children: [
               Expanded(
@@ -82,11 +88,13 @@ class ProfileInformationPage extends GetView<ProfileInformationController> {
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(99),
-                                  child: Image.asset(
-                                    Assets.logo,
+                                  child: imageData.isNotEmpty
+                                  ? Image.memory(
+                                    imageData,
                                     height: 120,
-                                    width: 120
-                                  ),
+                                    width: 120,
+                                  )
+                                  : null
                                 ),
                               ),
                             ),
@@ -99,17 +107,6 @@ class ProfileInformationPage extends GetView<ProfileInformationController> {
                                     children: [
                                       Text(
                                         controller.firstName.value,
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: const TextStyle(
-                                          color: CustomColors.black,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600
-                                        ),
-                                      ),
-                                      const SizedBox(width: 5),
-                                      Text(
-                                        controller.middeName.value,
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: const TextStyle(
@@ -157,58 +154,6 @@ class ProfileInformationPage extends GetView<ProfileInformationController> {
                             children: [
                               const SizedBox(height: Dimensions.regularSpacing),
                               const Text(
-                                Strings.birthday,
-                                style: TextStyle(
-                                  color: CustomColors.grey400,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500
-                                ),
-                              ),
-                              CommonTextField(
-                                controller: controller.birthdayController,
-                                errorText: "",
-                                readOnly: true,
-                                maxLines: 1,
-                                filled: true,
-                                fillColor: const Color(0xFFD9D9D9),
-                                contentPadding: const EdgeInsets.only(
-                                  left: Dimensions.largeSpacing,
-                                  right: Dimensions.largeSpacing,
-                                ),
-                                textStyle: const TextStyle(
-                                  fontSize: 16.0,
-                                  color: CustomColors.black,
-                                  fontWeight: FontWeight.w500
-                                ),
-                              ),
-                              const SizedBox(height: Dimensions.regularSpacing),
-                              const Text(
-                                Strings.gender,
-                                style: TextStyle(
-                                  color: CustomColors.grey400,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500
-                                ),
-                              ),
-                              CommonTextField(
-                                controller: controller.genderController,
-                                errorText: "",
-                                readOnly: true,
-                                maxLines: 1,
-                                filled: true,
-                                fillColor: const Color(0xFFD9D9D9),
-                                contentPadding: const EdgeInsets.only(
-                                  left: Dimensions.largeSpacing,
-                                  right: Dimensions.largeSpacing,
-                                ),
-                                textStyle: const TextStyle(
-                                  fontSize: 16.0,
-                                  color: CustomColors.black,
-                                  fontWeight: FontWeight.w500
-                                ),
-                              ),
-                              const SizedBox(height: Dimensions.regularSpacing),
-                              const Text(
                                 Strings.address,
                                 style: TextStyle(
                                   color: CustomColors.grey400,
@@ -233,35 +178,8 @@ class ProfileInformationPage extends GetView<ProfileInformationController> {
                                   fontWeight: FontWeight.w500
                                 ),
                               ),
-                              const SizedBox(height: Dimensions.regularSpacing),
-                              const Text(
-                                Strings.mobileNumber,
-                                style: TextStyle(
-                                  color: CustomColors.grey400,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500
-                                ),
-                              ),
-                              CommonTextField(
-                                controller: controller.contactNumberController,
-                                errorText: "",
-                                readOnly: true,
-                                maxLines: 1,
-                                filled: true,
-                                fillColor: const Color(0xFFD9D9D9),
-                                contentPadding: const EdgeInsets.only(
-                                  left: Dimensions.largeSpacing,
-                                  right: Dimensions.largeSpacing,
-                                ),
-                                textStyle: const TextStyle(
-                                  fontSize: 16.0,
-                                  color: CustomColors.black,
-                                  fontWeight: FontWeight.w500
-                                ),
-                              ),
                               const SizedBox(height: Dimensions.textFieldHeight),
-                             if (controller.isHeadFamily.isTrue || controller.getId.value == controller.id.value.toString())
-                             SizedBox(
+                              SizedBox(
                                 height: 50,
                                 width: Get.width,
                                 child: ElevatedButton(
@@ -285,13 +203,13 @@ class ProfileInformationPage extends GetView<ProfileInformationController> {
                               ),
                             ],
                           ),
-                        ),
+                        )
                       ],
                     ),
                   ),
                 ),
-              )
-            ],
+              ),
+            ]
           );
         }
       ),

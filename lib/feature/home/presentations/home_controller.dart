@@ -9,6 +9,7 @@ import '../../../core/domain/usecases/officials_usecase.dart';
 import '../../../core/routes/routes.dart';
 import '../../../core/utils/print_utils.dart';
 import '../../dashboard/dashboard_controller.dart';
+import '../../events/presentations/events_controller.dart';
 import '_components/announcements_section.dart';
 import '_components/events_section.dart';
 import '_components/officials_section.dart';
@@ -20,7 +21,8 @@ class HomeController extends GetxController {
     required this.dashboardDelegate,
     required this.eventsUseCase,
     required this.announcementUseCase,
-    required this.officialsUseCase
+    required this.officialsUseCase,
+    required this.eventDelegate
   });
   
   final StorageService storageService;
@@ -37,6 +39,8 @@ class HomeController extends GetxController {
 
   StreamSubscription? idEventSubs;
   StreamSubscription? idAnnouncementSubs;
+
+  final EventDelegate eventDelegate;
 
   ScrollController get scrollController => dashboardDelegate.scrollController;
 
@@ -92,39 +96,6 @@ class HomeController extends GetxController {
     });
   }
 
-
-  void getIdFromEvents({required int id}) {
-    isLoading(true);
-
-    idEventSubs?.cancel();
-    idEventSubs = eventsUseCase.getIdFromEvent(id: id).asStream().listen((response) {
-      
-      int id = response.id;
-      String eventName = response.eventName;
-      String eventDate = response.eventDate;
-      String eventDescription = response.eventDescription;
-      String eventLocation = response.eventLocation;
-
-      isLoading(false);
-       
-      Get.toNamed(
-        Routes.eventRoute,
-        arguments: {
-          "id": id,
-          "eventName": eventName,
-          "eventDate": eventDate,
-          "eventDescription": eventDescription,
-          "eventLocation": eventLocation,
-          "isLoading": isLoading.value
-        }
-      );
-      update();
-    },
-    onError: (error) {
-      printUtil("getEventsErr: $error");
-    });
-  }
-
   void getAnnouncement() {
     isLoading(true);
     announcementSectionKey.currentState?.setLoading(true);
@@ -142,6 +113,11 @@ class HomeController extends GetxController {
       isLoading(false);
       update();
     });
+  }
+
+  void getIdFromEvent({required int id}) {
+    eventDelegate.getEvent(id: id);
+    Get.toNamed(Routes.eventRoute);
   }
 
 
