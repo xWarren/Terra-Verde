@@ -58,7 +58,6 @@ class AddFamilyMemberController extends GetxController {
   RxList<String> familyRelationshipList = [
     Strings.grandfather, 
     Strings.grandmother,
-    Strings.headofthefamily, 
     Strings.mother,
     Strings.brother, 
     Strings.sister,
@@ -172,7 +171,6 @@ class AddFamilyMemberController extends GetxController {
         relationship: relationship.value, 
         password: password
       ).asStream().listen((response) {
-        log("hllo");
         showModal(
           context: context, 
           title: "Family Member Added Successfully", 

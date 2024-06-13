@@ -88,54 +88,33 @@ class OfficialsSectionState extends State<OfficialsSection> with AutomaticKeepAl
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   var data = officialsData[index];
-                  return Container(
-                    width: 150,
-                    margin: const EdgeInsets.symmetric(horizontal: 20),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: const Border.fromBorderSide(
-                        BorderSide(color: CustomColors.primaryColor)
-                      ),
-                      image: const DecorationImage(
-                        image: AssetImage(Assets.logo),
-                        fit: BoxFit.fill
-                      )
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(
-                            left: 8,
-                            bottom: 20
+                  return Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
+                         foregroundDecoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [Colors.transparent, Colors.black54],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            stops: [0.5, 1],
                           ),
-                          decoration: const BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromRGBO(0, 0, 0, 0.75),
-                                blurRadius: 40
-                              )
-                            ]
-                          ),
-                          child: Text(
-                            data.name,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              color: CustomColors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500
-                            ),
-                          ),
+                          borderRadius: BorderRadius.circular(8)
+                        ),
+                        child: Image.asset(
+                          Assets.logo,
+                          height: 120,
+                          width: 150,
+                          fit: BoxFit.fill,
                         )
-                      ],
-                    ),
+                      ),
+                    ],
                   );
                 }
               ),
             ),
-            const SizedBox(height: 60),
+            const SizedBox(height: 100),
           ],
         ),
       ],

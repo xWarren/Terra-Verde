@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:get/get.dart';
+import 'package:terra_verde/core/utils/extensions/getx_extension.dart';
 
 import '../../../core/domain/entities/resident_house_member_data_entity.dart';
 import '../../../core/domain/services/storage_service.dart';
@@ -79,6 +80,14 @@ class ProfileController extends GetxController implements ProfileDelegate {
     });
   }
 
+  void showModal(int id) {
+    showCustomDialog("Delete family member", "Are you sure you want to delete?",
+    onPressedDelete: () {
+      deleteResidentHouseMember(id);
+    },
+    );
+  }
+
   void deleteResidentHouseMember(int id) {
     isLoading(true);
 
@@ -86,7 +95,6 @@ class ProfileController extends GetxController implements ProfileDelegate {
 
     deleteResidentSubs = residentHouseMemberUseCase.deleteIdFromResidentHouseMember(id: id).asStream().listen((response){
       getResidentsMember();
-      log("Deleted na");
       isLoading(false);
     },
     cancelOnError: true,

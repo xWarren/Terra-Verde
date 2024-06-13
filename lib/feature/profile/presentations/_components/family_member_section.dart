@@ -12,12 +12,12 @@ class FamilyMemberSection extends StatefulWidget {
   const FamilyMemberSection({
     super.key,
     required this.residentsData,
-    required this.deleteResidentHouseMember,
+    required this.showModal,
     required this.isHeadFamily
   });
 
   final List<ResidentHouseMemberDataEntity> residentsData;
-  final Function(int) deleteResidentHouseMember;
+  final Function(int id) showModal;
   final bool isHeadFamily;
 
   @override
@@ -179,7 +179,7 @@ class _FamilyMemberSectionState extends State<FamilyMemberSection> {
                         ),
                         if(isHeadFamily == true)
                         GestureDetector(
-                          onTap: () => widget.deleteResidentHouseMember(data.id),
+                          onTap: widget.showModal(data.id),
                           child: const Padding(
                             padding: EdgeInsets.only(right: 30),
                             child: Icon(

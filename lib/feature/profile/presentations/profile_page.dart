@@ -67,7 +67,7 @@ class ProfilePage extends GetView<ProfileController> {
                               ),
                               FamilyMemberSection(
                                 residentsData: controller.residentsData,
-                                deleteResidentHouseMember: controller.deleteResidentHouseMember,
+                                showModal: controller.showModal,
                                 isHeadFamily: controller.isHeadFamily.value
                               )
                             ],

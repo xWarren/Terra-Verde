@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:terra_verde/core/utils/extensions/int_extensions.dart';
+import 'package:terra_verde/core/utils/extensions/int_extension.dart';
 
 import '../../../core/presentation/custom/custom_circle_tab_indicator.dart';
 import '../../../core/resources/custom_colors.dart';
