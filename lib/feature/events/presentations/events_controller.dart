@@ -65,6 +65,7 @@ class EventsController extends GetxController {
 
     if (isBookmarked.value) {
       log("Event is already bookmarked");
+      bookmarkController.deleteBookmark();
     } else {
       log("Event is not bookmarked. Adding bookmark...");
       bookmarkController.getBookmark(

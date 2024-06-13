@@ -3,6 +3,7 @@ import '../../../../core/domain/entities/add_bookmark_entity.dart';
 import '../../../../core/domain/entities/bookmark_data_entity.dart';
 import '../../../../core/domain/usecases/bookmark_usecase.dart';
 import '../../../events/domain/payload/add_bookmark_param.dart';
+import '../../../events/domain/payload/delete_bookmark_param.dart';
 import '../payload/bookmark_param.dart';
 
 class BookmarkUseCaseImpl implements BookmarkUseCase {
@@ -45,5 +46,15 @@ class BookmarkUseCaseImpl implements BookmarkUseCase {
     );
 
     return bookmarkRepository.addBookmark(param);
+  }
+  
+  @override
+  Future<AddBookmarkEntity> deleteBookmark({required int id}) {
+    
+    var param = DeleteBookmarkParam(
+      id: id
+    );
+
+    return bookmarkRepository.deleteBookmark(param);
   }
 }

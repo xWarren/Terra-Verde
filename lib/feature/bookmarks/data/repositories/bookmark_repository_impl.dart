@@ -1,3 +1,5 @@
+import 'package:terra_verde/feature/events/domain/payload/delete_bookmark_param.dart';
+
 import '../../../../core/data/repositories/bookmark_repository.dart';
 import '../../../../core/data/source/bookmark_remote_source.dart';
 import '../../../../core/domain/entities/add_bookmark_entity.dart';
@@ -35,6 +37,14 @@ class BookmarkRepositoryImpl implements BookmarkRepository {
   @override
   Future<AddBookmarkEntity> addBookmark(AddBookmarkParam param) async {
     var response = await remoteSource.addBookmark(param.toJson());
+    var featureEntity = AddBookmarkMapper.fromAddBookmarkResponseModel(response);
+    var entity = AddBookmarkMapper.fromFeatureAddBookmarkEntity(featureEntity);
+    return entity;
+  }
+
+  @override
+  Future<AddBookmarkEntity> deleteBookmark(DeleteBookmarkParam param) async {
+    var response = await remoteSource.deleteBookmark(id: param.id);
     var featureEntity = AddBookmarkMapper.fromAddBookmarkResponseModel(response);
     var entity = AddBookmarkMapper.fromFeatureAddBookmarkEntity(featureEntity);
     return entity;

@@ -60,4 +60,17 @@ class BookmarkRemoteSourceImpl extends BaseGetConnect implements BookmarkRemoteS
     var featureResponseModel = FeatureAddBookmarkResponseModel.fromJson(response.body);
     return AddBookmarkMapper.fromFeatureAddBookmarkResponseModel(featureResponseModel);
   }
+
+  @override
+  Future<AddBookmarkResponseModel> deleteBookmark({required int id}) async {
+    var response = await methodRequest(
+      "${APIEndpoint.bookmark}/$id",
+      method: Method.delete,
+      headers: {
+      "Authorization": "Bearer ${storageService.getAccessToken()}"
+      }
+    );
+    var featureResponseModel = FeatureAddBookmarkResponseModel.fromJson(response.body);
+    return AddBookmarkMapper.fromFeatureAddBookmarkResponseModel(featureResponseModel);
+  }
 }

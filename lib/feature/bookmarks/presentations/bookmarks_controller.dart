@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import '../../../core/domain/entities/bookmark_data_entity.dart';
 import '../../../core/domain/usecases/bookmark_usecase.dart';
 
-
 class BookmarksController extends GetxController {
 
   BookmarksController({
@@ -19,6 +18,8 @@ class BookmarksController extends GetxController {
   RxBool isLoading = false.obs;
 
   RxList<BookmarkDataEntity> bookmarkData = <BookmarkDataEntity>[].obs;
+
+  RxInt id = 0.obs;
 
 
   @override
@@ -36,6 +37,10 @@ class BookmarksController extends GetxController {
 
        bookmarkData.assignAll(response);
        isLoading(false); 
+
+       for (var bookmark in response ) {
+         id.value =  bookmark.id;
+       }
 
     },
     cancelOnError: true,
@@ -63,11 +68,21 @@ class BookmarksController extends GetxController {
     },
     cancelOnError: true,
     onError: (error) {
-      log("event Id: $eventId");
-      log("eventName: $eventName");
-      log("eventDescription: $eventDescription");
-      log("eventLocation: $eventLocation");
       log("getBookmarkErr = $error");
+    });
+  }
+
+  void deleteBookmark() {
+    _bookmarkSubs?.cancel();
+
+    _bookmarkSubs = bookmarkUseCase.deleteBookmark(
+      id: id.value
+    ).asStream().listen((value) {
+      bookmark();
+    },
+    cancelOnError: true,
+    onError: (error) {
+      log("deleteBookmarkErr = $error");
     });
   }
   

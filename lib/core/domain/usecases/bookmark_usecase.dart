@@ -11,4 +11,5 @@ abstract class BookmarkUseCase {
     required String eventDescription,
     required String eventLocation
   });
+  Future<AddBookmarkEntity> deleteBookmark({required int id});
 }

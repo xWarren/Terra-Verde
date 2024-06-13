@@ -7,4 +7,5 @@ abstract class BookmarkRemoteSource {
   Future<GetBookmarkResponseModel> bookmark();
   Future<GetBookmarkDataModel> getIdFromBookmark({required int id});
   Future<AddBookmarkResponseModel> addBookmark(body);
+  Future<AddBookmarkResponseModel> deleteBookmark({required int id});
 }
