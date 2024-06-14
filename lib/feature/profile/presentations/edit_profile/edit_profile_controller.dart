@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../core/domain/services/storage_service.dart';
@@ -32,6 +34,7 @@ class EditProfileController extends GetxController {
   RxInt id = 0.obs;
   RxInt residentId = 0.obs;
 
+  RxString profileImage = "".obs;
   final firstNameController = TextEditingController();
   final middleNameController = TextEditingController();
   final lastNameController = TextEditingController();
@@ -42,7 +45,12 @@ class EditProfileController extends GetxController {
   RxString birthday = "".obs;
   RxString gender = "".obs;
   RxString relationship = "".obs;
+
+  RxString imageFile = "".obs;
+
+  Rx<File?> fileImage = Rx<File?>(null);
   
+  RxString imageError = "".obs;
   RxString firstNameError = "".obs;
   RxString middleNameError = "".obs;
   RxString lastNameError = "".obs;
@@ -84,6 +92,11 @@ class EditProfileController extends GetxController {
     var password = passwordController.text;
 
     bool hasErrors = false;
+
+    if (imageFile.isEmpty) {
+      imageError.value = "Upload a photo";
+      hasErrors = true;
+    }
 
     if (firstName.isEmpty) {
       firstNameError.value = "Enter your first name";
@@ -147,11 +160,10 @@ class EditProfileController extends GetxController {
         address: address, 
         birthDate: birthday.value, 
         gender: gender.value, 
-        profileImage: "", 
+        profileImage: imageFile.toString(), 
         relationship: relationship.value, 
         password: password
       ).asStream().listen((response) {
-        log("hllo");
         profileInformationDelegate.profileInformation();
         profileDelegate.getResident();
         showModal(
@@ -191,11 +203,23 @@ class EditProfileController extends GetxController {
     relationship.value = Get.arguments["familyRelationship"] ?? "";
     birthday.value = Get.arguments["birthday"] ?? "";
     gender.value = Get.arguments["gender"] ?? "";
+    profileImage.value = Get.arguments["profileImage"] ?? "";
     DateTime announcementDate = DateTime.parse(birthday.value);
     DateFormat monthFormat = DateFormat('MMMM dd, yyyy');
     birthDate.value = monthFormat.format(announcementDate);
     log(birthday.value);
     super.onInit();
+  }
+
+    Future getImageFromGallery() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (image == null) {
+      return;
+    }
+     imageFile.value = image.path.toString();
+     final imagePermanent = File(image.path);
+     fileImage.value = imagePermanent;
+     log("eto ba? $imageFile");
   }
 
   @override

@@ -8,6 +8,7 @@ class FeatureLoginEntity {
     required this.errors,
     required this.token,
     required this.userName,
+    required this.profileImage,
     required this.firstName,
     required this.lastName,
     required this.email,
@@ -22,6 +23,7 @@ class FeatureLoginEntity {
   int errors;
   String token;
   String userName;
+  String profileImage;
   String firstName;
   String lastName;
   String email;

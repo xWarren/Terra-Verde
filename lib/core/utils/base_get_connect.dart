@@ -24,8 +24,8 @@ abstract class BaseGetConnect extends GetConnect {
     String? contentType,
     Map<String, String>? headers,
     Map<String, dynamic>? query,
-    String? file
   }) async {
+    
     try {
 
       Response<dynamic> response;

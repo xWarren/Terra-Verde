@@ -39,6 +39,7 @@ class ProfileInformationController extends GetxController implements ProfileInfo
   RxString familyRelationship = "".obs;
   RxString email = "".obs;
   RxString birthday = "".obs;
+  RxString profileImage = "".obs;
 
   final birthdayController = TextEditingController();
   final genderController = TextEditingController();
@@ -75,6 +76,7 @@ class ProfileInformationController extends GetxController implements ProfileInfo
       middeName.value = response.middleName;
       lastName.value = response.lastName;
       birthday.value = response.birthDate;
+      profileImage.value = response.profileImage;
       DateTime announcementDate = DateTime.parse(response.birthDate);
       DateFormat monthFormat = DateFormat('MMMM dd, yyyy');
       birthdayController.text = monthFormat.format(announcementDate);
@@ -108,6 +110,7 @@ class ProfileInformationController extends GetxController implements ProfileInfo
         "familyRelationship": familyRelationship.value,
         "birthday": birthday.value,
         "gender": genderController.text,
+        "profileImage": profileImage.value
       }
     );
   }

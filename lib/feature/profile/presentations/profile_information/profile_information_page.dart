@@ -1,10 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/presentation/common/common_text_field.dart';
 import '../../../../core/presentation/custom/custom_back_button.dart';
-import '../../../../core/resources/assets.dart';
 import '../../../../core/resources/custom_colors.dart';
 import '../../../../core/resources/dimensions.dart';
 import '../../../../core/resources/strings.dart';
@@ -37,6 +38,9 @@ class ProfileInformationPage extends GetView<ProfileInformationController> {
       ),
       body: GetBuilder<ProfileInformationController>(
         builder: (context) {
+          String base64String = controller.profileImage.split(',').last;
+          List<int> bytes = base64.decode(base64String);
+          Uint8List imageData = Uint8List.fromList(bytes);
           return Column(
             children: [
               Expanded(
@@ -82,11 +86,13 @@ class ProfileInformationPage extends GetView<ProfileInformationController> {
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(99),
-                                  child: Image.asset(
-                                    Assets.logo,
+                                  child: imageData.isNotEmpty
+                                  ? Image.memory(
+                                    imageData,
                                     height: 120,
-                                    width: 120
-                                  ),
+                                    width: 120,
+                                  )
+                                  : null
                                 ),
                               ),
                             ),

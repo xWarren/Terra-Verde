@@ -24,6 +24,11 @@ class SettingsController extends GetxController {
   RxString firstName = "".obs;
   RxString lastName = "".obs;
 
+  RxString image = "".obs;
+
+  RxString get getPicture => storageService.getPicture().obs;
+
+
 
   @override
   void onInit() {

@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +17,7 @@ class FamilyMemberSection extends StatefulWidget {
     required this.residentsData,
     required this.deleteResidentHouseMember,
     required this.isHeadFamily,
-    required this.getId
+    required this.getId,
   });
 
   final List<ResidentHouseMemberDataEntity> residentsData;
@@ -82,6 +85,9 @@ class _FamilyMemberSectionState extends State<FamilyMemberSection> {
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             var data = _residentHouseMemberData[index];
+            String base64String = data.profileImage.split(',').last;
+            List<int> bytes = base64.decode(base64String);
+            Uint8List imageData = Uint8List.fromList(bytes);
             return GestureDetector(
               onTap: () {
                 Get.toNamed(
@@ -112,11 +118,13 @@ class _FamilyMemberSectionState extends State<FamilyMemberSection> {
                               const SizedBox(width: Dimensions.regularSpacing),
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(99),
-                                child: Image.asset(
-                                  Assets.logo,
+                                child: imageData.isNotEmpty
+                                ? Image.memory(
+                                  imageData,
                                   height: 64,
                                   width: 64
-                                ),
+                                )
+                                : null
                               ),
                               const SizedBox(width: Dimensions.extraLargeSpacing),
                               Expanded(

@@ -8,6 +8,7 @@ class LoginResponseModel {
     required this.errors,
     required this.token,
     required this.userName,
+    required this.profileImage,
     required this.firstName,
     required this.lastName,
     required this.email,
@@ -22,6 +23,7 @@ class LoginResponseModel {
   final int errors;
   final String token;
   final String userName;
+  final String profileImage;
   final String firstName;
   final String lastName;
   final String email;

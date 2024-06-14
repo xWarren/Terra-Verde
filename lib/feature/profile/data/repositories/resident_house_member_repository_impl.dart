@@ -36,7 +36,20 @@ class ResidentHouseMemberRepositoryImpl implements ResidentHouseMemberRepository
 
   @override
   Future<AddResidentEntity> addResidentHouseMember(AddResidentHouseMemberParam param) async {
-    var response = await remoteSource.addResident(param.toJson());
+    var response = await remoteSource.addResident(
+      residentId: param.residentId,
+      firstName: param.firstName,
+      middleName: param.middleName,
+      lastName: param.lastName,
+      contactNumber: param.contactNumber,
+      emailAddress: param.emailAddress,
+      address: param.address,
+      birthDate: param.birthDate,
+      gender: param.gender,
+      profileImage: param.profileImage,
+      relationship: param.relationship,
+      password: param.password
+    );
     var featureEntity = AddResidentMapper.fromAddResidentResponseModel(response);
     var entity = AddResidentMapper.fromFeatureAddResidentDataEntity(featureEntity);
     return entity;
@@ -44,7 +57,21 @@ class ResidentHouseMemberRepositoryImpl implements ResidentHouseMemberRepository
 
   @override
   Future<AddResidentEntity> editProfile(EditProfileParam param) async {
-    var response = await remoteSource.editProfile(param.toJson());
+    var response = await remoteSource.editProfile(
+      id: param.id,
+      residentId: param.residentId,
+      firstName: param.firstName,
+      middleName: param.middleName,
+      lastName: param.lastName,
+      contactNumber: param.contactNumber,
+      emailAddress: param.emailAddress,
+      address: param.address,
+      birthDate: param.birthDate,
+      gender: param.gender,
+      profileImage: param.profileImage,
+      relationship: param.relationship,
+      password: param.password
+    );
     var featureEntity = AddResidentMapper.fromAddResidentResponseModel(response);
     var entity = AddResidentMapper.fromFeatureAddResidentDataEntity(featureEntity);
     return entity;

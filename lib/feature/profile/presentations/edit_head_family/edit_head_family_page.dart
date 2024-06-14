@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -37,6 +39,9 @@ class EditHeadFamilyPage extends GetView<EditHeadFamilyController> {
           ),
         body: GetBuilder<EditHeadFamilyController>(
           builder: (context) {
+            String base64String = controller.profileImage.split(',').last;
+            List<int> bytes = base64.decode(base64String);
+            Uint8List imageData = Uint8List.fromList(bytes);
             return LayoutBuilder(
               builder: (context, constraints) {
                 return Column(
@@ -64,30 +69,64 @@ class EditHeadFamilyPage extends GetView<EditHeadFamilyController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const SizedBox(height: Dimensions.extraLargeSpacing),
-                               SizedBox(
-                                height: 50,
-                                width: Get.width,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    controller.getImageFromGallery();
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: CustomColors.primaryColor,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8)
+                              Center(
+                                child: Stack(
+                                  alignment: Alignment.bottomRight,
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    Obx(
+                                      () => ClipRRect(
+                                        borderRadius: BorderRadius.circular(100),
+                                        child: 
+                                        controller.fileImage.value != null
+                                        ? Image.file(
+                                        controller.fileImage.call()!,
+                                        fit: BoxFit.fill,
+                                        height: 120,
+                                        width: 120
+                                        )
+                                        : Image.memory(
+                                          imageData,
+                                          height: 120,
+                                          width: 120,
+                                        )
+                                      ),
                                     ),
-                                    elevation: 0
-                                  ),
-                                  child: const Text(
-                                    "Upload Photo",
-                                    style: TextStyle(
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.white
+                                    GestureDetector(
+                                    onTap: () {
+                                      controller.getImageFromGallery();
+                                    },
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.grey.shade200,
+                                      radius: 17,
+                                      child: const Icon(
+                                        Icons.edit,
+                                        color: CustomColors.primaryColor,
+                                        size: 24,
+                                      )
+                                    ),
+                                  )
+                                  ]
+                                )
+                              ),
+                              controller.imageError.value.isNotEmpty
+                              ? AnimatedContainer(
+                                duration: 100.milliseconds,
+                                height: controller.imageError.value.isEmpty ? 0 : 30.0,
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Center(
+                                  child: Text(
+                                    controller.imageError.value,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      color: CustomColors.red,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
                                     ),
                                   ),
                                 ),
-                              ),
+                              ) 
+                              : const SizedBox.shrink(),
                               const SizedBox(height: Dimensions.regularSpacing),
                               const Text(
                                 Strings.firstName,

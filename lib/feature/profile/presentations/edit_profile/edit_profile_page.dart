@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -41,6 +43,9 @@ class EditProfilePage extends GetView<EditProfileController> {
           ),
         body: GetBuilder<EditProfileController>(
           builder: (context) {
+            String base64String = controller.profileImage.split(',').last;
+            List<int> bytes = base64.decode(base64String);
+            Uint8List imageData = Uint8List.fromList(bytes);
             return LayoutBuilder(
               builder: (context, constraints) {
                 return Column(
@@ -67,6 +72,70 @@ class EditProfilePage extends GetView<EditProfileController> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                               Center(
+                                child: Stack(
+                                  alignment: Alignment.bottomRight,
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    Obx(
+                                      () => ClipRRect(
+                                        borderRadius: BorderRadius.circular(100),
+                                        child: 
+                                        controller.fileImage.value != null
+                                        ? Image.file(
+                                        controller.fileImage.call()!,
+                                        fit: BoxFit.fill,
+                                        height: 120,
+                                        width: 120
+                                        )
+                                        : controller.profileImage.isNotEmpty
+                                        ? Image.memory(
+                                          imageData,
+                                          height: 120,
+                                          width: 120,
+                                        )
+                                        : Image.asset(
+                                          Assets.logo,
+                                          height: 120,
+                                          width: 120,
+                                        )
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                    onTap: () {
+                                      controller.getImageFromGallery();
+                                    },
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.grey.shade200,
+                                      radius: 17,
+                                      child: const Icon(
+                                        Icons.edit,
+                                        color: CustomColors.primaryColor,
+                                        size: 24,
+                                      )
+                                    ),
+                                  )
+                                  ]
+                                )
+                              ),
+                              controller.imageError.value.isNotEmpty
+                              ? AnimatedContainer(
+                                duration: 100.milliseconds,
+                                height: controller.imageError.value.isEmpty ? 0 : 30.0,
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Center(
+                                  child: Text(
+                                    controller.imageError.value,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      color: CustomColors.red,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                              ) 
+                              : const SizedBox.shrink(),
                               const Text(
                                 Strings.firstName,
                                 style: TextStyle(

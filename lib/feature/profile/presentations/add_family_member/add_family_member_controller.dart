@@ -1,8 +1,11 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/domain/usecases/resident_house_member_usecase.dart';
 import '../../../../core/presentation/custom/custom_modal.dart';
@@ -24,6 +27,9 @@ class AddFamilyMemberController extends GetxController {
   RxInt residentId = 0.obs;
 
   RxString emailChecker = "".obs;
+  RxString imageFile = "".obs;
+
+  Rx<File?> fileImage = Rx<File?>(null);
 
   final firstNameController = TextEditingController();
   final middleNameController = TextEditingController();
@@ -36,7 +42,9 @@ class AddFamilyMemberController extends GetxController {
   RxString birthday = "".obs;
   RxString gender = "".obs;
   RxString relationship = "".obs;
+  RxString profileImage = "".obs;
   
+  RxString imageError = "".obs;
   RxString firstNameError = "".obs;
   RxString middleNameError = "".obs;
   RxString lastNameError = "".obs;
@@ -90,6 +98,11 @@ class AddFamilyMemberController extends GetxController {
     var confirmPassword = confirmPasswordController.text;
 
     bool hasErrors = false;
+
+    if (imageFile.isEmpty) {
+      imageError.value = "Upload a photo";
+      hasErrors = true;
+    }
 
     if (firstName.isEmpty) {
       firstNameError.value = "Enter your first name";
@@ -167,10 +180,11 @@ class AddFamilyMemberController extends GetxController {
         address: address, 
         birthDate: birthday.value, 
         gender: gender.value, 
-        profileImage: "", 
+        profileImage: imageFile.toString(),
         relationship: relationship.value, 
         password: password
       ).asStream().listen((response) {
+        log("PROFILE IMAGE:${imageFile.toString()}");
         showModal(
           context: context, 
           title: "Family Member Added Successfully", 
@@ -193,6 +207,25 @@ class AddFamilyMemberController extends GetxController {
     profileDelegate.getResident();
     Get.back();
     Get.back();
+  }
+
+  Future getImageFromGallery() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (image == null) {
+      return;
+    }
+     imageFile.value = image.path.toString();
+     final imagePermanent = File(image.path);
+     fileImage.value = imagePermanent;
+  }
+
+  String convertToBase64String(File? file) {
+    if (file != null) {
+      List<int> imageBytes = file.readAsBytesSync();
+      return base64Encode(imageBytes);
+    } else {
+    return "";
+    }
   }
 
   @override

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
@@ -12,13 +11,15 @@ import '../../../../core/domain/usecases/resident_usecase.dart';
 import '../../../../core/presentation/custom/custom_modal.dart';
 import '../../../../core/resources/strings.dart';
 import '../head_family/head_family_controller.dart';
+import '../profile_controller.dart';
 
 class EditHeadFamilyController extends GetxController {
 
   EditHeadFamilyController({
     required this.storageService,
     required this.residentUseCase,
-    required this.headFamilyDelegate
+    required this.headFamilyDelegate,
+    required this.profileDelegate
   });
 
   final StorageService storageService;
@@ -28,6 +29,7 @@ class EditHeadFamilyController extends GetxController {
 
   
   final HeadFamilyDelegate headFamilyDelegate;
+  final ProfileDelegate profileDelegate;
 
   RxInt id = 0.obs;
   RxInt residentId = 0.obs;
@@ -42,7 +44,9 @@ class EditHeadFamilyController extends GetxController {
   RxString birthday = "".obs;
   RxString gender = "".obs;
   RxString relationship = "".obs;
-  
+
+
+  RxString imageError = "".obs;
   RxString firstNameError = "".obs;
   RxString middleNameError = "".obs;
   RxString lastNameError = "".obs;
@@ -52,6 +56,7 @@ class EditHeadFamilyController extends GetxController {
   RxString birthdayError = "".obs;
   RxString phoneNumberError = "".obs;
   RxString emailError = "".obs;
+  RxString profileImage = "".obs;
 
   RxString birthDate = "".obs;
 
@@ -70,6 +75,10 @@ class EditHeadFamilyController extends GetxController {
     Strings.cousin
   ].obs;
 
+  RxString imageFile = "".obs;
+
+  Rx<File?> fileImage = Rx<File?>(null);
+
   final emailRegExp = RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
 
   void dismissKeyboard() => Get.focusScope?.unfocus();
@@ -83,6 +92,7 @@ class EditHeadFamilyController extends GetxController {
     addressController .text = Get.arguments["address"] ?? "";
     passwordController.text = storageService.getPassword();
     emailController.text = Get.arguments["email"] ?? "";
+    profileImage.value = Get.arguments["profileImage"] ?? "";
     log("ID: ${id.value}");
     log("residentId: ${residentId.value}");
     log("firstNameController: ${firstNameController.text}");
@@ -103,6 +113,11 @@ class EditHeadFamilyController extends GetxController {
     var password = passwordController.text;
 
     bool hasErrors = false;
+
+    if (imageFile.isEmpty) {
+      imageError.value = "Upload a photo";
+      hasErrors = true;
+    }
 
     if (firstName.isEmpty) {
       firstNameError.value = "Enter your first name";
@@ -136,12 +151,13 @@ class EditHeadFamilyController extends GetxController {
         firstName: firstName, 
         lastName: lastName,
         emailAddress: email,
-        address: "asdasdasdas", 
-        profileImage: convertToBase64String(imageFile),
+        address: address, 
+        profileImage: imageFile.toString(),
         password: password
       ).asStream().listen((response) {
         log("hllo");
         headFamilyDelegate.getHeadFamily();
+        profileDelegate.getHeadFamily();
         showModal(
           context: context, 
           title: "Profile Updated Successfully", 
@@ -165,26 +181,19 @@ class EditHeadFamilyController extends GetxController {
     Get.back();
   }
 
-   File? imageFile;
+
 
   Future getImageFromGallery() async {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image == null) {
       return;
     }
-    final imagePermanent = File(image.path);
-    imageFile = imagePermanent;
+     imageFile.value = image.path.toString();
+     final imagePermanent = File(image.path);
+     fileImage.value = imagePermanent;
+     log("eto ba? $imageFile");
   }
 
-
-    String convertToBase64String(File? file) {
-    if (file != null) {
-      List<int> imageBytes = file.readAsBytesSync();
-      return base64Encode(imageBytes);
-    } else {
-    return "";
-    }
-  }
 
   @override
   void onClose() {

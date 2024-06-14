@@ -7,6 +7,7 @@ class FeatureLoginResponseModel {
   final int errors;
   final String token;
   final String userName;
+  final String profileImage;
   final String firstName;
   final String lastName;
   final String email;
@@ -21,6 +22,7 @@ class FeatureLoginResponseModel {
     required this.errors,
     required this.token,
     required this.userName,
+    required this.profileImage,
     required this.firstName,
     required this.lastName,
     required this.email,
@@ -36,6 +38,7 @@ class FeatureLoginResponseModel {
     errors: json?["Errors"] ?? 0,
     token: json?["tokenString"] ?? "",
     userName: json?["userName"] ?? "",
+    profileImage: json?["profileImage"] ?? "",
     firstName: json?["firstName"] ?? "",
     lastName: json?["lastName"] ?? "",
     email: json?["email"] ?? "",

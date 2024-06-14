@@ -93,7 +93,8 @@ class HeadFamilyController extends GetxController implements HeadFamilyDelegate 
         "firstName": firstName.value,
         "lastName": lastName.value,
         "address": addressController.text,
-        "email": email.value
+        "email": email.value,
+        "profileImage": profileImage
       }
     );
   }

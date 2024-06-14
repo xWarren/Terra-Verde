@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:io';
+import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
@@ -48,28 +48,23 @@ class ResidentRemoteSourceImpl extends BaseGetConnect implements ResidentRemoteS
     required String profileImage,
     required String password
   }) async {
-   // Check if the file exists
-  final file = File(profileImage);
-  if (!await file.exists()) {
-    throw Exception('File not found: $profileImage');
-  }
 
-  // Prepare the request URI
-  String uri = "${APIEndpoint.resident}?Id=$id&Email=$emailAddress&ResidentCode=$residentId&FirstName=$firstName&LastName=$lastName&Address=$address&Password=$password";
 
-  // Create a MultipartRequest
+  String uri = "https://trims-api.azurewebsites.net/api/v1/Residents?Id=$id&Email=$emailAddress&ResidentCode=$residentId&FirstName=$firstName&LastName=$lastName&Address=$address&Password=$password";
+
+
   var request = http.MultipartRequest('PUT', Uri.parse(uri))
     ..headers['Authorization'] = "Bearer ${storageService.getAccessToken()}"
     ..headers['accept'] = 'text/plain';
 
-  // Add the file to the request
+
   request.files.add(await http.MultipartFile.fromPath(
     'File', 
     profileImage, 
     contentType: MediaType('image', 'png')
   ));
 
-  // Add any additional fields in the body if needed
+  
   if (body != null) {
     body.forEach((key, value) {
       request.fields[key] = value;
@@ -80,6 +75,7 @@ class ResidentRemoteSourceImpl extends BaseGetConnect implements ResidentRemoteS
   var response = await request.send();
      // Handle the response
   if (response.statusCode == 200) {
+    log("image mo ba: $profileImage");
     var responseBody = await http.Response.fromStream(response);
     var featureResponseModel = FeatureAddResidentResponseModel.fromJson(json.decode(responseBody.body));
     return AddResidentMapper.fromFeatureAddResidentResponseModel(featureResponseModel);

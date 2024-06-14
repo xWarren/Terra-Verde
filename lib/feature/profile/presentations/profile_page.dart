@@ -76,7 +76,7 @@ class ProfilePage extends GetView<ProfileController> {
                                 residentsData: controller.residentsData,
                                 deleteResidentHouseMember: controller.showModal,
                                 isHeadFamily: controller.isHeadFamily.value,
-                                getId: controller.getId.call()
+                                getId: controller.getId.call(),
                               )
                             ],
                           ),

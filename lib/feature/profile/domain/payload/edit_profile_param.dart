@@ -31,18 +31,18 @@ class EditProfileParam {
   final String password;
 
   toJson() => {
-    "id": id,
-    "residentId": residentId,
-    "firstName": firstName,
-    "middleName": middleName,
-    "lastName": lastName,
-    "contactNumber": contactNumber,
-    "emailAddress": emailAddress,
-    "address": address,
-    "birthDate": birthDate,
-    "gender": gender,
-    "profileImage": profileImage,
-    "relationship": relationship,
-    "password": password
+    "Id": id,
+    "ResidentCode": residentId,
+    "FirstName": firstName,
+    "MiddleName": middleName,
+    "LastName": lastName,
+    "ContactNumber": contactNumber,
+    "EmailAddress": emailAddress,
+    "Address": address,
+    "BirthDate": birthDate,
+    "Gender": gender,
+    "File": profileImage,
+    "Password": password,
+    "Relationship": relationship
   };
 }

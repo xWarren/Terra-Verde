@@ -12,6 +12,7 @@ import '../../../core/utils/print_utils.dart';
 
 abstract class ProfileDelegate {
   void getResident();
+  void getHeadFamily();
 }
 
 class ProfileController extends GetxController implements ProfileDelegate {
@@ -43,6 +44,7 @@ class ProfileController extends GetxController implements ProfileDelegate {
   RxString middleName = "".obs;
   RxString lastName = "".obs;
   RxString familyRelationship = "".obs;
+
 
   RxString residentFirstName = "".obs;
   RxString residentLastName = "".obs;
@@ -77,6 +79,7 @@ class ProfileController extends GetxController implements ProfileDelegate {
     _residentSubs = residentUseCase.getResident(id: int.parse(getResidentId)).asStream().listen((response) {
       residentFirstName(response.firstName);
       profileImage = response.profileImage;
+      storageService.setPicture(response.profileImage);
       residentLastName(response.lastName);
       residentAddress(response.address);
       residentEmail(response.email);
@@ -160,7 +163,11 @@ class ProfileController extends GetxController implements ProfileDelegate {
   @override
   void getResident() {
     getResidentsMember();
-    log("nag update naman");
     update();
+  }
+
+  @override
+  void getHeadFamily() {
+    headFamily();
   }
 }
