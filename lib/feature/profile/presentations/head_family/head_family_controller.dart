@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 
 import '../../../../core/domain/services/storage_service.dart';
 import '../../../../core/domain/usecases/resident_usecase.dart';

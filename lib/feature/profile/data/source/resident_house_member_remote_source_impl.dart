@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
@@ -102,7 +101,6 @@ class ResidentHouseMemberRemoteSourceImpl extends BaseGetConnect implements Resi
     var response = await request.send();
 
     if (response.statusCode == 200) {
-      log("ASDASD1 ${profileImage}");
       var responseBody = await http.Response.fromStream(response);
       var featureResponseModel = FeatureAddResidentResponseModel.fromJson(json.decode(responseBody.body));
       return AddResidentMapper.fromFeatureAddResidentResponseModel(featureResponseModel);
