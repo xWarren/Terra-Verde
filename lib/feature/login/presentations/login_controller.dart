@@ -98,6 +98,7 @@ class LoginController extends GetxController {
         storageService.setEmail(value.userName);
         storageService.setPassword(password.toString());
         storageService.setId(value.id);
+        storageService.setPicture(value.profileImage);
         storageService.setResidentId(
           storageService.isHeadFamily() == true
           ? value.id.toString()

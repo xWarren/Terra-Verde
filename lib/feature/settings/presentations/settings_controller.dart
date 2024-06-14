@@ -32,6 +32,7 @@ class SettingsController extends GetxController {
 
   @override
   void onInit() {
+    getPicture(storageService.getPicture());
     residentId(storageService.getResidentId());
     firstName(storageService.getFirstName());
     lastName(storageService.getLastName());

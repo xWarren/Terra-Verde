@@ -179,6 +179,7 @@ class HeadFamilyPage extends GetView<HeadFamilyController> {
                                 ),
                               ),
                               const SizedBox(height: Dimensions.textFieldHeight),
+                              if(controller.isHeadFamily.value == true)
                               SizedBox(
                                 height: 50,
                                 width: Get.width,

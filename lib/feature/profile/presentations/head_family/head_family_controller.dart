@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
 
 import '../../../../core/domain/services/storage_service.dart';
 import '../../../../core/domain/usecases/resident_usecase.dart';
@@ -26,7 +27,7 @@ class HeadFamilyController extends GetxController implements HeadFamilyDelegate 
 
   String get getResidentId => storageService.getResidentId();
 
-  bool get isHeadFamily => storageService.isHeadFamily();
+  RxBool isHeadFamily = false.obs;
   
   RxInt id = 0.obs;
   RxInt residentId = 0.obs;
@@ -49,6 +50,7 @@ class HeadFamilyController extends GetxController implements HeadFamilyDelegate 
 
   @override
   void onInit() {
+    isHeadFamily(storageService.isHeadFamily());
     headFamily();
     super.onInit();
   }
